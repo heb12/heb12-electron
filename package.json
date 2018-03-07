@@ -1,0 +1,19 @@
+{
+    "name": "bible-app",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "repository": "https://github.com/MasterOfTheTiger/bible-electron",
+    "keywords": [
+        "bible",
+        "study"
+    ],
+    "author": "MasterOfTheTiger",
+    "license": "GPL 3",
+    "devDependencies": {
+        "electron": "~1.8.2"
+    }
+}

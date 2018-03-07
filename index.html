@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Bible Extension</title>
+        <link href="style.css" rel="stylesheet" />
+    </head>
+    <body>
+        <select id="translation">
+            <option value="asv">American Standard Version</option>
+            <option value="emphbbl">The Emphasized Bible</option>
+            <option value="kjv">King James Version</option>
+            <option value="leb">The Lexham English Bible</option>
+            <option value="ylt">Young's Literal Translation</option>
+            <option value="darby">Darby Bible</option>
+        </select>
+        <div class="margin-top">
+            <input id="search" type="text" placeholder="Search Bible Verses..." />
+            <button id="button">Search</button>
+            <p id="error">There was an error</p>
+        </div>
+        <div id="result">
+            <span id="reference"></span>
+            <p id="scripture">Verse will be here...</p>
+
+        </div>
+        <script src="script.js"></script>
+    </body>
+
+</html>
