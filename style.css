@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+}
+#result {
+  border-style: solid;
+  border-color: orange;
+  border-width: thin;
+  margin-top: 10px;
+  padding: 10px;
+  max-width: 100%;
+}
+#scripture {
+  padding: 0;
+  margin: 0;
+}
+#error {
+  display: none;
+  color: white;
+  background-color: red;
+  padding: 5px;
+}
+#reference {
+  font-size: 110%;
+}
+select {
+  border-color: #d8d8d8;
+  background-color: #efefef;
+  border-style: solid;
+  border-width: thin;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+#translation {
+  width: 100%;
+}
+
+#button:hover {
+  background-color: #d8d8d8;
+  cursor: default;
+}
+#button:active {
+  background-color: orange;
+  border-color: orange;
+}
+#search {
+  border-radius: 3px;
+  border-style: solid;
+  border-color: #d8d8d8;
+  padding: 7px;
+  padding-right: 2px;
+  padding-left: 4px;
+  font-size: 13px;
+  font-family: arial;
+  border-width: thin;
+  font-size: 12px;
+  width: 70%;
+  display: none;
+}
+#button {
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #d8d8d8;
+  padding: 6px;
+  padding-right: 20px;
+  padding-left: 20px;
+  background-color: #efefef;
+  font-size: 13px;
+  font-family: arial;
+  border-width: thin;
+  width: 28%;
+  display: none;
+}
+#search:focus {
+  border-color: orange;
+}
