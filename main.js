@@ -1,4 +1,13 @@
 const electron = require('electron')
+const chapterAndVerse = require('chapter-and-verse')
+const ref = 'Dan 4:1-3'
+let cv = chapterAndVerse(ref)
+if (cv.success === true) {
+    console.log(ref + ' is valid')
+}
+if (cv.success === false) {
+    console.log(ref + ' is invalid because ' + cv.reason)
+}
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -17,11 +26,16 @@ function createWindow() {
 
     // and load the index.html of the app.
     mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
+        pathname: path.join(__dirname, '/index.html'),
         protocol: 'file:',
         slashes: true
     }))
-
+    console.log(__dirname + '/index.html')
+    mainWindow.loadURL(url.format({
+        pathname: path.join(__dirname, '/index.html'),
+        protocol: 'file:',
+        slashes: true
+    }))
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
 
@@ -32,6 +46,11 @@ function createWindow() {
         // when you should delete the corresponding element.
         mainWindow = null
     })
+    mainWindow.loadURL(url.format({
+        pathname: path.join(__dirname, '/index.html'),
+        protocol: 'file:',
+        slashes: true
+    }))
 }
 
 // This method will be called when Electron has finished
