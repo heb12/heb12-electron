@@ -12,7 +12,7 @@
         "study"
     ],
     "author": "MasterOfTheTiger",
-    "license": "GPL3",
+    "license": "GPL-3.0",
     "devDependencies": {
         "electron": "~1.8.3"
     },
