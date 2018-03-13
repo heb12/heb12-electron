@@ -17,6 +17,6 @@
         "electron": "~1.8.3"
     },
     "dependencies": {
-        "chapter-and-verse": "^2.0.2"
+        "chapter-and-verse": "^2.0.4"
     }
 }
