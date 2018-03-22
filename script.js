@@ -60,10 +60,17 @@ var references =
     ];
 var random = Math.floor((Math.random() * references.length - 1) + 1);
 random = references[random];
-var url = "http://api.biblia.com/v1/bible/content/KJV.txt?passage=" + random + "&callback=myCallbackFunction&key=da8d21ea869302817b85b83a31a6ac91";
-getVerses(random, 'kjv');
+//var url = "http://api.biblia.com/v1/bible/content/KJV.txt?passage=" + random + "&callback=myCallbackFunction&key=da8d21ea869302817b85b83a31a6ac91";
+//getVerses(random, 'kjv');
 
 var chapter, chapterE, books;
+
+function updateText() {
+    var version = document.getElementById('translation').value;
+    getVerses(books[getBook(chapterE)].innerHTML + ' ' + chapter.value, version);
+
+}
+
 function loadChapters() {
     books = document.getElementsByClassName('book');
     chapter = document.getElementById('chapter');
@@ -79,13 +86,7 @@ function loadChapters() {
     
     updateText();
 }
-var script = document.getElementById('script').innerHTML;
-function updateText() {
-    var version = document.getElementById('translation').value;
-    getVerses(books[getBook(chapterE)].innerHTML + ' ' + chapter.value, version);
-    
-}
-var verses, x;
+/*var verses, x;
 function updateText2() {
     var bibleBook = books[getBook(chapterE)].innerHTML;
     var bibleChapter = chapter.value;
@@ -100,7 +101,6 @@ function updateText2() {
         }, 300);
     }
     document.getElementById('scripture').innerHTML = output;
-}
+}*/
 
 loadChapters();
-updateText();
