@@ -2,6 +2,11 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     padding: 0;
 }
+optgroup {
+  font-size: 15px;
+  position: relative;
+  left: 10px;
+}
 #result {
   border-style: solid;
   border-color: orange;
@@ -9,10 +14,8 @@ body {
   margin-top: 10px;
   padding: 10px;
   max-width: 100%;
-  line-height: 25px;
-  font-size: 17px;
 }
-#result b {
+#scripture b {
   font-size: 13px;
   position: relative;
   bottom: 2px;
@@ -20,6 +23,8 @@ body {
 #scripture {
   padding: 0;
   margin: 0;
+  line-height: 25px;
+  font-size: 17px;
 }
 #error {
   display: none;
