@@ -1,7 +1,7 @@
 # bible-electron
 An Electron app for reading the Bible.
 
-This application currently uses [this API](http://labs.bible.org/api/). It only supports NET, but soon this app will likely also include this [KJV API](http://bible-api.com) as well. 
+This application currently uses [this API](http://labs.bible.org/api_web_service). It only supports NET, but soon this app will likely also include this [KJV API](http://bible-api.com) as well. 
 
 ## Installation and Testing
 To install the program, run these commands:
