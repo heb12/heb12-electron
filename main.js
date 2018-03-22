@@ -1,13 +1,4 @@
 const electron = require('electron')
-const chapterAndVerse = require('chapter-and-verse')
-const ref = 'Dan 4:1-3'
-let cv = chapterAndVerse(ref)
-if (cv.success === true) {
-    console.log(ref + ' is valid')
-}
-if (cv.success === false) {
-    console.log(ref + ' is invalid because ' + cv.reason)
-}
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
