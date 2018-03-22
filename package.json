@@ -1,22 +1,58 @@
 {
-    "name": "hebrews-12.1-2",
-    "version": "1.0.0",
-    "description": "",
+    "name": "hebrews",
+    "productName": "Hebrews",
+    "version": "0.1.0",
+    "description": "A simple program for reading the Bible",
     "main": "main.js",
     "scripts": {
-        "start": "electron ."
+        "start": "electron .",
+        "pack": "electron-builder --dir",
+        "dist": "electron-builder"
     },
     "repository": "https://github.com/MasterOfTheTiger/bible-electron",
     "keywords": [
         "bible",
-        "study"
+        "study",
+        "reference"
     ],
-    "author": "MasterOfTheTiger",
+    "author": {
+        "name": "MasterOfTheTiger",
+        "email": "ted.programmer@gmail.com"
+    },
     "license": "GPL-3.0",
     "devDependencies": {
-        "electron": "~1.8.3"
+        "electron": "~1.8.3",
+        "electron-builder": "^20.6.2"
     },
-    "dependencies": {
-        "chapter-and-verse": "^2.0.4"
-    }
+    "dependencies": {},
+    "build": {
+        "appId": "org.masterofthetiger.hebrews",
+        "dmg": {
+            "contents": [
+                {
+                    "x": 110,
+                    "y": 150
+                },
+                {
+                    "x": 240,
+                    "y": 150,
+                    "type": "link",
+                    "path": "/Applications"
+                }
+            ]
+        },
+        "linux": {
+            "target": [
+                "AppImage",
+                "deb",
+                "rpm"
+            ],
+            "category": "Education;Office"
+        },
+        "win": {
+            "target": "NSIS",
+            "icon": "build/icon.ico"
+        }
+    },
+    "postinstall": "electron-builder install-app-deps"
 }
