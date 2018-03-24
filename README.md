@@ -8,7 +8,7 @@ To install the program for editing, run these commands:
 <pre>
 $ git clone https://github.com/masterofthetiger/bible-electron
 $ cd bible-electron
-$ npm install && npm start
+$ yarn install && yarn start
 </pre>
 
 Packages for easy installation will be available upon the release of the first version. 
