@@ -4,6 +4,7 @@
     <head>
         <meta charset="UTF-8"/>
         <title>Hebrews 12:1-2 Desktop</title>
+        <link href="./fontawesome/css/fontawesome-all.css" rel="stylesheet" />
         <link href="style.css" rel="stylesheet" />
     </head>
     <body>
@@ -16,7 +17,7 @@
                 <option value="ylt">Young's Literal Translation</option>
                 <option value="darby">Darby Bible</option>
             </select>
-            <select id="book" onchange="loadChapters()">
+            <select class="button" id="book" onchange="loadChapters()">
                 <optgroup label="Old Testament"></optgroup>
                 <option value="Gen" class="book ot">Genesis</option>
                 <option value="Exod" class="book ot">Exodus</option>
@@ -87,21 +88,19 @@
                 <option value="Jude" class="book nt">Jude</option>
                 <option value="Rev" class="book nt">Revelation</option>
             </select>
-            <select id="chapter" onchange="updateText()">
+            <select id="chapter" onchange="updateText()" class="button">
                 <option value="1">1</option>
             </select>
-            <div class="search">
-                <input id="search" type="text" placeholder="Search Bible Verses..." />
-                <button id="button">Search</button>
-                <p id="error">There was an error</p>
-            </div>
+            <button id="last" class="button" onclick="lastChapter()"><i class="fas fa-arrow-left"></i></button>
+            <button id="next" class="button" onclick="nextChapter()"><i class="fas fa-arrow-right"></i></button>
         </div>
+        <p id="error">There was an error</p>
         <div id="result">
             <span id="reference"></span>
             <p id="scripture">Verse will be here...</p>
         </div>
         <footer>
-            <p>This program is made by <a href="http://mtiger.tk">MasterOfTheTiger</a>.</p>
+            <p>This program is made by <a href="http://mtiger.tk">MasterOfTheTiger</a>. The Bible is from the NET via <a href="http://labs.bible.org/api_web_service">this API</a>.</p>
         </footer>
         <script type="text/javascript" src="jquery.min.js"></script>
         <script type="text/javascript" src="script.js"></script>

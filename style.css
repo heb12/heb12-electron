@@ -21,7 +21,7 @@ a {
   max-width: 100%;
   background-color: whitesmoke;
   margin: 0px;
-  padding: 10px 0px 5px 9%;
+  padding: 8px 0px 0px 9%;
   box-shadow: 2px 2px 10px grey;
 }
 #result {
@@ -32,7 +32,8 @@ a {
   margin-right: auto;
   margin-left: auto;
   background-color: white;
-  box-shadow: 5px 5px 5px 5px grey;
+  box-shadow: 3px 5px 5px 5px grey;
+  border-radius: 2px;
 }
 #scripture {
   padding: 0;
@@ -54,7 +55,7 @@ a {
 #reference {
   font-size: 110%;
 }
-select {
+.button {
   border-color: #d8d8d8;
   background-color: #efefef;
   border-style: solid;
@@ -71,10 +72,14 @@ select option {
   width: 100%;
 }
 
-#button:hover {
+.button:hover {
   background-color: #d8d8d8;
   cursor: default;
 }
+.button:hover option, .button:hover optgroup {
+  background-color: #efefef;
+}
+
 #button:active {
   background-color: orange;
   border-color: orange;

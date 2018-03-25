@@ -34,14 +34,6 @@ if (!navigator.onLine) {
 } else {
     document.getElementById('error').style.display = 'none';
 }
-function start() {
-    input = document.getElementById('search').value;
-    if (input != '') {
-        var version = document.getElementById('translation').value;
-        urll = "http://api.biblia.com/v1/bible/content/KJV.txt?passage=" + input + "&callback=myCallbackFunction&key=da8d21ea869302817b85b83a31a6ac91";
-        getVerses(input, version);
-    }
-}
 var references =
     ["1 Thessalonians 5.16",
         "1 Thessalonians 5.19",
@@ -70,12 +62,36 @@ function updateText() {
     getVerses(books[getBook(chapterE)].innerHTML + ' ' + chapter.value, version);
 
 }
-function nextChapter(direction) {
-    var chapterEl = chapter.getElementById('chapter');
-    if ((bible[getBook(chapterE)].chapters.length > 1) && (chapterEl != (bible[getBook(chapterE)].chapters.length + 1))) {
-        
+function nextChapter() {
+    books = document.getElementsByClassName('book');
+    chapter = document.getElementById('chapter');
+    chapterE = document.getElementById('book').value;
+    
+    if ((bible[getBook(chapterE)].chapters.length > 1) && (chapter.value != (bible[getBook(chapterE)].chapters.length))) {
+        var next = (Number(chapter.value));
+        var opts = chapter.options;
+        for (var opt, j = 0; opt = opts[j]; j++) {
+            if (opt.value == next) {
+                chapter.selectedIndex = next;
+                break;
+            }
+        }
+        updateText();
     }
 }
+function lastChapter() {
+    books = document.getElementsByClassName('book');
+    chapter = document.getElementById('chapter');
+    chapterE = document.getElementById('book').value;
+
+    if ((bible[getBook(chapterE)].chapters.length > 1) && (Number(chapter.value) > 1)) {
+        var next = (Number(chapter.value) - 2);
+        var opts = chapter.options;
+        chapter.selectedIndex = Number(chapter.value) - 2;
+        updateText();
+    }
+}
+
 
 function loadChapters() {
     books = document.getElementsByClassName('book');
