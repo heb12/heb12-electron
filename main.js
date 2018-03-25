@@ -21,12 +21,6 @@ function createWindow() {
         protocol: 'file:',
         slashes: true
     }))
-    console.log(__dirname + '/index.html')
-    mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, '/index.html'),
-        protocol: 'file:',
-        slashes: true
-    }))
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
 
@@ -37,11 +31,6 @@ function createWindow() {
         // when you should delete the corresponding element.
         mainWindow = null
     })
-    mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, '/index.html'),
-        protocol: 'file:',
-        slashes: true
-    }))
 }
 
 // This method will be called when Electron has finished
