@@ -9,7 +9,7 @@ function getBook(bookGet) {
     return i;
 }
 function getVerses(reference, version) {
-    url = 'http://labs.bible.org/api/?passage= ' + reference;
+    url = 'http://labs.bible.org/api/?passage= ' + reference + '&formatting=full';
     fetch(url, {
         mode: 'cors'
     })
@@ -70,6 +70,12 @@ function updateText() {
     getVerses(books[getBook(chapterE)].innerHTML + ' ' + chapter.value, version);
 
 }
+function nextChapter(direction) {
+    var chapterEl = chapter.getElementById('chapter');
+    if ((bible[getBook(chapterE)].chapters.length > 1) && (chapterEl != (bible[getBook(chapterE)].chapters.length + 1))) {
+        
+    }
+}
 
 function loadChapters() {
     books = document.getElementsByClassName('book');
@@ -83,7 +89,7 @@ function loadChapters() {
             chapter.innerHTML = chapter.innerHTML + '<option value=\"' + (x) + '\">' + (x) + '</option>';
         }
     }
-    
+
     updateText();
 }
 /*var verses, x;
