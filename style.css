@@ -5,6 +5,7 @@ body {
   margin: 0;
   background-color: rgb(253, 252, 252);
   max-width: 100%;
+  padding-top: 50px;
 }
 footer {
   margin-top: 30px;
@@ -23,6 +24,9 @@ a {
   margin: 0px;
   padding: 8px 0px 0px 9%;
   box-shadow: 2px 2px 10px grey;
+  position: fixed;
+  top: 0;
+  z-index: 100;
 }
 #result {
   margin-top: 10px;
