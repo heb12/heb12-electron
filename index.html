@@ -9,90 +9,88 @@
     </head>
     <body>
         <div id="head">
-            <select id="translation" style="display:none">
-                <option value="asv">American Standard Version</option>
-                <option value="emphbbl">The Emphasized Bible</option>
-                <option value="kjv">King James Version</option>
-                <option value="leb">The Lexham English Bible</option>
-                <option value="ylt">Young's Literal Translation</option>
-                <option value="darby">Darby Bible</option>
-            </select>
-            <select class="button" id="book" onchange="loadChapters()">
-                <optgroup label="Old Testament"></optgroup>
-                <option value="Gen" class="book ot">Genesis</option>
-                <option value="Exod" class="book ot">Exodus</option>
-                <option value="Lev" class="book ot">Leviticus</option>
-                <option value="Num" class="book ot">Numbers</option>
-                <option value="Deut" class="book ot">Deuteronomy</option>
-                <option value="Josh" class="book ot">Joshua</option>
-                <option value="Judg" class="book ot">Judges</option>
-                <option value="Ruth" class="book ot">Ruth</option>
-                <option value="1Sam" class="book ot">1 Samuel</option>
-                <option value="2Sam" class="book ot">2 Samuel</option>
-                <option value="1Kgs" class="book ot">1 Kings</option>
-                <option value="2Kgs" class="book ot">2 Kings</option>
-                <option value="1Chr" class="book ot">1 Chronicles</option>
-                <option value="2Chr" class="book ot">2 Chronicles</option>
-                <option value="Ezra" class="book ot">Ezra</option>
-                <option value="Neh" class="book ot">Nehemiah</option>
-                <option value="Esth" class="book ot">Esther</option>
-                <option value="Job" class="book ot">Job</option>
-                <option value="Ps" class="book ot">Psalms</option>
-                <option value="Prov" class="book ot">Proverbs</option>
-                <option value="Eccl" class="book ot">Ecclesiastes</option>
-                <option value="Song" class="book ot">Song of Solomon</option>
-                <option value="Isa" class="book ot">Isaiah</option>
-                <option value="Jer" class="book ot">Jeremiah</option>
-                <option value="Lam" class="book ot">Lamentations</option>
-                <option value="Ezek" class="book ot">Ezekiel</option>
-                <option value="Dan" class="book ot">Daniel</option>
-                <option value="Hos" class="book ot">Hosea</option>
-                <option value="Joel" class="book ot">Joel</option>
-                <option value="Amos" class="book ot">Amos</option>
-                <option value="Obad" class="book ot">Obadiah</option>
-                <option value="Jonah" class="book ot">Jonah</option>
-                <option value="Mic" class="book ot">Micah</option>
-                <option value="Nah" class="book ot">Nahum</option>
-                <option value="Hab" class="book ot">Habakkuk</option>
-                <option value="Zeph" class="book ot">Zephaniah</option>
-                <option value="Hag" class="book ot">Haggai</option>
-                <option value="Zech" class="book ot">Zechariah</option>
-                <option value="Mal" class="book ot">Malachi</option>
-                <!-- Now the New Testament -->
-                <optgroup label="New Testament"></optgroup>
-                <option value="Matt" class="book nt">Matthew</option>
-                <option value="Mark" class="book nt">Mark</option>
-                <option value="Luke" class="book nt">Luke</option>
-                <option value="John" class="book nt">John</option>
-                <option value="Acts" class="book nt">Acts</option>
-                <option value="Rom" class="book nt">Romans</option>
-                <option value="1Cor" class="book nt">1 Corinthians</option>
-                <option value="2Cor" class="book nt">2 Corinthians</option>
-                <option value="Gal" class="book nt">Galatians</option>
-                <option value="Eph" class="book nt">Ephesians</option>
-                <option value="Phil" class="book nt">Philippians</option>
-                <option value="Col" class="book nt">Colossians</option>
-                <option value="1Thess" class="book nt">1 Thessalonians</option>
-                <option value="2Thess" class="book nt">2 Thessalonians</option>
-                <option value="1Tim" class="book nt">1 Timothy</option>
-                <option value="2Tim" class="book nt">2 Timothy</option>
-                <option value="Titus" class="book nt">Titus</option>
-                <option value="Phlm" class="book nt">Philemon</option>
-                <option value="Heb" class="book nt" selected>Hebrews</option>
-                <option value="Jas" class="book nt">James</option>
-                <option value="1Pet" class="book nt">1 Peter</option>
-                <option value="2Pet" class="book nt">2 Peter</option>
-                <option value="1John" class="book nt">1 John</option>
-                <option value="2John" class="book nt">2 John</option>
-                <option value="3John" class="book nt">3 John</option>
-                <option value="Jude" class="book nt">Jude</option>
-                <option value="Rev" class="book nt">Revelation</option>
-            </select>
-            <select id="chapter" onchange="updateText()" class="button">
-                <option value="1">1</option>
-            </select>
-            <button id="last" class="button" onclick="lastChapter()"><i class="fas fa-arrow-left"></i></button>
-            <button id="next" class="button" onclick="nextChapter()"><i class="fas fa-arrow-right"></i></button>
+            <div id="headItems">
+                <select id="translation" class="button" onchange="updateText()">
+                    <option value="net">NET</option>
+                    <option value="kjv">KJV</option>
+                </select>
+                <select class="button" id="book" onchange="loadChapters()">
+                    <optgroup label="Old Testament"></optgroup>
+                    <option value="Gen" class="book ot">Genesis</option>
+                    <option value="Exod" class="book ot">Exodus</option>
+                    <option value="Lev" class="book ot">Leviticus</option>
+                    <option value="Num" class="book ot">Numbers</option>
+                    <option value="Deut" class="book ot">Deuteronomy</option>
+                    <option value="Josh" class="book ot">Joshua</option>
+                    <option value="Judg" class="book ot">Judges</option>
+                    <option value="Ruth" class="book ot">Ruth</option>
+                    <option value="1Sam" class="book ot">1 Samuel</option>
+                    <option value="2Sam" class="book ot">2 Samuel</option>
+                    <option value="1Kgs" class="book ot">1 Kings</option>
+                    <option value="2Kgs" class="book ot">2 Kings</option>
+                    <option value="1Chr" class="book ot">1 Chronicles</option>
+                    <option value="2Chr" class="book ot">2 Chronicles</option>
+                    <option value="Ezra" class="book ot">Ezra</option>
+                    <option value="Neh" class="book ot">Nehemiah</option>
+                    <option value="Esth" class="book ot">Esther</option>
+                    <option value="Job" class="book ot">Job</option>
+                    <option value="Ps" class="book ot">Psalms</option>
+                    <option value="Prov" class="book ot">Proverbs</option>
+                    <option value="Eccl" class="book ot">Ecclesiastes</option>
+                    <option value="Song" class="book ot">Song of Solomon</option>
+                    <option value="Isa" class="book ot">Isaiah</option>
+                    <option value="Jer" class="book ot">Jeremiah</option>
+                    <option value="Lam" class="book ot">Lamentations</option>
+                    <option value="Ezek" class="book ot">Ezekiel</option>
+                    <option value="Dan" class="book ot">Daniel</option>
+                    <option value="Hos" class="book ot">Hosea</option>
+                    <option value="Joel" class="book ot">Joel</option>
+                    <option value="Amos" class="book ot">Amos</option>
+                    <option value="Obad" class="book ot">Obadiah</option>
+                    <option value="Jonah" class="book ot">Jonah</option>
+                    <option value="Mic" class="book ot">Micah</option>
+                    <option value="Nah" class="book ot">Nahum</option>
+                    <option value="Hab" class="book ot">Habakkuk</option>
+                    <option value="Zeph" class="book ot">Zephaniah</option>
+                    <option value="Hag" class="book ot">Haggai</option>
+                    <option value="Zech" class="book ot">Zechariah</option>
+                    <option value="Mal" class="book ot">Malachi</option>
+                    <!-- Now the New Testament -->
+                    <optgroup label="New Testament"></optgroup>
+                    <option value="Matt" class="book nt">Matthew</option>
+                    <option value="Mark" class="book nt">Mark</option>
+                    <option value="Luke" class="book nt">Luke</option>
+                    <option value="John" class="book nt">John</option>
+                    <option value="Acts" class="book nt">Acts</option>
+                    <option value="Rom" class="book nt">Romans</option>
+                    <option value="1Cor" class="book nt">1 Corinthians</option>
+                    <option value="2Cor" class="book nt">2 Corinthians</option>
+                    <option value="Gal" class="book nt">Galatians</option>
+                    <option value="Eph" class="book nt">Ephesians</option>
+                    <option value="Phil" class="book nt">Philippians</option>
+                    <option value="Col" class="book nt">Colossians</option>
+                    <option value="1Thess" class="book nt">1 Thessalonians</option>
+                    <option value="2Thess" class="book nt">2 Thessalonians</option>
+                    <option value="1Tim" class="book nt">1 Timothy</option>
+                    <option value="2Tim" class="book nt">2 Timothy</option>
+                    <option value="Titus" class="book nt">Titus</option>
+                    <option value="Phlm" class="book nt">Philemon</option>
+                    <option value="Heb" class="book nt" selected>Hebrews</option>
+                    <option value="Jas" class="book nt">James</option>
+                    <option value="1Pet" class="book nt">1 Peter</option>
+                    <option value="2Pet" class="book nt">2 Peter</option>
+                    <option value="1John" class="book nt">1 John</option>
+                    <option value="2John" class="book nt">2 John</option>
+                    <option value="3John" class="book nt">3 John</option>
+                    <option value="Jude" class="book nt">Jude</option>
+                    <option value="Rev" class="book nt">Revelation</option>
+                </select>
+                <select id="chapter" onchange="updateText()" class="button">
+                    <option value="1">1</option>
+                </select>
+                <button id="last" class="button" onclick="lastChapter()"><i class="fas fa-arrow-left"></i></button>
+                <button id="next" class="button" onclick="nextChapter()"><i class="fas fa-arrow-right"></i></button>
+            </div>
         </div>
         <p id="error">There was an error</p>
         <div id="result">
@@ -100,8 +98,9 @@
             <p id="scripture">Chapter will be here...</p>
         </div>
         <footer>
-            <p>This program is made by MasterOfTheTiger (mtiger.tk). The Bible is from the NET via http://labs.bible.org/api_web_service.</p>
+            <p>This program is made by MasterOfTheTiger (<span class="link">mtiger.tk</span>). The Bible is from the NET via <span class="link">http://labs.bible.org/api_web_service.</p></span>
         </footer>
+        <script src="./node_modules/chapter-and-verse/browser.js"></script>
         <script type="text/javascript" src="script.js"></script>
     </body>
 
