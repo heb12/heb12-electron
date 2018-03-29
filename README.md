@@ -7,7 +7,7 @@ This application currently uses [this API](http://labs.bible.org/api_web_service
 To install the program for editing, run these commands:
 <pre>
 $ git clone https://github.com/masterofthetiger/heb12
-$ cd bible-electron
+$ cd heb12
 $ yarn install && yarn start
 </pre>
 
