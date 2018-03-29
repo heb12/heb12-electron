@@ -1,12 +1,12 @@
-# bible-electron
-An Electron app for reading the Bible.
+# Heb12 Bible App
+A Linux program for reading the Bible.
 
 This application currently uses [this API](http://labs.bible.org/api_web_service). It only supports NET, but soon this app will likely also include this [KJV API](http://bible-api.com) as well. 
 
 ## Installation
 To install the program for editing, run these commands:
 <pre>
-$ git clone https://github.com/masterofthetiger/bible-electron
+$ git clone https://github.com/masterofthetiger/heb12
 $ cd bible-electron
 $ yarn install && yarn start
 </pre>

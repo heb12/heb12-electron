@@ -9,7 +9,7 @@
         "pack": "electron-builder --dir",
         "dist": "electron-builder"
     },
-    "repository": "https://github.com/MasterOfTheTiger/bible-electron",
+    "repository": "https://github.com/MasterOfTheTiger/heb12",
     "keywords": [
         "bible",
         "study",
