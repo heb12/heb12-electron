@@ -148,6 +148,7 @@ function reset() {
     localStorage.setItem('lineSpacing', '25px');
     localStorage.removeItem('firstTime');
     localStorage.setItem("lastRef", 'Hebrews 12');
+    return 'Sucessfully reset localStorage';
 }
 
 // Checks if this is the first time you opened the program
