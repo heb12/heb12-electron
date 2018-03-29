@@ -3,7 +3,7 @@
 <head>
     <head>
         <meta charset="UTF-8"/>
-        <title>Heb12 Desktop</title>
+        <title>Heb12 Bible App</title>
         <link href="./fontawesome/css/fontawesome-all.css" rel="stylesheet" />
         <link href="style.css" rel="stylesheet" />
     </head>
@@ -14,7 +14,7 @@
                     <option value="net">NET</option>
                     <option value="kjv">KJV</option>
                 </select>
-                <select class="button" id="book" onchange="loadChapters()">
+                <select class="button" id="book" onchange="loadChapters(); updateText()">
                     <optgroup label="Old Testament"></optgroup>
                     <option value="Gen" class="book ot">Genesis</option>
                     <option value="Exod" class="book ot">Exodus</option>
@@ -90,6 +90,13 @@
                 </select>
                 <button id="last" class="button" onclick="lastChapter()"><i class="fas fa-arrow-left"></i></button>
                 <button id="next" class="button" onclick="nextChapter()"><i class="fas fa-arrow-right"></i></button>
+                <div class="dropdown button">
+                    <button class="dropbtn"><i class="fas fa-font"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="fontSizePlus()">Increase size</a>
+                        <a href="#" onclick="fontSizeMinus()">Decrease size</a>
+                    </div>
+                </div>
             </div>
         </div>
         <p id="error">There was an error</p>

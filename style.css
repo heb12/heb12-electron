@@ -65,15 +65,15 @@ a {
   margin-bottom: 7px;
 }
 /* End */
+
 #error {
   display: none;
   color: white;
   background-color: red;
   padding: 5px;
 }
-#reference {
-  font-size: 110%;
-}
+
+/* Buttons & other header things */
 .button {
   /*border-color: #d8d8d8;
   background-color: #efefef;*/
@@ -93,27 +93,14 @@ select option {
   cursor: default;
 }
 .button:hover option, .button:hover optgroup {
-  background-color: #efefef;
+  background-color: #ffffff;
 }
 
 #button:active {
   background-color: orange;
   border-color: orange;
 }
-#search {
-  border-radius: 3px;
-  border-style: solid;
-  border-color: #d8d8d8;
-  padding: 7px;
-  padding-right: 2px;
-  padding-left: 4px;
-  font-size: 13px;
-  font-family: arial;
-  border-width: thin;
-  font-size: 12px;
-  width: 70%;
-  display: none;
-}
+
 optgroup {
   font-size: 20px;
   position: relative;
@@ -133,6 +120,76 @@ optgroup {
   width: 28%;
   display: none;
 }
+#book {
+  text-align: center;
+  padding-left: auto;
+  padding-right: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+ /* Dropdown Button */
+.dropbtn {
+    background-color: transparent;
+    color: black;
+    border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 49px;
+    left: -1px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/* No longer used */
+#search {
+  border-radius: 3px;
+  border-style: solid;
+  border-color: #d8d8d8;
+  padding: 7px;
+  padding-right: 2px;
+  padding-left: 4px;
+  font-size: 13px;
+  font-family: arial;
+  border-width: thin;
+  font-size: 12px;
+  width: 70%;
+  display: none;
+}
 #search:focus {
   border-color: orange;
+}
+
+#reference {
+  font-size: 110%;
 }
