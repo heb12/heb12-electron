@@ -20,4 +20,10 @@ Feel free to make changes to the design, scripts, and even the fundamental code 
 - The API request
 - The rendering of the scripture
 - The selecting of verses
+- Offline use of major features (and at least the KJV translation), i.e, don't make your features depend on external requests unless it is necessary
+
 If any of those do not work, then it will not be accepted without changes. 
+
+## License
+Copyright 2018 Theodore Jameson.
+This software is released under the GPL license version 2.0 or later. See the [LICENSE](https://github.com/MasterOfTheTiger/heb12/blob/master/LICENSE) file for more information. 
