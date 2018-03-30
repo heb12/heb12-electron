@@ -29,3 +29,7 @@ Please refer (and contribute) to the [wiki](https://github.com/MasterOfTheTiger/
 ## License
 Copyright 2018 Theodore Jameson.
 This software is released under the GPL license version 2.0 or later. See the [LICENSE](https://github.com/MasterOfTheTiger/heb12/blob/master/LICENSE) file for more information. 
+
+## Credits
+- @MasterOfTheTiger is the author of the program
+- @danday74 for [Chapter and Verse](https://github.com/danday74/chapter-and-verse), a very useful tool for this program
