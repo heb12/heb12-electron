@@ -24,6 +24,8 @@ Feel free to make changes to the design, scripts, and even the fundamental code 
 
 If any of those do not work, then it will not be accepted without changes. 
 
+Please refer (and contribute) to the [wiki](https://github.com/MasterOfTheTiger/heb12/wiki) for helpful instruction for installing, packaging, and more.
+
 ## License
 Copyright 2018 Theodore Jameson.
 This software is released under the GPL license version 2.0 or later. See the [LICENSE](https://github.com/MasterOfTheTiger/heb12/blob/master/LICENSE) file for more information. 
