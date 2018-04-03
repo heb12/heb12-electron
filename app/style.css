@@ -52,10 +52,10 @@ a {
 #info {
   display: none;
   position: absolute;
-  top: 25%;
+  top: 15%;
   left: 25%;
   width: 50%;
-  height: 50%;
+  height: 70%;
   padding: 16px;
   border: 2px solid orange;
   border-radius: 5px;

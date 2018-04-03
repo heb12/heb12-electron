@@ -69,20 +69,15 @@ function updateText() {
     getVerses(books[getBook(chapterE)].innerHTML + ' ' + chapter.value, translation);
 
 }
+
+// Changes to the next and last chapters
 function nextChapter() {
     books = document.getElementsByClassName('book');
     chapter = document.getElementById('chapter');
     chapterE = document.getElementById('book').value;
     
     if ((bible[getBook(chapterE)].chapters.length > 1) && (chapter.value != (bible[getBook(chapterE)].chapters.length))) {
-        var next = (Number(chapter.value));
-        var opts = chapter.options;
-        for (var opt, j = 0; opt = opts[j]; j++) {
-            if (opt.value == next) {
-                chapter.selectedIndex = next;
-                break;
-            }
-        }
+        chapter.selectedIndex = Number(chapter.value);
         updateText();
     }
 }
@@ -92,14 +87,12 @@ function lastChapter() {
     chapterE = document.getElementById('book').value;
 
     if ((bible[getBook(chapterE)].chapters.length > 1) && (Number(chapter.value) > 1)) {
-        var next = (Number(chapter.value) - 2);
-        var opts = chapter.options;
         chapter.selectedIndex = Number(chapter.value) - 2;
         updateText();
     }
 }
 
-
+// Render the current book's chapters into the chapters dropdown
 function loadChapters() {
     books = document.getElementsByClassName('book');
     chapter = document.getElementById('chapter');
@@ -118,8 +111,8 @@ function updateTranslation() {
     localStorage.setItem('translation', document.getElementById('translation').value);
 }
 
+// Increase and decrease text size
 var script;
-// Increase text size
 function fontSizePlus() {
     var fontSize = localStorage.getItem('fontSize');
     script = document.getElementById('scripture');
@@ -137,12 +130,15 @@ function fontSizeMinus() {
 script = document.getElementById('scripture');
 console.log(String(Number(script.style.fontSize)));
 
+// This runs the first time the program is opened
 function setup() {
     localStorage.setItem('fontSize', '17px');
     localStorage.setItem('lineSpacing', '25px');
     localStorage.setItem('firstTime', 'no');
     localStorage.setItem("lastRef", 'Hebrews 12');
 }
+
+// Resets the program's localStorage
 function reset() {
     localStorage.removeItem('fontSize');
     localStorage.setItem('lineSpacing', '25px');
