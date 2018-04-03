@@ -93,11 +93,23 @@
                 <div class="dropdown button">
                     <button class="dropbtn"><i class="fas fa-font"></i></button>
                     <div class="dropdown-content">
-                        <a href="#" onclick="fontSizePlus()">Increase size</a>
-                        <a href="#" onclick="fontSizeMinus()">Decrease size</a>
+                        <a href="#" onclick="fontSizePlus()"><i class="fas fa-plus"></i></a>
+                        <a href="#" onclick="fontSizeMinus()"><i class="fas fa-minus"></i></a>
                     </div>
                 </div>
+                <span onclick="document.getElementById('info').style.display='block';document.getElementById('backdrop').style.display='block'" class="button">
+                    <i class="fas fa-info-circle"></i>
+                </span>
             </div>
+        </div>
+        <div id="backdrop" onclick="document.getElementById('info').style.display='none';document.getElementById('backdrop').style.display='none'"></div>
+        <div id="info">
+            <h1>About this Program</h1>
+            <p>This program was built by MasterOfTheTiger (mtiger.tk) as a simple Bible program for GNU/Linux systems.</p>
+            <h3>Credits</h3>
+            <ul>
+                <li>Main Author: MasterOfTheTiger</li>
+                <li>Chapter and Verse dependancy author: danday74</li>
         </div>
         <p id="error">There was an error</p>
         <div id="result">
