@@ -1,6 +1,8 @@
 # Heb12 Bible App
 A Linux program for reading the Bible.
 
+![screenshot from 2018-04-05 15-05-02](https://user-images.githubusercontent.com/16640496/38394328-e20f67f6-38e2-11e8-96bc-16c37116956e.png)
+
 This application currently uses [this API](http://labs.bible.org/api_web_service), and an offline KJV version. It might support more in the future.
 
 If you would like to try out a prerelease version for Linux (without automatic updates) you can get it [here](https://drive.google.com/drive/folders/1bSoHc1mAjkGA6cyjO7YDcD8BtOdTxnuh?usp=sharing).
