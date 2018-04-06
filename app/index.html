@@ -4,8 +4,9 @@
     <head>
         <meta charset="UTF-8"/>
         <title>Heb12 Bible App</title>
-        <link href="./fontawesome/css/fontawesome-all.css" rel="stylesheet" />
+        <link href="./fonts/fontawesome/css/fontawesome-all.css" rel="stylesheet" />
         <link href="style.css" rel="stylesheet" />
+        <link href="./themes/theme1.css" rel="stylesheet" id="themeStyle" />
     </head>
     <body>
         <div id="head">
@@ -90,26 +91,18 @@
                 </select>
                 <button id="last" class="button" onclick="lastChapter()"><i class="fas fa-arrow-left"></i></button>
                 <button id="next" class="button" onclick="nextChapter()"><i class="fas fa-arrow-right"></i></button>
-                <div class="dropdown button">
-                    <button class="dropbtn"><i class="fas fa-font"></i></button>
-                    <div class="dropdown-content">
-                        <a href="#" onclick="fontSizePlus()"><i class="fas fa-plus"></i></a>
-                        <a href="#" onclick="fontSizeMinus()"><i class="fas fa-minus"></i></a>
-                    </div>
-                </div>
-                <span onclick="document.getElementById('info').style.display='block';document.getElementById('backdrop').style.display='block';document.body.scrollTop = document.documentElement.scrollTop = 0;" class="button">
-                    <i class="fas fa-info-circle"></i>
-                </span>
+                <span onclick="document.getElementById('info').style.display='block';document.getElementById('backdrop').style.display='block'" id="infoButton" class="button"><i class="fas fa-info-circle"></i></span>
+                <span id="settingsButton" class="button" onclick="document.getElementById('settings').style.display='block';document.getElementById('backdrop').style.display='block'"><i class="fas fa-cog"></i></span>
             </div>
         </div>
-        <div id="backdrop" onclick="document.getElementById('info').style.display='none';document.getElementById('backdrop').style.display='none'"></div>
-        <div id="info">
+        <div id="backdrop" onclick="document.getElementById('info').style.display='none';document.getElementById('settings').style.display='none';document.getElementById('backdrop').style.display='none';document.body.style.overflow='auto';"></div>
+        <div id="info" class="popup">
             <h1>About this Program</h1>
             <p>This program was built by MasterOfTheTiger (mtiger.tk) as a simple Bible program for GNU/Linux systems.</p>
             <blockquote><b>1</b> Therefore, since we are surrounded by such a great cloud of witnesses, we must get rid of every weight and the sin that clings
             so closely, and run with endurance the race set out for us, <b>2</b> keeping our eyes fixed on Jesus, the pioneer and perfecter
             of our faith. For the joy set out for him he endured the cross, disregarding its shame, and has taken his seat at the right
-            hand of the throne of God. <i>Hebrews 12:1-2</i></blockquote>
+            hand of the throne of God. <span class="link" onclick="setChapter('Hebrews 12');document.getElementById('info').style.display='none';document.getElementById('backdrop').style.display='none'">Hebrews 12:1-2</span></blockquote>
             <h3>Credits</h3>
             <ul>
                 <li>Main Author: MasterOfTheTiger</li>
@@ -119,8 +112,44 @@
             <ul>
                 <li>Built using web technologies with Electron</li>
                 <li>Uses ChapterAndVerse version 2.0.7</li>
+                <li>GitHub repository: <span class="link">https://github.com/MasterOfTheTiger/heb12</span></li>
+                <li>Uses the NET api found here: <span class="link">http://labs.bible.org/api_web_service.</span></li>
             </ul>
-            <p>Do you want to help out with this program in any way? Help out here: https://github.com/MasterOfTheTiger/heb12</p>
+            <p>Do you want to help out with this program in any way? Help out here: <span class="link">https://github.com/MasterOfTheTiger/heb12</span></p>
+        </div>
+        <div id="settings" class="popup">
+            <h1>Settings</h1>
+            <div class="settingBox">
+                <h2>Font</h2>
+                <span>Font size:</span>
+                <button onclick="fontSizePlus()"><i class="fas fa-plus"></i></button>
+                <button onclick="fontSizeMinus()"><i class="fas fa-minus"></i></button>
+                <br /><br />
+                <span>Font family:</span>
+                <select id="font" onchange="changeFont()">
+                    <option value="default">Arial</option>
+                    <option value="'Times New Roman'">Times New Roman</option>
+                    <option value="Open Sans">Open Sans</option>
+                    <option value="Roboto">Roboto</option>
+                    <option value="'Roboto Mono'">Roboto Mono</option>
+                    <option value="Chicle, cursive">Chicle</option>
+                    <option value="Montserrat">Montserrat</option>
+                </select>
+                <br /><br />
+                <span>Font align:</span>
+                <select id="textAlign" onchange="changetextAlign()">
+                    <option value="left">Left</option>
+                    <option value="center">Center</option>
+                    <option value="justify">Justify</option>
+                </select>
+            </div>
+            <div class="settingsBox">
+                <h2>Color Theme</h2>
+                <select id="theme" onchange="changeTheme()">
+                    <option value="theme1">Default</option>
+                    <option value="theme2">Orange</option>
+                </select>
+            </div>
         </div>
         <p id="error">There was an error</p>
         <div id="result">
@@ -128,7 +157,7 @@
             <p id="scripture">Chapter will be here...</p>
         </div>
         <footer>
-            <p>This program is made by MasterOfTheTiger (<span class="link">mtiger.tk</span>). The Bible is from the NET via <span class="link">http://labs.bible.org/api_web_service.</p></span>
+            <p>This program is made by MasterOfTheTiger (<span class="link">mtiger.tk</span>). The Bible is from the NET via <span class="link">http://labs.bible.org/api_web_service.</span></p>
         </footer>
         <script src="../node_modules/chapter-and-verse/browser.js"></script>
         <script type="text/javascript" src="./script.js"></script>

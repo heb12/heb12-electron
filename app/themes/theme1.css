@@ -1,0 +1,17 @@
+/* This is the default theme */
+.popup {
+    border-color: rgb(87, 87, 226);
+}
+/* Link color */
+.link {
+  color: rgb(87, 87, 226);
+}
+/* Header buttons */
+.button:hover {
+  background-color: #efefef;
+}
+/* Other buttons */
+button:active {
+  background-color: rgb(87, 87, 226);
+  border-color: rgb(87, 87, 226);
+}

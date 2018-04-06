@@ -111,6 +111,26 @@ function updateTranslation() {
     localStorage.setItem('translation', document.getElementById('translation').value);
 }
 
+// This lets you easily open a chapter
+function setChapter(reference) {
+    var a = chapterAndVerse(reference);
+    var theChapter = a.chapter;
+    var theBook = a.book.name.split(' ').join('');
+    var val = a.book.name;
+    var sel = document.getElementById('book');
+    var opts = sel.options;
+    for (var opt, j = 0; opt = opts[j]; j++) {
+        if (opt.innerHTML == val) {
+            sel.selectedIndex = j;
+            break;
+        }
+    }
+    loadChapters();
+    sel = document.getElementById('chapter');
+    sel.selectedIndex = a.chapter - 1;
+    updateText();
+}
+
 // Increase and decrease text size
 var script;
 function fontSizePlus() {
@@ -127,17 +147,37 @@ function fontSizeMinus() {
     script.style.fontSize = String(Number(fontSize.split('px')[0]) - 1) + 'px';
     localStorage.setItem('fontSize', String(Number(fontSize.split('px')[0]) - 1) + 'px');
 }
-script = document.getElementById('scripture');
-console.log(String(Number(script.style.fontSize)));
 
+function changeFont() {
+    localStorage.setItem('font', document.getElementById('font').value);
+    if (document.getElementById('font').value == 'default') {
+        document.getElementById('scripture').style.fontFamily = 'Arial, Helvetica, sans-serif';
+    } else {
+        document.getElementById('scripture').style.fontFamily = document.getElementById('font').value;
+    }
+    
+}
+function changeTheme() {
+    localStorage.setItem('theme', document.getElementById('theme').value);
+    themeChoice = document.getElementById('theme').value;
+    document.getElementById('themeStyle').href = './themes/' + themeChoice +'.css';
+}
+function changetextAlign() {
+    localStorage.setItem('textAlign', document.getElementById('textAlign').value);
+    document.getElementById('scripture').style.textAlign = document.getElementById('textAlign').value;
+}
 // This runs the first time the program is opened
 function setup() {
     localStorage.setItem('fontSize', '17px');
     localStorage.setItem('lineSpacing', '25px');
     localStorage.setItem('firstTime', 'no');
     localStorage.setItem("lastRef", 'Hebrews 12');
+    localStorage.setItem('font', 'default');
+    localStorage.setItem('theme', 'theme1');
+    localStorage.setItem('textAlign', 'left');
+    console.log("Finished first-time setup of localStorage");
+    
 }
-
 // Resets the program's localStorage
 function reset() {
     localStorage.removeItem('fontSize');
@@ -146,6 +186,11 @@ function reset() {
     localStorage.setItem("lastRef", 'Hebrews 12');
     return 'Sucessfully reset localStorage';
 }
+
+
+
+// Retrieves items from localStorage and sets up program
+
 
 // Checks if this is the first time you opened the program
 var firstTime = localStorage.getItem('firstTime');
@@ -158,44 +203,68 @@ if (firstTime != 'no') {
 
 script = document.getElementById('scripture');
 
-// Retrieve last font size
-window.onload = function() {
+// Retrieve last font information and apply it to text
+/*window.onload = function() {
+    // Font size
     var fontSizers = localStorage.getItem('fontSize');
     script.style.fontSize = fontSizers;
-}
+    // Font align
+    var textAligned = localStorage.getItem('textAlign');
+    script.style.textAlign = textAligned;
+}*/
 
+console.log(localStorage.getItem('font') + ' is the font loaded from localStorage');
 
-// Retrieve last chapter viewed
-
-var lastRef = localStorage.getItem('lastRef');
-var a = chapterAndVerse(lastRef);
-var val = a.book.name;
-var sel = document.getElementById('book');
+// Retrieve last font
+var val = localStorage.getItem('font');
+var sel = document.getElementById('font');
 var opts = sel.options;
 for (var opt, j = 0; opt = opts[j]; j++) {
-    if (opt.innerHTML == val) {
+    if (opt.value == val) {
         sel.selectedIndex = j;
         break;
     }
 }
+if (document.getElementById('font').value == 'default') {
+    document.getElementById('scripture').style.fontFamily = 'Arial, Helvetica, sans-serif';
+} else {
+    document.getElementById('scripture').style.fontFamily = document.getElementById('font').value;
+}
+// Retrieve last textAlign
+val = localStorage.getItem('textAlign');
+sel = document.getElementById('textAlign');
+opts = sel.options;
+for (var opt, j = 0; opt = opts[j]; j++) {
+    if (opt.value == val) {
+        sel.selectedIndex = j;
+        break;
+    }
+}
+document.getElementById('scripture').style.textAlign = document.getElementById('textAlign').value;
 
+// Retrieve last theme
+val = localStorage.getItem('theme');
+console.log(val + ' is the theme stored in localStorage.');
+
+sel = document.getElementById('theme');
+opts = sel.options;
+for (var opt, j = 0; opt = opts[j]; j++) {
+    if (opt.value == val) {
+        sel.selectedIndex = j;
+        break;
+    }
+}
+var themeChoice = document.getElementById('theme').value;
+document.getElementById('themeStyle').href = './themes/' + themeChoice + '.css';
+
+// Retrieve last chapter viewed
+setChapter(localStorage.getItem('lastRef'));
 
 // Translation recovery does not work yet. This code does not affect the program negatively, but it is not operational
 var translations = localStorage.getItem('translation');
 sel = document.getElementById('translation');
 console.log(translations + ' is the translation loaded from localStorage.');
 
-opts = sel.options;
-for (var opt, j = 0; opt = opts[j]; j++) {
-    if (opt.value == translations) {
-        sel.selectedIndex = j;
-        break;
-    }
-}
 if (translation == 'kjv') {
     sel.selectedIndex = 2;
 }
-loadChapters();
-sel = document.getElementById('chapter');
-sel.selectedIndex = a.chapter - 1;
-updateText();

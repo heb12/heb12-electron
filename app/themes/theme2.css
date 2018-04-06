@@ -1,0 +1,32 @@
+/* This is the default theme */
+/* Header */
+#head {
+    background-color: rgb(255, 166, 0);
+    color: white;
+}
+.button {
+    color: white;
+    text-shadow: 2px 2px 5px gray;
+}
+
+/* Popup border color */
+.popup {
+    border-color: orange;
+}
+/* Link color */
+.link {
+  color: rgb(211, 150, 36);
+}
+/* Header buttons */
+.button:hover {
+    background-color: rgb(235, 154, 4);
+}
+.button:hover option, .button:hover optgroup {
+  background-color: #ffffff;
+  color: black;
+}
+/* Other buttons */
+button:active {
+  background-color: orange;
+  border-color: orange;
+}

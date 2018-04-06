@@ -1,3 +1,5 @@
+@import url('./fonts/googlefonts.css');
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
@@ -34,11 +36,11 @@ a {
   text-align: center;
 }
 
-/* Info screen */
+/* Popups */
 
 #backdrop {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 0%;
   left: 0%;
   width: 100%;
@@ -49,15 +51,15 @@ a {
   opacity: .40;
   filter: alpha(opacity=40);
 }
-#info {
+.popup {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 15%;
   left: 25%;
   width: 50%;
   height: 70%;
   padding: 16px;
-  border: 2px solid orange;
+  border: 2px solid;
   border-radius: 5px;
   background-color: white;
   z-index: 1002;
@@ -68,7 +70,6 @@ a {
 
 #result {
   margin-top: 10px;
-  text-align: justify;
   padding: 10px;
   width: 80%;
   margin-right: auto;
@@ -78,6 +79,7 @@ a {
   border-radius: 2px;
 }
 #scripture {
+  text-align: left;
   padding: 0;
   margin: 0;
   line-height: 25px;
@@ -114,24 +116,20 @@ a {
   border-color: transparent;
   border-style: solid;
   border-width: thin;
-  padding: 15px 15px;
+  border-radius: 0;
+  padding: 12px 12px;
   font-size: 15px;
+  font-size: 18px;
   margin: 0;
 }
 select option {
   font-size: 16px;
 }
 .button:hover {
-  background-color: #efefef;
   cursor: default;
 }
 .button:hover option, .button:hover optgroup {
   background-color: #ffffff;
-}
-
-#button:active {
-  background-color: orange;
-  border-color: orange;
 }
 
 optgroup {
@@ -139,7 +137,26 @@ optgroup {
   position: relative;
   left: 10px;
 }
-#button {
+#book {
+  text-align: center;
+  padding-left: auto;
+  padding-right: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* End misc header */
+
+/* Misc */
+
+.link {
+  cursor: pointer;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+/* This button CSS is from https://github.com/MasterOfTheTiger/apod-extension/blob/master/css/style.css under the MIT license */
+button {
   border-radius: 5px;
   border-style: solid;
   border-color: #d8d8d8;
@@ -150,19 +167,21 @@ optgroup {
   font-size: 13px;
   font-family: arial;
   border-width: thin;
-  width: 28%;
-  display: none;
 }
-#book {
-  text-align: center;
-  padding-left: auto;
-  padding-right: auto;
-  margin-left: auto;
-  margin-right: auto;
+button:hover {
+  background-color: #d8d8d8;
+  cursor: default;
+}
+select {
+  border-color: #d8d8d8;
+  background-color: #efefef;
+  border-style: solid;
+  border-width: thin;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
-
- /* Dropdown Button */
+ /* Dropdown Button for Text size dropdown from W3Schools */
 .dropbtn {
     background-color: transparent;
     color: black;
@@ -180,50 +199,22 @@ optgroup {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    min-width: 91px;
+    max-width: 50px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 10;
-    top: 49px;
+    top: 45px;
     left: -1px;
 }
-
 /* Links inside the dropdown */
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
-    display: block;
-    float: left;
+    display: inline-block;
 }
-
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {background-color: #ddd}
-
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
     display: block;
-}
-
-
-/* No longer used */
-#search {
-  border-radius: 3px;
-  border-style: solid;
-  border-color: #d8d8d8;
-  padding: 7px;
-  padding-right: 2px;
-  padding-left: 4px;
-  font-size: 13px;
-  font-family: arial;
-  border-width: thin;
-  font-size: 12px;
-  width: 70%;
-  display: none;
-}
-#search:focus {
-  border-color: orange;
-}
-
-#reference {
-  font-size: 110%;
 }
