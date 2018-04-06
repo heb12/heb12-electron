@@ -12,7 +12,7 @@ To install the program for editing, run these commands:
 <pre>
 $ git clone https://github.com/masterofthetiger/heb12
 $ cd heb12
-$ yarn install && yarn start
+~/heb12 $ yarn install && yarn start
 </pre>
 
 Packages for easy installation will be available upon the release of the first version. 
