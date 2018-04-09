@@ -79,7 +79,8 @@ function getVerses(reference, version) {
         var a = chapterAndVerse(reference);
         var theChapter = a.chapter;
         var theBook = a.book.name.split(' ').join('');
-        jsonKJV = require('./bible/' + theBook + '.json');
+        //jsonKJV = require('./bible/' + theBook + '.json');
+        apiLib.get("./bible/"+theBook+".json",function(data){let jsonKJV=data;});
         //jsonKJV = jsonKJV.chapters[0].verses[0]["1"];
         var length = "0";
         var toAdd = '';
