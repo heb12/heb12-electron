@@ -14,7 +14,7 @@ var apiLib = {
         xhttp.send();
     }
 };
-apiLib.get("./bible/3John.json",function(data){let jsonKJV=data;
+apiLib.get("./bible/3John.json",function(data){let jsonKJV=data;});
 function getBook(bookGet) {
     var i = 0;
     while (bible[i].id != bookGet) {
@@ -282,4 +282,4 @@ console.log(translations + ' is the translation loaded from localStorage.');
 if (translation == 'kjv') {
     sel.selectedIndex = 2;
 }
-});
+
