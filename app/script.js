@@ -21,7 +21,8 @@ var z = reference.split(" ");
 var obj = new Object();
     obj.verse = verse;
     obj.chapter = chapter;
-    obj.book = book;
+    obj.book = new Object();
+    obj.book.name = book;
 };
 var apiLib = {
     get: function (site,callback) {
