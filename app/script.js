@@ -4,8 +4,24 @@ var bible = [{ "id": "Gen", "verseCount": 1533, "chapters": [31, 25, 24, 26, 32,
 // apiLib by AmazinigMech2418 (Github) or AmazingMech2418 (Scratch)
 var chapterAndVerse = function(reference) {
 var z = reference.split(" ");
-    var chapter = z[0];
-    var verse = z[1];
+
+    if (z.length>2) {
+    var verse = z[z.length-1];
+    } else {
+    var verse = "1-";
+    }
+    z.pop;
+        if (z.length>1) {
+    var chapter = z[z.length-1];
+    } else {
+    var chapter = "1-";
+    }
+    z.pop;
+    var book = z.join(" ");
+var obj = new Object();
+    obj.verse = verse;
+    obj.chapter = chapter;
+    obj.book = book;
 };
 var apiLib = {
     get: function (site,callback) {
