@@ -23,6 +23,7 @@ var obj = new Object();
     obj.chapter = chapter;
     obj.book = new Object();
     obj.book.name = book;
+    return obj;
 };
 var apiLib = {
     get: function (site,callback) {
