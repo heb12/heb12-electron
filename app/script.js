@@ -50,7 +50,7 @@ function getVerses(reference, version) {
         var i = 0;
         for (var i = 0; i < jsonKJV.chapters[Number(theChapter) - 1].verses.length; i++) {
             toAdd = toAdd + '<p class="verse">' + '<b class="vref">' + (i + 1) + '</b> ' + jsonKJV.chapters[Number(theChapter) - 1].verses[i][i + 1] + '</p>';
-            
+
         }
         document.getElementById('scripture').innerHTML = toAdd;
         document.getElementById('error').style.display = 'none';
@@ -60,7 +60,7 @@ function getVerses(reference, version) {
     document.title = chapterAndVerse(document.getElementById('book').value).book.name + ' ' + document.getElementById('chapter').value + ' - ' + 'Heb12 Bible App';
     localStorage.setItem("lastRef", chapterAndVerse(document.getElementById('book').value).book.name + ' ' + document.getElementById('chapter').value);
     console.log(localStorage.getItem('lastRef'));
-    
+
 }
 var chapter, chapterE, books;
 
@@ -75,7 +75,7 @@ function nextChapter() {
     books = document.getElementsByClassName('book');
     chapter = document.getElementById('chapter');
     chapterE = document.getElementById('book').value;
-    
+
     if ((bible[getBook(chapterE)].chapters.length > 1) && (chapter.value != (bible[getBook(chapterE)].chapters.length))) {
         chapter.selectedIndex = Number(chapter.value);
         updateText();
@@ -155,7 +155,7 @@ function changeFont() {
     } else {
         document.getElementById('scripture').style.fontFamily = document.getElementById('font').value;
     }
-    
+
 }
 function changeTheme() {
     localStorage.setItem('theme', document.getElementById('theme').value);
@@ -166,6 +166,70 @@ function changetextAlign() {
     localStorage.setItem('textAlign', document.getElementById('textAlign').value);
     document.getElementById('scripture').style.textAlign = document.getElementById('textAlign').value;
 }
+
+// This closes all popups
+function closePopups() {
+  var popups = document.getElementsByClassName('popup');
+  for (var i = 0; i < popups.length; i++) {
+    popups[i].style.display = 'none';
+  }
+  document.getElementById('backdrop').style.display = 'none';
+  document.body.style.overflow = 'auto';
+  document.getElementById('backdrop').style.zIndex = '1001';
+}
+
+// This closes a specific popup
+function closePopup(popup) {
+  if (popup == 'alertBox') {
+    document.getElementById(popup).style.display = 'none';
+  } else {
+    document.getElementById(popup).style.display = 'none';
+    document.getElementById('backdrop').style.display = 'none';
+  }
+  document.getElementById('backdrop').style.zIndex = '1001';
+}
+
+// This prepares a popup
+function openPopup(popup) {
+  document.getElementById(popup).style.display = 'block';
+  document.getElementById('backdrop').style.display = 'block';
+  if (popup == 'alertBox') {
+    document.getElementById('backdrop').style.zIndex = '1003';
+  }
+}
+
+// This is an easy popup maker for either confirming something or just making a notice
+function alertYou(say, mode, callback) {
+  document.getElementById('alertText').innerText = say;
+  if (mode == 'Y/N') {
+    document.getElementById('yes').style.display = 'inline-block';
+    document.getElementById('no').style.display = 'inline-block';
+    openPopup('alertBox');
+    document.getElementById('yes').addEventListener('click', function() {
+      closePopup('alertBox');
+      switch (callback) {
+        case 'reset':
+          reset();
+          setup();
+          break;
+        default:
+          break;
+      }
+      return 'yes';
+    });
+    document.getElementById('no').addEventListener('click', function() {
+      closePopup('alertBox');
+      return 'no';
+    });
+  } else {
+    document.getElementById('okay').style.display = 'inline-block';
+    document.getElementById('okay').addEventListener('click', function() {
+      closePopup('alertBox');
+      return 'okay';
+    });
+  }
+}
+
 // This runs the first time the program is opened
 function setup() {
     localStorage.setItem('fontSize', '17px');
@@ -176,7 +240,7 @@ function setup() {
     localStorage.setItem('theme', 'theme1');
     localStorage.setItem('textAlign', 'left');
     console.log("Finished first-time setup of localStorage");
-    
+
 }
 // Resets the program's localStorage
 function reset() {

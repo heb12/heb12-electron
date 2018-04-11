@@ -66,6 +66,17 @@ a {
   overflow: auto;
 }
 
+#alertBox {
+  top: 40%;
+  left: 40%;
+  width: 20%;
+  max-height: 15%;
+  z-index: 1004;
+}
+#alertBox button {
+  display: none;
+}
+
 /* End */
 
 #result {

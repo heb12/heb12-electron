@@ -91,18 +91,19 @@
                 </select>
                 <button id="last" class="button" onclick="lastChapter()"><i class="fas fa-arrow-left"></i></button>
                 <button id="next" class="button" onclick="nextChapter()"><i class="fas fa-arrow-right"></i></button>
-                <span onclick="document.getElementById('info').style.display='block';document.getElementById('backdrop').style.display='block'" id="infoButton" class="button"><i class="fas fa-info-circle"></i></span>
-                <span id="settingsButton" class="button" onclick="document.getElementById('settings').style.display='block';document.getElementById('backdrop').style.display='block'"><i class="fas fa-cog"></i></span>
+                <span onclick="openPopup('info')" id="infoButton" class="button"><i class="fas fa-info-circle"></i></span>
+                <span id="settingsButton" class="button" onclick="openPopup('settings')"><i class="fas fa-cog"></i></span>
             </div>
         </div>
-        <div id="backdrop" onclick="document.getElementById('info').style.display='none';document.getElementById('settings').style.display='none';document.getElementById('backdrop').style.display='none';document.body.style.overflow='auto';"></div>
+        <!-- Here are the popups -->
+        <div id="backdrop" onclick="closePopups()"></div>
         <div id="info" class="popup">
             <h1>About this Program</h1>
             <p>This program was built by MasterOfTheTiger (mtiger.tk) as a simple Bible program for GNU/Linux systems.</p>
             <blockquote><b>1</b> Therefore, since we are surrounded by such a great cloud of witnesses, we must get rid of every weight and the sin that clings
             so closely, and run with endurance the race set out for us, <b>2</b> keeping our eyes fixed on Jesus, the pioneer and perfecter
             of our faith. For the joy set out for him he endured the cross, disregarding its shame, and has taken his seat at the right
-            hand of the throne of God. <span class="link" onclick="setChapter('Hebrews 12');document.getElementById('info').style.display='none';document.getElementById('backdrop').style.display='none'">Hebrews 12:1-2</span></blockquote>
+            hand of the throne of God. <span class="link" onclick="setChapter('Hebrews 12');closePopup()">Hebrews 12:1-2</span></blockquote>
             <h3>Credits</h3>
             <ul>
                 <li>Main Author: MasterOfTheTiger</li>
@@ -112,10 +113,10 @@
             <ul>
                 <li>Built using web technologies with Electron</li>
                 <li>Uses ChapterAndVerse version 2.0.7</li>
-                <li>GitHub repository: <span class="link">https://github.com/MasterOfTheTiger/heb12</span></li>
+                <li>GitHub repository: <span class="link">https://github.com/heb12/heb12</span></li>
                 <li>Uses the NET api found here: <span class="link">http://labs.bible.org/api_web_service.</span></li>
             </ul>
-            <p>Do you want to help out with this program in any way? Help out here: <span class="link">https://github.com/MasterOfTheTiger/heb12</span></p>
+            <p>Do you want to help out with this program in any way? Help out here: <span class="link">https://github.com/heb12/heb12</span></p>
         </div>
         <div id="settings" class="popup">
             <h1>Settings</h1>
@@ -150,7 +151,25 @@
                     <option value="theme2">Orange</option>
                 </select>
             </div>
+            <div class="settingsBox">
+                <h2>Reset</h2>
+                <p>This will reset all of your settings and other information stored and restore the program to the state it was in when you installed it. <em>Once you reset it, please restart the program</em></p>
+                <button onclick="alertYou('Are you sure you want to reset ALL data?', 'Y/N', 'reset');">Reset Data</button>
+            </div>
         </div>
+
+        <div class="popup" id="alertBox">
+          <p id="alertText"></p>
+          <div id="YN">
+            <button id="yes">Yes</button>
+            <button id="no">No</button>
+          </div>
+          <div id="notice">
+            <button id="okay">Okay</button>
+          </div>
+        </div>
+
+        <!-- End popups -->
         <p id="error">There was an error</p>
         <div id="result">
             <span id="reference"></span>

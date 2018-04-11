@@ -34,5 +34,6 @@ This software is released under the GPL license version 2.0 or later. See the [L
 
 ## Credits
 - @MasterOfTheTiger is the author of the program
+- @amazinigmech2418 for the online version
 - @danday74 for [Chapter and Verse](https://github.com/danday74/chapter-and-verse), a very useful tool for this program
 - Chapter and Verse for the bible.json file
