@@ -239,6 +239,7 @@ function setup() {
     localStorage.setItem('font', 'default');
     localStorage.setItem('theme', 'theme1');
     localStorage.setItem('textAlign', 'left');
+    localStorage.setItem('translation', 'net');
     console.log("Finished first-time setup of localStorage");
 
 }
@@ -318,17 +319,18 @@ for (var opt, j = 0; opt = opts[j]; j++) {
         break;
     }
 }
+// Set the theme
 var themeChoice = document.getElementById('theme').value;
 document.getElementById('themeStyle').href = './themes/' + themeChoice + '.css';
-
-// Retrieve last chapter viewed
-setChapter(localStorage.getItem('lastRef'));
 
 // Translation recovery does not work yet. This code does not affect the program negatively, but it is not operational
 var translations = localStorage.getItem('translation');
 sel = document.getElementById('translation');
 console.log(translations + ' is the translation loaded from localStorage.');
 
-if (translation == 'kjv') {
-    sel.selectedIndex = 2;
+if (translations == 'kjv') {
+    sel.selectedIndex = 1;
 }
+
+// Retrieve last chapter viewed
+setChapter(localStorage.getItem('lastRef'));
