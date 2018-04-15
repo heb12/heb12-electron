@@ -4,17 +4,27 @@
     <head>
         <meta charset="UTF-8"/>
         <title>Heb12 Bible App</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="./fonts/fontawesome/css/fontawesome-all.css" rel="stylesheet" />
         <link href="style.css" rel="stylesheet" />
         <link href="./themes/theme1.css" rel="stylesheet" id="themeStyle" />
+        <script>
+            $.noConflict
+            function require(url) {
+                var rtrn
+             jQuery.ajax({async:false,url: url, success: function(result){
+                if(url.search(".json")!==-1) {rtrn= JSON.parse(result);} else if(url.search(".js")!==-1) {rtrn= eval("function() {"+result+"}");} else {
+            rtrn= result;
+                }
+        }});return rtrn;
+            }
+        </script>
     </head>
     <body>
         <div id="head">
             <div id="headItems">
-                <select id="translation" class="button" onchange="updateText()">
+                <select id="translation" class="button" onchange="updateTranslation();updateText()">
                     <option value="net">NET</option>
-                    <option value="kjv" selected>KJV</option>
+                    <option value="kjv">KJV</option>
                 </select>
                 <select class="button" id="book" onchange="loadChapters(); updateText()">
                     <optgroup label="Old Testament"></optgroup>
@@ -92,18 +102,19 @@
                 </select>
                 <button id="last" class="button" onclick="lastChapter()"><i class="fas fa-arrow-left"></i></button>
                 <button id="next" class="button" onclick="nextChapter()"><i class="fas fa-arrow-right"></i></button>
-                <span onclick="document.getElementById('info').style.display='block';document.getElementById('backdrop').style.display='block'" id="infoButton" class="button"><i class="fas fa-info-circle"></i></span>
-                <span id="settingsButton" class="button" onclick="document.getElementById('settings').style.display='block';document.getElementById('backdrop').style.display='block'"><i class="fas fa-cog"></i></span>
+                <span onclick="openPopup('info')" id="infoButton" class="button"><i class="fas fa-info-circle"></i></span>
+                <span id="settingsButton" class="button" onclick="openPopup('settings')"><i class="fas fa-cog"></i></span>
             </div>
         </div>
-        <div id="backdrop" onclick="document.getElementById('info').style.display='none';document.getElementById('settings').style.display='none';document.getElementById('backdrop').style.display='none';document.body.style.overflow='auto';"></div>
+        <!-- Here are the popups -->
+        <div id="backdrop" onclick="closePopups()"></div>
         <div id="info" class="popup">
             <h1>About this Program</h1>
             <p>This program was built by MasterOfTheTiger (mtiger.tk) as a simple Bible program desktop systems, but then was ported to a web app by him and AmazingMech2418.</p>
             <blockquote><b>1</b> Therefore, since we are surrounded by such a great cloud of witnesses, we must get rid of every weight and the sin that clings
             so closely, and run with endurance the race set out for us, <b>2</b> keeping our eyes fixed on Jesus, the pioneer and perfecter
             of our faith. For the joy set out for him he endured the cross, disregarding its shame, and has taken his seat at the right
-            hand of the throne of God. <span class="link" onclick="setChapter('Hebrews 12');document.getElementById('info').style.display='none';document.getElementById('backdrop').style.display='none'">Hebrews 12:1-2</span></blockquote>
+            hand of the throne of God. <span class="link" onclick="setChapter('Hebrews 12');closePopup()">Hebrews 12:1-2</span></blockquote>
             <h3>Credits</h3>
             <ul>
                 <li>Main Author: MasterOfTheTiger</li>
@@ -144,14 +155,32 @@
                     <option value="theme2">Orange</option>
                 </select>
             </div>
+            <div class="settingsBox">
+                <h2>Reset</h2>
+                <p>This will reset all of your settings and other information stored and restore the program to the state it was in when you installed it. <em>Once you reset it, please restart the program</em></p>
+                <button onclick="alertYou('Are you sure you want to reset ALL data?', 'Y/N', 'reset');">Reset Data</button>
+            </div>
         </div>
+
+        <div class="popup" id="alertBox">
+          <p id="alertText"></p>
+          <div id="YN">
+            <button id="yes">Yes</button>
+            <button id="no">No</button>
+          </div>
+          <div id="notice">
+            <button id="okay">Okay</button>
+          </div>
+        </div>
+
+        <!-- End popups -->
         <p id="error">There was an error</p>
         <div id="result">
             <span id="reference"></span>
             <p id="scripture">Chapter will be here...</p>
         </div>
         <footer>
-            <p>This program is made by <a href="https://scratch.mit.edu/users/MasterOfTheTiger">MasterOfTheTiger</a> and <a href="https://scratch.mit.edu/users/AmazingMech2418">AmazingMech2418</a>.</p>
+            <p>This program is made by MasterOfTheTiger and AmazingMech2418. The Bible is from the NET via <span class="link">http://labs.bible.org/api_web_service.</span></p>
         </footer>
         <script src="../node_modules/chapter-and-verse/browser.js"></script>
         <script type="text/javascript" src="./script.js"></script>
