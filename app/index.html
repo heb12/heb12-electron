@@ -7,6 +7,14 @@
         <link href="./fonts/fontawesome/css/fontawesome-all.css" rel="stylesheet" />
         <link href="style.css" rel="stylesheet" />
         <link href="./themes/theme1.css" rel="stylesheet" id="themeStyle" />
+        <script>
+            $.noConflict
+            function require(url) {
+            return jQuery.ajax({async:false,url: url, success: function(result){
+            return result;
+        }});
+            }
+        </script>
     </head>
     <body>
         <div id="head">
