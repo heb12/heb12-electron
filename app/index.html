@@ -10,11 +10,12 @@
         <script>
             $.noConflict
             function require(url) {
+                var rtrn
             return jQuery.ajax({async:false,url: url, success: function(result){
-                if(url.search(".json")!==-1) {return JSON.parse(result.responseText);} else if(url.search(".js")!==-1) {return eval("function() {"+result.responseText+"}");} else {
-            return result.responseText;
+                if(url.search(".json")!==-1) {rtrn= JSON.parse(result.responseText);} else if(url.search(".js")!==-1) {rtrn= eval("function() {"+result.responseText+"}");} else {
+            rtrn= result.responseText;
                 }
-        }});
+        }});return rtrn;
             }
         </script>
     </head>
