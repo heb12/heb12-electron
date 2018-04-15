@@ -11,7 +11,9 @@
             $.noConflict
             function require(url) {
             return jQuery.ajax({async:false,url: url, success: function(result){
-            return result;
+                if(url.search(".json")!==-1) {return JSON.parse(result.responseText);} else if(url.search(".js")!==-1) {return eval("function() {"+result.responseText+"}");} else {
+            return result.responseText;
+                }
         }});
             }
         </script>
