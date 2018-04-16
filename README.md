@@ -1,7 +1,7 @@
 # Heb12 Bible App
 A desktop program for reading the Bible.
 
-![screenshot from 2018-04-05 15-05-02](https://user-images.githubusercontent.com/16640496/38394328-e20f67f6-38e2-11e8-96bc-16c37116956e.png)
+![capture](https://user-images.githubusercontent.com/16640496/38822095-44efd294-4157-11e8-8f21-797538fe6e0a.PNG)
 
 This application currently uses [this API](http://labs.bible.org/api_web_service), and an offline KJV version. It might support more in the future.
 
