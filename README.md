@@ -1,11 +1,11 @@
 # Heb12 Bible App
-A Linux program for reading the Bible.
+A desktop program for reading the Bible.
 
-![screenshot from 2018-04-05 15-05-02](https://user-images.githubusercontent.com/16640496/38394328-e20f67f6-38e2-11e8-96bc-16c37116956e.png)
+![capture](https://user-images.githubusercontent.com/16640496/38822095-44efd294-4157-11e8-8f21-797538fe6e0a.PNG)
 
 This application currently uses [this API](http://labs.bible.org/api_web_service), and an offline KJV version. It might support more in the future.
 
-If you would like to try out a prerelease version for Linux (without automatic updates) you can get it [here](https://drive.google.com/drive/folders/1bSoHc1mAjkGA6cyjO7YDcD8BtOdTxnuh?usp=sharing).
+If you would like to try out a prerelease version (without automatic updates) you can get it [here](https://github.com/heb12/heb12/wiki/Packages).
 
 ## Installation
 To install the program for editing, run these commands:
@@ -23,6 +23,7 @@ Feel free to make changes to the design, scripts, and even the fundamental code 
 - The rendering of the scripture
 - The selecting of verses
 - Offline use of major features (and at least the KJV translation), i.e, don't make your features depend on external requests unless it is necessary
+- Building on Linux and Windows
 
 If any of those do not work, then it will not be accepted without changes.
 
@@ -33,7 +34,6 @@ Copyright 2018 Theodore Jameson.
 This software is released under the GPL license version 2.0 or later. See the [LICENSE](https://github.com/MasterOfTheTiger/heb12/blob/master/LICENSE) file for more information.
 
 ## Credits
-- @MasterOfTheTiger is the author of the program
-- @amazinigmech2418 for the online version
+- @MasterOfTheTiger and @amazinigmech2418 are the authors of the program
 - @danday74 for [Chapter and Verse](https://github.com/danday74/chapter-and-verse), a very useful tool for this program
 - Chapter and Verse for the bible.json file
