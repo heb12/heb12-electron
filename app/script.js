@@ -1,6 +1,8 @@
+// Require some outside files
 let bible = require('./bible.json');
-let jsonKJV = require('./bible/3John.json');
+let jsonKJV = require('./bible/Hebrews.json');
 
+// This function gets the book number in bible.json from its name
 function getBook(bookGet) {
     var i = 0;
     while (bible[i].id != bookGet) {
@@ -8,20 +10,26 @@ function getBook(bookGet) {
     }
     return i;
 }
+
+// This puts the correct reference and version requested of the Bible in the 'script' element
 function getVerses(reference, version) {
     console.log(version);
+    // Hides the scripture element
     document.getElementById('result').style.display = 'hidden';
     // Renders NET
     if (version == 'net') {
+        // If the program is offline it sends an error message
         if (!navigator.onLine) {
             document.getElementById('error').style.display = 'block';
             document.getElementById('error').innerHTML = '<strong>No Internet!</strong> Internet connection is required for some features, including the NET translation.';
-            // Set translation back to KJV if NET was chosen while offline
+            // Set translation back to KJV
             document.getElementById('translation').selectedIndex = 1;
         } else {
             document.getElementById('error').style.display = 'none';
         }
+        // This is the url for the NET Bible API. The '&formatting=full' returns the headings and the line spacings of the text
         url = 'http://labs.bible.org/api/?passage= ' + reference + '&formatting=full';
+        // Uses the fetch API to request the scripture from the url above
         fetch(url, {
             mode: 'cors'
         })
@@ -32,11 +40,13 @@ function getVerses(reference, version) {
                     //document.getElementById('reference').innerHTML = reference;
                     document.getElementById('error').style.display = 'none';
                 } else {
+                    // If for some reason the request returned as blank, it sends an error
                     document.getElementById('error').style.display = 'block';
                     document.getElementById('error').innerHTML = 'Pardon, there was an error fetching the translation, please try again later';
+                    // Closes the error after 5 seconds
                     setTimeout(function () { document.getElementById('error').style.display = "none" }, 5000);
                 }
-                document.getElementById('result').display = 'block';
+                // Return the result variable for other use if nessessarry
                 return result;
             });
     }
@@ -57,19 +67,24 @@ function getVerses(reference, version) {
         document.getElementById('scripture').innerHTML = toAdd;
         document.getElementById('error').style.display = 'none';
     }
+
+    // Scrolls to the top of the page when the scripture loads
     document.body.scrollTop = document.documentElement.scrollTop = 0;
-    document.getElementById('result').style.display = 'block';
+    // Show the scripture element
+    document.getElementById('scripture').style.display = 'block';
+    // Set the title of the page to the Bible reference and 'Heb12 Bible App'
     document.title = chapterAndVerse(document.getElementById('book').value).book.name + ' ' + document.getElementById('chapter').value + ' - ' + 'Heb12 Bible App';
+    // Save the reference opened in localStorage
     localStorage.setItem("lastRef", chapterAndVerse(document.getElementById('book').value).book.name + ' ' + document.getElementById('chapter').value);
     console.log(localStorage.getItem('lastRef'));
 
 }
 var chapter, chapterE, books;
 
+// An easy function to update the text according to the dropdown menus
 function updateText() {
     var translation = document.getElementById('translation').value;
     getVerses(books[getBook(chapterE)].innerHTML + ' ' + chapter.value, translation);
-
 }
 
 // Changes to the next and last chapters
@@ -202,13 +217,20 @@ function openPopup(popup) {
 
 // This is an easy popup maker for either confirming something or just making a notice
 function alertYou(say, mode, callback) {
+  // Set the text for the alertText to the say parimeter
   document.getElementById('alertText').innerText = say;
+  // If the mode is a confirming of an action
   if (mode == 'Y/N') {
+    // Show the elements for Y/N
     document.getElementById('yes').style.display = 'inline-block';
     document.getElementById('no').style.display = 'inline-block';
+    // Open the alertBox
     openPopup('alertBox');
+    // If the 'yes' button is clicked run this function
     document.getElementById('yes').addEventListener('click', function() {
+      // Close alertBox
       closePopup('alertBox');
+      // Choose which function to run
       switch (callback) {
         case 'reset':
           reset();
@@ -219,10 +241,12 @@ function alertYou(say, mode, callback) {
       }
       return 'yes';
     });
+    // Cancel everything when no is clicked
     document.getElementById('no').addEventListener('click', function() {
       closePopup('alertBox');
       return 'no';
     });
+    // 'Okay' is a simple dialoge box to explain something
   } else {
     document.getElementById('okay').style.display = 'inline-block';
     document.getElementById('okay').addEventListener('click', function() {
@@ -263,22 +287,12 @@ function reset() {
 var firstTime = localStorage.getItem('firstTime');
 console.log(firstTime + ' is the value of firstTime in localStorage.');
 
+// If this is the first time you opened the program, run the setup function
 if (firstTime != 'no') {
     setup();
 }
 
-
 script = document.getElementById('scripture');
-
-// Retrieve last font information and apply it to text
-/*window.onload = function() {
-    // Font size
-    var fontSizers = localStorage.getItem('fontSize');
-    script.style.fontSize = fontSizers;
-    // Font align
-    var textAligned = localStorage.getItem('textAlign');
-    script.style.textAlign = textAligned;
-}*/
 
 console.log(localStorage.getItem('font') + ' is the font loaded from localStorage');
 
