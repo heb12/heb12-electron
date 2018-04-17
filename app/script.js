@@ -16,6 +16,8 @@ function getVerses(reference, version) {
         if (!navigator.onLine) {
             document.getElementById('error').style.display = 'block';
             document.getElementById('error').innerHTML = '<strong>No Internet!</strong> Internet connection is required for some features, including the NET translation.';
+            // Set translation back to KJV if NET was chosen while offline
+            document.getElementById('translation').selectedIndex = 1;
         } else {
             document.getElementById('error').style.display = 'none';
         }
