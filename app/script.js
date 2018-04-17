@@ -328,7 +328,7 @@ var translations = localStorage.getItem('translation');
 sel = document.getElementById('translation');
 console.log(translations + ' is the translation loaded from localStorage.');
 
-if (translations == 'kjv') {
+if (translations == 'kjv' || !navigator.onLine) {
     sel.selectedIndex = 1;
 }
 
