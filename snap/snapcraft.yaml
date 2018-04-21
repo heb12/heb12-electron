@@ -1,0 +1,13 @@
+name: heb12
+version: '0.1.0'
+summary: A simple program for reading the Bible
+description: |
+  Heb12 is a simple Bible program. It includes extensive settings to customize your experience.
+
+grade: stable
+confinement: strict
+
+parts:
+  my-part:
+    # See 'snapcraft plugins'
+    plugin: nil
