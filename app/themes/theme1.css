@@ -1,10 +1,10 @@
 /* This is the default theme */
 .popup {
-    border-color: rgb(87, 87, 226);
+    border-color: #3689e6;
 }
 /* Link color */
 .link {
-  color: rgb(87, 87, 226);
+  color: #0d52bf;
 }
 /* Header buttons */
 .button:hover {
@@ -12,6 +12,14 @@
 }
 /* Other buttons */
 button:active {
-  background-color: rgb(87, 87, 226);
-  border-color: rgb(87, 87, 226);
+  background-color: #3689e6;
+  border-color: #3689e6;
+}
+.closePopup {
+  transition-duration: 0.5s;
+  color: #3689e6;
+}
+.closePopup:hover {
+  transition-duration: 0.5s;
+  color: #002e99;
 }
