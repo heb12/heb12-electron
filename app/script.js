@@ -282,11 +282,8 @@ function setup() {
 }
 // Resets the program's localStorage
 function reset() {
-    localStorage.removeItem('fontSize');
-    localStorage.setItem('lineSpacing', '25px');
     localStorage.removeItem('firstTime');
-    localStorage.setItem("lastRef", 'Hebrews 12');
-    return 'Sucessfully reset localStorage';
+    console.log("Set firstTime to false. When startup() funtion is run user information will be erased.");
 }
 
 

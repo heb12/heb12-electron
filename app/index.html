@@ -150,8 +150,12 @@
             </div>
             <div class="settingsBox">
                 <h2>Reset</h2>
-                <p>This will reset all of your settings and other information stored and restore the program to the state it was in when you installed it. <em>Once you reset it, please restart the program</em></p>
-                <button onclick="alertYou('Are you sure you want to reset ALL data?', 'Y/N', 'reset');">Reset Data</button>
+                <p>This will reset all of your settings and other information stored and restore the program to the state it was in when you installed it.</p>
+                <div id="undoReset" style="display:none;">
+                  <p><em>Reset will occur next time you open the program.</em></p>
+                  <button onclick="localStorage.setItem('firstTime', 'no');document.getElementById('undoReset').style.display='none';document.getElementById('reset').style.display='block';" style="border-color:red">Undo</button>
+                </div>
+                <button id="reset" onclick="reset(); document.getElementById('undoReset').style.display='block';this.style.display='none'">Prepare Reset</button>
             </div>
         </div>
 
