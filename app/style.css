@@ -55,8 +55,8 @@ a {
   display: none;
   position: fixed;
   top: 15%;
-  left: 25%;
-  width: 50%;
+  left: 15%;
+  width: 70%;
   height: 70%;
   padding: 16px;
   border: 2px solid;
@@ -164,6 +164,25 @@ optgroup {
 }
 .link:hover {
   text-decoration: underline;
+}
+
+.settingsBox {
+  display: block;
+  float: left;
+  width: 30%;
+  height: 200px;
+  padding: 10px;
+  border-right: solid gray 2px;
+}
+@media only screen
+and (max-width : 1000px) {
+  .settingsBox {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    height: auto;
+  }
 }
 
 /* This button CSS is from https://github.com/MasterOfTheTiger/apod-extension/blob/master/css/style.css under the MIT license */
