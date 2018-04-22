@@ -94,19 +94,30 @@ function nextChapter() {
     chapterE = document.getElementById('book').value;
 
     if ((bible[getBook(chapterE)].chapters.length > 1) && (chapter.value != (bible[getBook(chapterE)].chapters.length))) {
-        chapter.selectedIndex = Number(chapter.value);
-        updateText();
+        chapter.selectedIndex = chapter.selectedIndex + 1;
+    } else if ((chapter.selectedIndex == bible[getBook(chapterE)].chapters.length - 1) && book.selectedIndex < 65) {
+      book.selectedIndex = book.selectedIndex + 1;
+      chapterE = document.getElementById('book').value;
+      console.log(chapterE);
+      loadChapters();
+      chapter.selectedIndex = 0;
     }
+    updateText();
 }
 function lastChapter() {
     books = document.getElementsByClassName('book');
     chapter = document.getElementById('chapter');
     chapterE = document.getElementById('book').value;
-
-    if ((bible[getBook(chapterE)].chapters.length > 1) && (Number(chapter.value) > 1)) {
-        chapter.selectedIndex = Number(chapter.value) - 2;
-        updateText();
+    // Selected index starts at 0
+    if ((bible[getBook(chapterE)].chapters.length > 1) && (chapter.selectedIndex > 0)) {
+        chapter.selectedIndex = chapter.selectedIndex - 1;
+    } else if ((chapter.selectedIndex == 0) && (book.selectedIndex > 0)) {
+      book.selectedIndex = book.selectedIndex - 1;
+      chapterE = document.getElementById('book').value;
+      loadChapters();
+      chapter.selectedIndex = bible[getBook(chapterE)].chapters.length - 1;
     }
+    updateText();
 }
 
 // Render the current book's chapters into the chapters dropdown
