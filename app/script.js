@@ -1,6 +1,6 @@
 // Require some outside files
-let bible = require('./bible.json');
-let jsonKJV = require('./bible/Hebrews.json');
+let bible = require('bible.json');
+let jsonKJV = require('bible/Hebrews.json');
 
 // This function gets the book number in bible.json from its name
 function getBook(bookGet) {
