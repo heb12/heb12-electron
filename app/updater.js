@@ -22,7 +22,8 @@ function checkUpdates() {
                 document.getElementById('latestUpdate').style.display = 'block';
               } else {
                 console.log('Using latest version.');
-                document.getElementById('latestUpdate').innerHTML = 'Latest version: ' + result.newest;
+                document.getElementById('latestUpdate').innerHTML = 'Latest version: ' + result.newest + ' (up to date)';
+                document.getElementById('latestUpdate').style.display = 'block';
               }
             } else {
                 // If for some reason the request returned as blank, it sends an error
