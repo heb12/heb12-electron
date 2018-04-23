@@ -12,7 +12,7 @@ If you would like to try out a prerelease version (without automatic updates) yo
 ## Installation
 To install the program for editing, run these commands:
 <pre>
-$ git clone https://github.com/masterofthetiger/heb12
+$ git clone https://github.com/heb12/heb12
 $ cd heb12
 ~/heb12 $ yarn install && yarn start
 </pre>
