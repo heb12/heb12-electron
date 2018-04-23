@@ -205,6 +205,15 @@ and (max-width : 1000px) {
   }
 }
 
+#technicalInfo {
+  display: block;
+  margin-bottom: 20px;
+}
+#technicalInfo img {
+  float: left;
+  margin-right: 20px;
+}
+
 /* This button CSS is from https://github.com/MasterOfTheTiger/apod-extension/blob/master/css/style.css under the MIT license */
 button {
   border-radius: 5px;
