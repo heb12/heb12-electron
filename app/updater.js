@@ -22,6 +22,7 @@ function checkUpdates() {
                 document.getElementById('latestUpdate').style.display = 'block';
               } else {
                 console.log('Using latest version.');
+                document.getElementById('latestUpdate').innerHTML = 'Latest version: ' + result.newest;
               }
             } else {
                 // If for some reason the request returned as blank, it sends an error
