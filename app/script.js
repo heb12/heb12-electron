@@ -347,7 +347,7 @@ for (var opt, j = 0; opt = opts[j]; j++) {
 var themeChoice = document.getElementById('theme').value;
 document.getElementById('themeStyle').href = './themes/' + themeChoice + '.css';
 
-// Translation recovery does not work yet. This code does not affect the program negatively, but it is not operational
+// Retrieve last translation
 var translations = localStorage.getItem('translation');
 sel = document.getElementById('translation');
 console.log(translations + ' is the translation loaded from localStorage.');
