@@ -1,10 +1,10 @@
 // Update this version number for every release:
-const version = '0-1-0'
+const version = '0.1.0'
 let timesChecked = localStorage.getItem('timesChecked');
 
 function checkUpdates() {
   console.log(timesChecked);
-  url = 'https://heb12.github.io/updater/desktop/' + version + '.json' + '?' + timesChecked;
+  url = 'https://heb12.github.io/updater/desktop/latest.json' + '?' + timesChecked;
   console.log(url);
   if (navigator.onLine) {
     console.log("Checking for updates...");
@@ -16,13 +16,13 @@ function checkUpdates() {
             result = JSON.parse(result);
             if (result != '') {
               console.log(result);
-              if (result.outdated == true) {
+              if (result.version != version) {
                 console.log('This version is outdated. The newest version is ' + result.newest);
-                document.getElementById('latestUpdate').innerHTML = 'Latest version: ' + result.newest + ' (get the newest version from <span class="link">heb12.github.io/update</span>)';
+                document.getElementById('latestUpdate').innerHTML = 'Latest version: ' + result.version + ' (get the newest version from <span class="link">heb12.github.io/update</span>)';
                 document.getElementById('latestUpdate').style.display = 'block';
               } else {
                 console.log('Using latest version.');
-                document.getElementById('latestUpdate').innerHTML = 'Latest version: ' + result.newest + ' (up to date)';
+                document.getElementById('latestUpdate').innerHTML = 'Latest version: ' + result.version + ' (up to date)';
                 document.getElementById('latestUpdate').style.display = 'block';
               }
             } else {
