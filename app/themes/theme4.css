@@ -6,8 +6,9 @@
   box-shadow: 3px 5px 5px 5px #09B0E8;
 }
 
-option {
-	background-color: #09B0E8;
+.button:hover option, .button:hover optgroup {
+  background-color: #ffffff;
+  color: black;
 }
 .popup {
     border-color: #09B0E8;
