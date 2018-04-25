@@ -12,7 +12,7 @@ function getBook(bookGet) {
 }
 
 // This puts the correct reference and version requested of the Bible in the 'script' element
-function getVerses(reference, version) {
+async function getVerses(reference, version) {
     console.log(version);
     // Hides the scripture element
     document.getElementById('result').style.display = 'hidden';
@@ -30,7 +30,7 @@ function getVerses(reference, version) {
         // This is the url for the NET Bible API. The '&formatting=full' returns the headings and the line spacings of the text
         url = 'http://labs.bible.org/api/?passage= ' + reference + '&formatting=full';
         // Uses the fetch API to request the scripture from the url above
-        fetch(url, {
+        result2 = await fetch(url, {
             mode: 'cors'
         })
             .then(response => response.text())
@@ -77,14 +77,15 @@ function getVerses(reference, version) {
     // Save the reference opened in localStorage
     localStorage.setItem("lastRef", chapterAndVerse(document.getElementById('book').value).book.name + ' ' + document.getElementById('chapter').value);
     console.log(localStorage.getItem('lastRef'));
-
+    return result;
 }
 var chapter, chapterE, books;
 
 // An easy function to update the text according to the dropdown menus
-function updateText() {
+async function updateText() {
     var translation = document.getElementById('translation').value;
-    getVerses(books[getBook(chapterE)].innerHTML + ' ' + chapter.value, translation);
+    var text2 = await getVerses(books[getBook(chapterE)].innerHTML + ' ' + chapter.value, translation);
+    console.log('Here is the book: ' + text2.innerHTML);
 }
 
 // Changes to the next and last chapters
