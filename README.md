@@ -17,7 +17,7 @@ $ cd heb12
 ~/heb12 $ yarn install && yarn start
 </pre>
 
-Packages for easy installation will be available upon the release of the first version.
+Packages for easy installation are available on the [releases page](https://github.com/heb12/heb12/releases).
 
 ## Contributing
 Feel free to make changes to the design, scripts, and even the fundamental code to the program, as it is still in heavy development, and submit a pull request. However, please make sure the following work before submitting your request.
