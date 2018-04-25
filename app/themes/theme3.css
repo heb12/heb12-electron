@@ -1,0 +1,60 @@
+/* This is the default theme */
+/* Header */
+body {
+  color: white;
+  background-color: black;
+}
+#head {
+    background-color: black;
+    color: white;
+    box-shadow: 2px 2px 10px #1a1a1a;
+}
+.button {
+    color: white;
+}
+
+/* Popup border color */
+.popup {
+    border-color: #333333;
+    background-color: black;
+}
+/* Link color */
+.link {
+  color: #0d52bf;
+}
+/* Header buttons */
+.button:hover {
+  background-color: #1a1a1a;
+}
+.button:hover option, .button:hover optgroup {
+  background-color: black;
+  color: white;
+}
+/* Other buttons */
+button, select {
+  background-color: #1a1a1a;
+  color: white;
+  border-color: #666666;
+}
+button:hover {
+  background-color: #666666;
+}
+button:active, select:active {
+  background-color: #666666;
+  border-color: #666666;
+}
+
+.closePopup {
+  transition-duration: 0.5s;
+  color: #1a1a1a;
+}
+.closePopup:hover {
+  transition-duration: 0.5s;
+  color: #333333;
+}
+
+
+#result {
+  box-shadow: 3px 5px 5px 5px #1a1a1a;
+  background-color: black;
+}
