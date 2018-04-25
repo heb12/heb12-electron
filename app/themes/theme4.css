@@ -1,0 +1,37 @@
+#head {
+    background-color: #09B0E8;
+    color: white;
+}
+#result {
+  box-shadow: 3px 5px 5px 5px #09B0E8;
+}
+
+
+.popup {
+    border-color: #09B0E8;
+}
+/* Link color */
+.link {
+  color: #09B0E8;
+}
+/* Header buttons */
+.button {
+	color: white;
+}
+.button:hover {
+  background-color: #0A7BA1;
+}
+/* Other buttons */
+button:active {
+  background-color: #0A7BA1;
+  border-color: #09B0E8;
+}
+.closePopup {
+  transition-duration: 0.5s;
+  color: #09B0E8;
+}
+.closePopup:hover {
+  transition-duration: 0.5s;
+  color: #0A7BA1;
+}
+
