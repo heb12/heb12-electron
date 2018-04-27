@@ -12,8 +12,11 @@
         <div id="head">
             <div id="headItems">
                 <select id="translation" class="button" onchange="updateTranslation();updateText()">
-                    <option value="net">NET</option>
+                    <option value='amp'>AMP</option>
                     <option value="kjv">KJV</option>
+                    <option value="msg">MSG</option>
+                    <option value="nasb">NASB</option>
+                    <option value="net">NET</option>
                 </select>
                 <select class="button" id="book" onchange="loadChapters(); updateText()">
                     <optgroup label="Old Testament"></optgroup>

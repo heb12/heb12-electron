@@ -51,7 +51,8 @@ async function getVerses(reference, version) {
             });
     }
     // Renders KJV
-    else {
+    else if (version == 'kjv') {
+        console.log('Loading KJV...');
         var a = chapterAndVerse(reference);
         var theChapter = a.chapter;
         var theBook = a.book.name.split(' ').join('');
@@ -66,6 +67,41 @@ async function getVerses(reference, version) {
         }
         document.getElementById('scripture').innerHTML = toAdd;
         document.getElementById('error').style.display = 'none';
+    }
+    else {
+      var a = chapterAndVerse(reference);
+      var theChapter = a.chapter;
+      var theBook = a.book.name.split(' ').join('');
+      var verses = a.book.versesPerChapter[a.chapter - 1];
+      var scriptures = '';
+      document.getElementById('scripture').innerHTML = 'Loading scripture. This may take up to 30 seconds...';
+      for (var i = 1; i < verses; i++) {
+        url = 'https://edxt.net/services/heb12/getverse.php?v=eng-' + version + ':' + theBook + '.' + theChapter + '.' + String(i);
+        console.log('Loading ' + url);
+        await fetch(url, {
+            mode: 'cors'
+        })
+            .then(response => response.json())
+            .then(result => {
+                if (result != '') {
+                    scriptures = scriptures + result.response.verses['0'].text;
+                    //document.getElementById('scripture').innerHTML = document.getElementById('scripture').innerHTML + result.response.verses['0'].text;
+                    //console.log(result.response.verses['0'].text);
+                    //document.getElementById('reference').innerHTML = reference;
+                    document.getElementById('error').style.display = 'none';
+                } else {
+                    // If for some reason the request returned as blank, it sends an error
+                    document.getElementById('error').style.display = 'block';
+                    document.getElementById('error').innerHTML = 'Pardon, there was an error fetching the translation, please try again later';
+                    // Closes the error after 5 seconds
+                    setTimeout(function () { document.getElementById('error').style.display = "none" }, 5000);
+                }
+                // Return the result variable for other use if nessessarry
+                return result;
+            });
+      }
+      document.getElementById('scripture').innerHTML = scriptures;
+      console.log(scriptures);
     }
 
     // Scrolls to the top of the page when the scripture loads
