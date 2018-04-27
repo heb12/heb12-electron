@@ -30,7 +30,7 @@ async function getVerses(reference, version) {
         // This is the url for the NET Bible API. The '&formatting=full' returns the headings and the line spacings of the text
         url = 'http://labs.bible.org/api/?passage= ' + reference + '&formatting=full';
         // Uses the fetch API to request the scripture from the url above
-        result2 = await fetch(url, {
+        fetch(url, {
             mode: 'cors'
         })
             .then(response => response.text())
