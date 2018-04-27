@@ -28,7 +28,8 @@ async function getVerses(reference, version) {
             document.getElementById('error').style.display = 'none';
         }
         // This is the url for the NET Bible API. The '&formatting=full' returns the headings and the line spacings of the text
-        url = 'http://labs.bible.org/api/?passage= ' + reference + '&formatting=full';
+        // Add cors proxy - myed
+        url = 'https://cors-anywhere.herokuapp.com/labs.bible.org/api/?passage= ' + reference + '&formatting=full';
         // Uses the fetch API to request the scripture from the url above
         fetch(url, {
             mode: 'cors'
