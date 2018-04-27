@@ -267,6 +267,10 @@ function alertYou(say, mode, callback) {
     });
   }
 }
+// Save scroll position
+document.body.onscroll = function() {
+  localStorage.setItem('scroll', document.body.scrollTop);
+}
 
 // This runs the first time the program is opened
 function setup() {
@@ -358,4 +362,9 @@ if (translations == 'kjv' || !navigator.onLine) {
 }
 
 // Retrieve last chapter viewed
-setChapter(localStorage.getItem('lastRef'));
+window.onload = function() {
+  setChapter(localStorage.getItem('lastRef'));
+  setTimeout(function() {
+    document.body.scrollTop = localStorage.getItem('scroll');
+  }, 200);
+}
