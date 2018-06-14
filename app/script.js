@@ -11,6 +11,32 @@ function getBook(bookGet) {
     return i;
 }
 
+function getKJVVerse(bk, chap, vs) {
+  jsonKJV = require('./bible/' + bk + '.json');
+  console.log(vs);
+  return jsonKJV.chapters[Number(chap) - 1].verses[vs - 1][vs];
+}
+function getNETVerse(bk, chap, vs) {
+  if (!navigator.onLine) {
+      document.getElementById('nettext').innerHTML = '<em>Check your Internet connection.</em>';
+      console.log('Offline ERROR');
+  } else {
+    console.log('Getting ' + bk + ' ' + chap + ':' + vs + ' in NET translation.');
+    url = 'https://labs.bible.org/api/?passage= ' + bk + ' ' + chap + ':' + vs + '&formatting=full';
+    fetch(url, {
+        mode: 'cors'
+    })
+        .then(response => response.text())
+        .then(result => {
+            if (result != '') {
+                document.getElementById('nettext').innerHTML = result;
+                document.getElementById('error').style.display = 'none';
+            }
+            return result;
+        });
+  }
+}
+
 // This puts the correct reference and version requested of the Bible in the 'script' element
 async function getVerses(reference, version) {
     console.log(version);
@@ -62,7 +88,8 @@ async function getVerses(reference, version) {
         var toAdd = '';
         var i = 0;
         for (var i = 0; i < jsonKJV.chapters[Number(theChapter) - 1].verses.length; i++) {
-            toAdd = toAdd + '<p class="verse">' + '<b class="vref">' + (i + 1) + '</b> ' + jsonKJV.chapters[Number(theChapter) - 1].verses[i][i + 1] + '</p>';
+            toAdd = toAdd + '<p class="verse">' + '<b class="vref"' + ' onclick="openVerse(\'' + a.book.name + ' ' + theChapter + ':' + (i + 1) + '\')"' + '>' + (i + 1) + '</b> ' + getKJVVerse(theBook, theChapter, (i + 1)); + '</p>';
+            // jsonKJV.chapters[Number(theChapter) - 1].verses[i][i + 1] replaced with getKJVVerse(theBook, theChapter, (i + 1));
 
         }
         document.getElementById('scripture').innerHTML = toAdd;
@@ -195,6 +222,17 @@ function changeTheme() {
 function changetextAlign() {
     localStorage.setItem('textAlign', document.getElementById('textAlign').value);
     document.getElementById('scripture').style.textAlign = document.getElementById('textAlign').value;
+}
+
+// This opens a verse popup for a specific verse
+function openVerse(ref) {
+  openPopup('versePopup');
+  var a = chapterAndVerse(ref);
+  var theBook = a.book.name;
+  var theChapter = a.chapter;
+  var vs = a.from;
+  document.getElementById('vs').innerText = ref;
+  document.getElementById('kjvtext').innerText = getKJVVerse(theBook, theChapter, vs);getNETVerse(theBook, theChapter, vs);
 }
 
 // This closes all popups
