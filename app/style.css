@@ -106,6 +106,15 @@ a {
   margin: 5px;
 }
 
+#searchBox {
+  padding: 5px;
+  width: 90%;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: lightgray;
+  margin-bottom: 10px;
+}
+
 /* End */
 
 #result {
