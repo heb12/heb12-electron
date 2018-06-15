@@ -93,6 +93,7 @@
                 <button id="next" class="button" onclick="nextChapter()"><i class="fas fa-arrow-right"></i></button>
                 <span onclick="openPopup('info')" id="infoButton" class="button"><i class="fas fa-info-circle"></i></span>
                 <span id="settingsButton" class="button" onclick="openPopup('settings')"><i class="fas fa-cog"></i></span>
+                <span id="searchButton" class="button" onclick="openVerse('Hebrews 4:12')">S</span>
             </div>
         </div>
         <!-- Here are the popups -->
@@ -162,6 +163,7 @@
         <div id="versePopup" class="popup">
           <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
           <h3 id='vs'></h3>
+          <input id="searchBox" type="text" autofocus placeholder="Hebrews 4:12" /><button id="searchAction" onclick="closePopups();openVerse(document.getElementById('searchBox').value)">Open</button>
           <div class="verseBox">
             <p><strong>KJV</strong></p>
             <p id="kjvtext"></p>
