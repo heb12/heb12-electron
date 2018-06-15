@@ -1,5 +1,0 @@
-js
---recursive
---reporter spec
---require ./test/test.bootstrap
---colors
