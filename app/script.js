@@ -11,18 +11,27 @@ function getBook(bookGet) {
     return i;
 }
 
-function getKJVVerse(bk, chap, vs) {
-  jsonKJV = require('./bible/' + bk + '.json');
-  console.log(vs);
-  return jsonKJV.chapters[Number(chap) - 1].verses[vs - 1][vs];
+function getKJVVerse(ref) {
+  let a = chapterAndVerse(ref);
+  jsonKJV = require('./bible/' + a.book.name + '.json');
+  result = '';
+  if (a.from < a.to) {
+    console.log('running');
+    for (var i = a.from; i < a.to; i++) {
+        result = result + jsonKJV.chapters[Number(a.chapter) - 1].verses[a.from - 1][a.from];
+    }
+  } else {
+    result = jsonKJV.chapters[Number(a.chapter) - 1].verses[a.from - 1][a.from];
+  }
+
+  return result;
 }
-function getNETVerse(bk, chap, vs) {
+function getNETVerse(ref) {
   if (!navigator.onLine) {
       document.getElementById('nettext').innerHTML = '<em>Check your Internet connection.</em>';
       console.log('Offline ERROR');
   } else {
-    console.log('Getting ' + bk + ' ' + chap + ':' + vs + ' in NET translation.');
-    url = 'https://labs.bible.org/api/?passage= ' + bk + ' ' + chap + ':' + vs + '&formatting=full';
+    url = 'https://labs.bible.org/api/?passage= ' + ref + '&formatting=full';
     fetch(url, {
         mode: 'cors'
     })
@@ -88,7 +97,7 @@ async function getVerses(reference, version) {
         var toAdd = '';
         var i = 0;
         for (var i = 0; i < jsonKJV.chapters[Number(theChapter) - 1].verses.length; i++) {
-            toAdd = toAdd + '<p class="verse">' + '<b class="vref"' + ' onclick="openVerse(\'' + a.book.name + ' ' + theChapter + ':' + (i + 1) + '\')"' + '>' + (i + 1) + '</b> ' + getKJVVerse(theBook, theChapter, (i + 1)); + '</p>';
+            toAdd = toAdd + '<p class="verse">' + '<b class="vref"' + ' onclick="openVerse(\'' + a.book.name + ' ' + theChapter + ':' + (i + 1) + '\')"' + '>' + (i + 1) + '</b> ' + getKJVVerse(theBook + ' ' + theChapter + ':' + (i + 1)); + '</p>';
             // jsonKJV.chapters[Number(theChapter) - 1].verses[i][i + 1] replaced with getKJVVerse(theBook, theChapter, (i + 1));
 
         }
@@ -226,12 +235,8 @@ function changetextAlign() {
 // This opens a verse popup for a specific verse
 function openVerse(ref) {
   openPopup('versePopup');
-  var a = chapterAndVerse(ref);
-  var theBook = a.book.name;
-  var theChapter = a.chapter;
-  var vs = a.from;
   document.getElementById('vs').innerText = ref;
-  document.getElementById('kjvtext').innerText = getKJVVerse(theBook, theChapter, vs);getNETVerse(theBook, theChapter, vs);
+  document.getElementById('kjvtext').innerText = getKJVVerse(ref);getNETVerse(ref);
 }
 
 // This closes all popups
