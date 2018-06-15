@@ -113,7 +113,6 @@ var chapter, chapterE, books;
 async function updateText() {
     var translation = document.getElementById('translation').value;
     var text2 = await getVerses(books[getBook(chapterE)].innerHTML + ' ' + chapter.value, translation);
-    console.log('Here is the book: ' + text2.innerHTML);
 }
 
 // Changes to the next and last chapters
