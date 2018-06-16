@@ -13,7 +13,7 @@ function getBook(bookGet) {
 
 function getKJVVerse(ref) {
   let a = chapterAndVerse(ref);
-  jsonKJV = require('./bible/' + a.book.name + '.json');
+  jsonKJV = require('./bible/' + a.book.name.split(' ').join('') + '.json');
   result = '';
   if (a.from < a.to) {
     for (var i = a.from; i < a.to; i++) {
