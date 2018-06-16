@@ -108,11 +108,16 @@ a {
 
 #searchBox {
   padding: 5px;
-  width: 90%;
+  width: 80%;
+  margin-right: 1%;
   border-radius: 5px;
   border-style: solid;
   border-color: lightgray;
   margin-bottom: 10px;
+}
+#searchAction {
+  padding: auto;
+  display: inline-block;
 }
 
 /* End */
