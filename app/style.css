@@ -247,6 +247,34 @@ and (max-width : 1000px) {
   margin-right: 20px;
 }
 
+.arrow {
+  position: fixed;
+  border-radius: 30px;
+  background-color: white;
+  font-size: 20px;
+  display: block;
+  border: 1px solid gray;
+}
+#last {
+  left: 40px;
+  bottom: 50px;
+}
+#next {
+  right: 40px;
+  bottom: 50px;
+}
+@media only screen
+and (max-width : 900px) {
+  #last {
+    left: 10px;
+    bottom: 50px;
+  }
+  #next {
+    right: 10px;
+    bottom: 50px;
+  }
+}
+
 /* This button CSS is from https://github.com/MasterOfTheTiger/apod-extension/blob/master/css/style.css under the MIT license */
 button {
   border-radius: 5px;

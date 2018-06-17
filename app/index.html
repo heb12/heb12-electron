@@ -89,13 +89,14 @@
                 <select id="chapter" onchange="updateText()" class="button">
                     <option value="1">1</option>
                 </select>
-                <button id="last" class="button" onclick="lastChapter()"><i class="fas fa-arrow-left"></i></button>
-                <button id="next" class="button" onclick="nextChapter()"><i class="fas fa-arrow-right"></i></button>
                 <span onclick="openPopup('info')" id="infoButton" class="button"><i class="fas fa-info-circle"></i></span>
                 <span id="settingsButton" class="button" onclick="openPopup('settings')"><i class="fas fa-cog"></i></span>
                 <span id="searchButton" class="button" onclick="openVerse('Hebrews 4:12')">S</span>
             </div>
         </div>
+        <!-- Buttons for changing chapters -->
+        <div id="last" class="button arrow" onclick="lastChapter()"><i class="fas fa-arrow-left"></i></div>
+        <div id="next" class="button arrow" onclick="nextChapter()"><i class="fas fa-arrow-right"></i></div>
         <!-- Here are the popups -->
         <div id="backdrop" onclick="closePopups()"></div>
         <div id="info" class="popup">
