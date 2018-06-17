@@ -264,7 +264,7 @@ and (max-width : 1000px) {
   bottom: 50px;
 }
 @media only screen
-and (max-width : 900px) {
+and (max-width : 1000px) {
   #last {
     left: 10px;
     bottom: 50px;
