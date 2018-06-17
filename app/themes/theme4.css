@@ -1,9 +1,10 @@
+/* This is the light blue theme */
 #head {
     background-color: #09B0E8;
     color: white;
 }
 #result {
-  box-shadow: 3px 5px 5px 5px #09B0E8;
+  /*box-shadow: 3px 5px 5px 5px #09B0E8;*/
 }
 
 .button:hover option, .button:hover optgroup {
@@ -37,4 +38,3 @@ button:active {
   transition-duration: 0.5s;
   color: #0A7BA1;
 }
-

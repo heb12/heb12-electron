@@ -1,4 +1,4 @@
-/* This is the default theme */
+/* This is the dark theme */
 /* Header */
 body {
   color: white;
@@ -7,7 +7,7 @@ body {
 #head {
     background-color: black;
     color: white;
-    box-shadow: 2px 2px 10px #1a1a1a;
+    /*box-shadow: 2px 2px 10px #1a1a1a;*/
 }
 .button {
     color: white;
@@ -55,6 +55,6 @@ button:active, select:active {
 
 
 #result {
-  box-shadow: 3px 5px 5px 5px #1a1a1a;
+  /*box-shadow: 3px 5px 5px 5px #1a1a1a;*/
   background-color: black;
 }

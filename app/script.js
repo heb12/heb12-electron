@@ -313,6 +313,13 @@ function alertYou(say, mode, callback) {
 // Save scroll position
 document.body.onscroll = function() {
   localStorage.setItem('scroll', document.body.scrollTop);
+  if (document.body.scrollTop > 0) {
+    document.getElementById('head').className = 'scroll';
+    document.getElementById('result').className = 'scroll';
+  } else {
+    document.getElementById('head').className = '';
+    document.getElementById('result').className = '';
+  }
 }
 
 // This runs the first time the program is opened
