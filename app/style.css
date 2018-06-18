@@ -201,13 +201,6 @@ optgroup {
   position: relative;
   left: 10px;
 }
-#book {
-  text-align: center;
-  padding-left: auto;
-  padding-right: auto;
-  margin-left: auto;
-  margin-right: auto;
-}
 /* End misc header */
 
 /* Misc */
@@ -273,6 +266,21 @@ and (max-width : 1000px) {
     right: 10px;
     bottom: 50px;
   }
+}
+
+#books {
+  text-align: center;
+}
+#books h1 {
+  text-align: left;
+}
+.book {
+  height: 40px;
+  min-width: 100px;
+  margin: 1px -1px;
+  padding-right: auto;
+  padding-left: auto;
+  display: inline-block;
 }
 
 /* This button CSS is from https://github.com/MasterOfTheTiger/apod-extension/blob/master/css/style.css under the MIT license */

@@ -11,81 +11,8 @@
     <body>
         <div id="head">
             <div id="headItems">
-                <select id="translation" class="button" onchange="updateTranslation();updateText()">
-                    <option value="net">NET</option>
-                    <option value="kjv">KJV</option>
-                </select>
-                <select class="button" id="book" onchange="loadChapters(); updateText()">
-                    <optgroup label="Old Testament"></optgroup>
-                    <option value="Gen" class="book ot">Genesis</option>
-                    <option value="Exod" class="book ot">Exodus</option>
-                    <option value="Lev" class="book ot">Leviticus</option>
-                    <option value="Num" class="book ot">Numbers</option>
-                    <option value="Deut" class="book ot">Deuteronomy</option>
-                    <option value="Josh" class="book ot">Joshua</option>
-                    <option value="Judg" class="book ot">Judges</option>
-                    <option value="Ruth" class="book ot">Ruth</option>
-                    <option value="1Sam" class="book ot">1 Samuel</option>
-                    <option value="2Sam" class="book ot">2 Samuel</option>
-                    <option value="1Kgs" class="book ot">1 Kings</option>
-                    <option value="2Kgs" class="book ot">2 Kings</option>
-                    <option value="1Chr" class="book ot">1 Chronicles</option>
-                    <option value="2Chr" class="book ot">2 Chronicles</option>
-                    <option value="Ezra" class="book ot">Ezra</option>
-                    <option value="Neh" class="book ot">Nehemiah</option>
-                    <option value="Esth" class="book ot">Esther</option>
-                    <option value="Job" class="book ot">Job</option>
-                    <option value="Ps" class="book ot">Psalms</option>
-                    <option value="Prov" class="book ot">Proverbs</option>
-                    <option value="Eccl" class="book ot">Ecclesiastes</option>
-                    <option value="Song" class="book ot">Song of Solomon</option>
-                    <option value="Isa" class="book ot">Isaiah</option>
-                    <option value="Jer" class="book ot">Jeremiah</option>
-                    <option value="Lam" class="book ot">Lamentations</option>
-                    <option value="Ezek" class="book ot">Ezekiel</option>
-                    <option value="Dan" class="book ot">Daniel</option>
-                    <option value="Hos" class="book ot">Hosea</option>
-                    <option value="Joel" class="book ot">Joel</option>
-                    <option value="Amos" class="book ot">Amos</option>
-                    <option value="Obad" class="book ot">Obadiah</option>
-                    <option value="Jonah" class="book ot">Jonah</option>
-                    <option value="Mic" class="book ot">Micah</option>
-                    <option value="Nah" class="book ot">Nahum</option>
-                    <option value="Hab" class="book ot">Habakkuk</option>
-                    <option value="Zeph" class="book ot">Zephaniah</option>
-                    <option value="Hag" class="book ot">Haggai</option>
-                    <option value="Zech" class="book ot">Zechariah</option>
-                    <option value="Mal" class="book ot">Malachi</option>
-                    <!-- Now the New Testament -->
-                    <optgroup label="New Testament"></optgroup>
-                    <option value="Matt" class="book nt">Matthew</option>
-                    <option value="Mark" class="book nt">Mark</option>
-                    <option value="Luke" class="book nt">Luke</option>
-                    <option value="John" class="book nt">John</option>
-                    <option value="Acts" class="book nt">Acts</option>
-                    <option value="Rom" class="book nt">Romans</option>
-                    <option value="1Cor" class="book nt">1 Corinthians</option>
-                    <option value="2Cor" class="book nt">2 Corinthians</option>
-                    <option value="Gal" class="book nt">Galatians</option>
-                    <option value="Eph" class="book nt">Ephesians</option>
-                    <option value="Phil" class="book nt">Philippians</option>
-                    <option value="Col" class="book nt">Colossians</option>
-                    <option value="1Thess" class="book nt">1 Thessalonians</option>
-                    <option value="2Thess" class="book nt">2 Thessalonians</option>
-                    <option value="1Tim" class="book nt">1 Timothy</option>
-                    <option value="2Tim" class="book nt">2 Timothy</option>
-                    <option value="Titus" class="book nt">Titus</option>
-                    <option value="Phlm" class="book nt">Philemon</option>
-                    <option value="Heb" class="book nt" selected>Hebrews</option>
-                    <option value="Jas" class="book nt">James</option>
-                    <option value="1Pet" class="book nt">1 Peter</option>
-                    <option value="2Pet" class="book nt">2 Peter</option>
-                    <option value="1John" class="book nt">1 John</option>
-                    <option value="2John" class="book nt">2 John</option>
-                    <option value="3John" class="book nt">3 John</option>
-                    <option value="Jude" class="book nt">Jude</option>
-                    <option value="Rev" class="book nt">Revelation</option>
-                </select>
+                <span id="translation" class="button" onclick="openPopup('translations')">KJV</span>
+                <span onclick="openPopup('books')" id="book" class="button">Genesis</span>
                 <select id="chapter" onchange="updateText()" class="button">
                     <option value="1">1</option>
                 </select>
@@ -163,7 +90,7 @@
         <!-- Verse Popup -->
         <div id="versePopup" class="popup">
           <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
-          <h3 id='vs'></h3>
+          <h2 id='vs'></h2>
           <input id="searchBox" type="text" autofocus placeholder="Hebrews 4:12" /><button id="searchAction" onclick="closePopups();openVerse(document.getElementById('searchBox').value)">Open</button>
           <div class="verseBox">
             <p><strong>KJV</strong></p>
@@ -173,6 +100,95 @@
             <p><strong>NET</strong></p>
             <p id="nettext"><em>No text available. Check your internet connection.</em></p>
           </div>
+        </div>
+
+        <!-- Selection popups -->
+        <div id="translations" class="popup">
+          <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
+          <h2>Translations</h2>
+          <div class="translation">
+            <h3>King James Version (KJV)</h3>
+            <p>This translation is built into the program and can be used offline.</p>
+            <button onclick="updateTranslation('kjv');closePopups();">Use</button>
+          </div>
+          <div class="translation">
+            <h3>New English Translation (NET)</h3>
+            <p>This translation is accessed via labs.bible.org/api. Online only.</p>
+            <button onclick="updateTranslation('net');closePopups();">Use</button>
+          </div>
+        </div>
+        <div id="books" class="popup">
+          <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
+          <h1>Books</h1>
+          <h3>Old Testament</h3>
+          <button class="book ot">Genesis</button>
+          <button value="Exod" class="book ot">Exodus</button>
+          <button value="Lev" class="book ot">Leviticus</button>
+          <button value="Num" class="book ot">Numbers</button>
+          <button value="Deut" class="book ot">Deuteronomy</button>
+          <button value="Josh" class="book ot">Joshua</button>
+          <button value="Judg" class="book ot">Judges</button>
+          <button value="Ruth" class="book ot">Ruth</button>
+          <button value="1Sam" class="book ot">1 Samuel</button>
+          <button value="2Sam" class="book ot">2 Samuel</button>
+          <button value="1Kgs" class="book ot">1 Kings</button>
+          <button value="2Kgs" class="book ot">2 Kings</button>
+          <button value="1Chr" class="book ot">1 Chronicles</button>
+          <button value="2Chr" class="book ot">2 Chronicles</button>
+          <button value="Ezra" class="book ot">Ezra</button>
+          <button value="Neh" class="book ot">Nehemiah</button>
+          <button value="Esth" class="book ot">Esther</button>
+          <button value="Job" class="book ot">Job</button>
+          <button value="Ps" class="book ot">Psalms</button>
+          <button value="Prov" class="book ot">Proverbs</button>
+          <button value="Eccl" class="book ot">Ecclesiastes</button>
+          <button value="Song" class="book ot">Song of Solomon</button>
+          <button value="Isa" class="book ot">Isaiah</button>
+          <button value="Jer" class="book ot">Jeremiah</button>
+          <button value="Lam" class="book ot">Lamentations</button>
+          <button value="Ezek" class="book ot">Ezekiel</button>
+          <button value="Dan" class="book ot">Daniel</button>
+          <button value="Hos" class="book ot">Hosea</button>
+          <button value="Joel" class="book ot">Joel</button>
+          <button value="Amos" class="book ot">Amos</button>
+          <button value="Obad" class="book ot">Obadiah</button>
+          <button value="Jonah" class="book ot">Jonah</button>
+          <button value="Mic" class="book ot">Micah</button>
+          <button value="Nah" class="book ot">Nahum</button>
+          <button value="Hab" class="book ot">Habakkuk</button>
+          <button value="Zeph" class="book ot">Zephaniah</button>
+          <button value="Hag" class="book ot">Haggai</button>
+          <button value="Zech" class="book ot">Zechariah</button>
+          <button value="Mal" class="book ot">Malachi</button>
+          <!-- Now the New Testament -->
+          <h3>New Testament</h3>
+          <button value="Matt" class="book nt">Matthew</button>
+          <button value="Mark" class="book nt">Mark</button>
+          <button value="Luke" class="book nt">Luke</button>
+          <button value="John" class="book nt">John</button>
+          <button value="Acts" class="book nt">Acts</button>
+          <button value="Rom" class="book nt">Romans</button>
+          <button value="1Cor" class="book nt">1 Corinthians</button>
+          <button value="2Cor" class="book nt">2 Corinthians</button>
+          <button value="Gal" class="book nt">Galatians</button>
+          <button value="Eph" class="book nt">Ephesians</button>
+          <button value="Phil" class="book nt">Philippians</button>
+          <button value="Col" class="book nt">Colossians</button>
+          <button value="1Thess" class="book nt">1 Thessalonians</button>
+          <button value="2Thess" class="book nt">2 Thessalonians</button>
+          <button value="1Tim" class="book nt">1 Timothy</button>
+          <button value="2Tim" class="book nt">2 Timothy</button>
+          <button value="Titus" class="book nt">Titus</button>
+          <button value="Phlm" class="book nt">Philemon</button>
+          <button value="Heb" class="book nt" selected>Hebrews</button>
+          <button value="Jas" class="book nt">James</button>
+          <button value="1Pet" class="book nt">1 Peter</button>
+          <button value="2Pet" class="book nt">2 Peter</button>
+          <button value="1John" class="book nt">1 John</button>
+          <button value="2John" class="book nt">2 John</button>
+          <button class="book nt">3 John</button>
+          <button class="book nt">Jude</button>
+          <button class="book nt">Revelation</button>
         </div>
 
         <div class="popup" id="alertBox">

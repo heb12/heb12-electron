@@ -57,7 +57,8 @@ async function getVerses(reference, version) {
             document.getElementById('error').style.display = 'block';
             document.getElementById('error').innerHTML = '<strong>No Internet!</strong> Internet connection is required for some features, including the NET translation.';
             // Set translation back to KJV
-            document.getElementById('translation').selectedIndex = 1;
+            document.getElementById('translation').innerText = 'kjv';
+            updateTranslation();
         } else {
             document.getElementById('error').style.display = 'none';
         }
@@ -109,32 +110,37 @@ async function getVerses(reference, version) {
     // Show the scripture element
     document.getElementById('scripture').style.display = 'block';
     // Set the title of the page to the Bible reference and 'Heb12 Bible App'
-    document.title = chapterAndVerse(document.getElementById('book').value).book.name + ' ' + document.getElementById('chapter').value + ' - ' + 'Heb12 Bible App';
+    document.title = chapterAndVerse(document.getElementById('book').innerText).book.name + ' ' + document.getElementById('chapter').value + ' - ' + 'Heb12 Bible App';
     // Save the reference opened in localStorage
-    localStorage.setItem("lastRef", chapterAndVerse(document.getElementById('book').value).book.name + ' ' + document.getElementById('chapter').value);
+    localStorage.setItem("lastRef", chapterAndVerse(document.getElementById('book').innerText).book.name + ' ' + document.getElementById('chapter').value);
     console.log(localStorage.getItem('lastRef'));
     return result;
 }
-var chapter, chapterE, books;
+var chapter, chapters, books, theBook, theChapter;
 
 // An easy function to update the text according to the dropdown menus
 async function updateText() {
-    var translation = document.getElementById('translation').value;
-    var text2 = await getVerses(books[getBook(chapterE)].innerHTML + ' ' + chapter.value, translation);
+    theBook = document.getElementById('book').innerText;
+    a = chapterAndVerse(theBook);
+    chapters = a.book.chapters;
+    var translation = document.getElementById('translation').innerText;
+    var text2 = await getVerses(a.book.name + ' ' + chapter.value, translation);
 }
 
 // Changes to the next and last chapters
 function nextChapter() {
     books = document.getElementsByClassName('book');
     chapter = document.getElementById('chapter');
-    chapterE = document.getElementById('book').value;
+    theBook = document.getElementById('book').innerText;
+    a = chapterAndVerse(theBook);
+    chapters = a.book.chapters;
 
-    if ((bible[getBook(chapterE)].chapters.length > 1) && (chapter.value != (bible[getBook(chapterE)].chapters.length))) {
+    if ((chapters > 1) && (chapter.value != chapters)) {
         chapter.selectedIndex = chapter.selectedIndex + 1;
-    } else if ((chapter.selectedIndex == bible[getBook(chapterE)].chapters.length - 1) && book.selectedIndex < 65) {
-      book.selectedIndex = book.selectedIndex + 1;
-      chapterE = document.getElementById('book').value;
-      console.log(chapterE);
+    } else if ((chapter.selectedIndex == chapters - 1) && theBook != 'Revelation') {
+      document.getElementById('book').innerText = chapterAndVerse(bible[Number(getBook(a.book.id)) + 1].id).book.name;
+      theBook = document.getElementById('book').innerText;
+      console.log(theBook);
       loadChapters();
       chapter.selectedIndex = 0;
     }
@@ -143,15 +149,17 @@ function nextChapter() {
 function lastChapter() {
     books = document.getElementsByClassName('book');
     chapter = document.getElementById('chapter');
-    chapterE = document.getElementById('book').value;
+    theBook = document.getElementById('book').innerText;
+    a = chapterAndVerse(theBook);
+    chapters = a.book.chapters;
     // Selected index starts at 0
-    if ((bible[getBook(chapterE)].chapters.length > 1) && (chapter.selectedIndex > 0)) {
+    if ((chapters > 1) && (chapter.selectedIndex > 0)) {
         chapter.selectedIndex = chapter.selectedIndex - 1;
-    } else if ((chapter.selectedIndex == 0) && (book.selectedIndex > 0)) {
-      book.selectedIndex = book.selectedIndex - 1;
-      chapterE = document.getElementById('book').value;
+    } else if ((chapter.selectedIndex == 0) && (theBook != 'Genesis')) {
+      document.getElementById('book').innerText = chapterAndVerse(bible[Number(getBook(a.book.id)) - 1].id).book.name;
+      theBook = document.getElementById('book').innerText;
       loadChapters();
-      chapter.selectedIndex = bible[getBook(chapterE)].chapters.length - 1;
+      chapter.selectedIndex = chapters - 1;
     }
     updateText();
 }
@@ -160,38 +168,33 @@ function lastChapter() {
 function loadChapters() {
     books = document.getElementsByClassName('book');
     chapter = document.getElementById('chapter');
-    chapterE = document.getElementById('book').value;
+    theBook = document.getElementById('book').innerText;
+    theBook = document.getElementById('book').innerText;
+    a = chapterAndVerse(theBook);
+    console.log(a);
+    chapters = a.book.chapters;
     chapter.innerHTML = '';
-    if (bible[getBook(chapterE)].chapters.length == 1) {
-        chapter.innerHTML = chapter.innerHTML + '<option value=\"1-' + bible[getBook(chapterE)].chapters[0] + '\">' + '1-' + bible[getBook(chapterE)].chapters[0] + '</option>';
+    if (chapters == 1) {
+        chapter.innerHTML = chapter.innerHTML + '<option value=\"1-' + a.book.versesPerChapter[0] + '\">' + '1-' + a.book.versesPerChapter[0] + '</option>';
     } else {
-        for (var x = 1; x < bible[getBook(chapterE)].chapters.length + 1; x++) {
+        for (var x = 1; x < chapters + 1; x++) {
             chapter.innerHTML = chapter.innerHTML + '<option value=\"' + (x) + '\">' + (x) + '</option>';
         }
     }
     updateTranslation();
 }
-function updateTranslation() {
-    localStorage.setItem('translation', document.getElementById('translation').value);
+function updateTranslation(translation) {
+    localStorage.setItem('translation', translation);
+    updateText();
 }
 
 // This lets you easily open a chapter
 function setChapter(reference) {
     var a = chapterAndVerse(reference);
-    var theChapter = a.chapter;
-    var theBook = a.book.name.split(' ').join('');
-    var val = a.book.name;
-    var sel = document.getElementById('book');
-    var opts = sel.options;
-    for (var opt, j = 0; opt = opts[j]; j++) {
-        if (opt.innerHTML == val) {
-            sel.selectedIndex = j;
-            break;
-        }
-    }
+    console.log(reference);
+    document.getElementById('book').innerText = a.book.name;
     loadChapters();
-    sel = document.getElementById('chapter');
-    sel.selectedIndex = a.chapter - 1;
+    document.getElementById('chapter').selectedIndex = a.chapter - 1;
     updateText();
 }
 
@@ -404,16 +407,22 @@ document.getElementById('themeStyle').href = './themes/' + themeChoice + '.css';
 
 // Retrieve last translation
 var translations = localStorage.getItem('translation');
-sel = document.getElementById('translation');
 console.log(translations + ' is the translation loaded from localStorage.');
 
 if (translations == 'kjv' || !navigator.onLine) {
-    sel.selectedIndex = 1;
+  document.getElementById('translation').innerText = 'KJV';
+} else {
+  document.getElementById('translation').innerText = 'NET';
 }
 
 // Retrieve last chapter viewed
 window.onload = function() {
   setChapter(localStorage.getItem('lastRef'));
+  let booksEl = document.getElementsByClassName('book');
+  console.log(booksEl);
+  for (var i = 0; i < booksEl.length; i++) {
+    booksEl[i].addEventListener('click', function() {setChapter(this.innerText + ' 1');closePopups()});
+  }
   setTimeout(function() {
     document.body.scrollTop = localStorage.getItem('scroll');
   }, 200);
