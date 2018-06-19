@@ -63,3 +63,8 @@ button:active, select:active {
   color: white;
   background-color: black;
 }
+
+#searchBox {
+  background-color: black;
+  border-color: gray;
+}
