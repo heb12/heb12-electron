@@ -38,3 +38,8 @@ button:active {
   transition-duration: 0.5s;
   color: #0A7BA1;
 }
+
+.arrow {
+  color: white;
+  background-color: #09B0E8;
+}

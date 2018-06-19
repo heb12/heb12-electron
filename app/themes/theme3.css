@@ -58,3 +58,8 @@ button:active, select:active {
   /*box-shadow: 3px 5px 5px 5px #1a1a1a;*/
   background-color: black;
 }
+
+.arrow {
+  color: white;
+  background-color: black;
+}

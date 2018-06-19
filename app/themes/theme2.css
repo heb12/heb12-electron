@@ -43,3 +43,8 @@ button:active {
 #result {
   /*box-shadow: 3px 5px 5px 5px #ffc27d;*/
 }
+
+.arrow {
+  color: white;
+  background-color: #f37329;
+}
