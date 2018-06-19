@@ -16,9 +16,9 @@
                 <select id="chapter" onchange="updateText()" class="button">
                     <option value="1">1</option>
                 </select>
-                <span onclick="openPopup('info')" id="infoButton" class="button"><i class="fas fa-info-circle"></i></span>
+                <span id="searchButton" class="button" onclick="openVerse('Hebrews 4:12')"><i class="fa fa-search"></i></span>
                 <span id="settingsButton" class="button" onclick="openPopup('settings')"><i class="fas fa-cog"></i></span>
-                <span id="searchButton" class="button" onclick="openVerse('Hebrews 4:12')">S</span>
+                <span onclick="openPopup('info')" id="infoButton" class="button"><i class="fas fa-info-circle"></i></span>
             </div>
         </div>
         <!-- Buttons for changing chapters -->
@@ -91,7 +91,7 @@
         <div id="versePopup" class="popup">
           <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
           <h2 id='vs'></h2>
-          <input id="searchBox" type="text" autofocus placeholder="Hebrews 4:12" /><button id="searchAction" onclick="closePopups();openVerse(document.getElementById('searchBox').value)">Open</button>
+          <input id="searchBox" type="text" autofocus placeholder="Hebrews 4:12" /><button id="searchAction" onclick="openVerse(document.getElementById('searchBox').value)">Open</button>
           <div class="verseBox">
             <p><strong>KJV</strong></p>
             <p id="kjvtext"></p>
