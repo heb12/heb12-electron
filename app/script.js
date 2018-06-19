@@ -205,6 +205,10 @@ function fontSizePlus() {
     script = document.getElementById('scripture');
     console.log(String(Number(script.style.fontSize.split('px')[0]) + 1) + 'px');
     script.style.fontSize = String(Number(fontSize.split('px')[0]) + 1) + 'px';
+    let x = document.getElementsByClassName('text');
+    for (var i = 0; i < x.length; i++) {
+      x[i].style.fontSize = String(Number(fontSize.split('px')[0]) + 1) + 'px';
+    }
     localStorage.setItem('fontSize', String(Number(fontSize.split('px')[0]) + 1) + 'px');
 }
 function fontSizeMinus() {
@@ -212,6 +216,10 @@ function fontSizeMinus() {
     script = document.getElementById('scripture');
     console.log(String(Number(script.style.fontSize.split('px')[0]) - 1) + 'px');
     script.style.fontSize = String(Number(fontSize.split('px')[0]) - 1) + 'px';
+    let x = document.getElementsByClassName('text');
+    for (var i = 0; i < x.length; i++) {
+      x[i].style.fontSize = String(Number(fontSize.split('px')[0]) - 1) + 'px';
+    }
     localStorage.setItem('fontSize', String(Number(fontSize.split('px')[0]) - 1) + 'px');
 }
 
