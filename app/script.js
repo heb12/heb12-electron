@@ -16,8 +16,8 @@ function getKJVVerse(ref) {
   jsonKJV = require('./bible/' + a.book.name.split(' ').join('') + '.json');
   result = '';
   if (a.from < a.to) {
-    for (var i = a.from; i < a.to; i++) {
-        result = result + jsonKJV.chapters[Number(a.chapter) - 1].verses[i - 1][i];
+    for (var i = a.from; i < a.to + 1; i++) {
+        result = result + ' ' + i + ' ' + jsonKJV.chapters[Number(a.chapter) - 1].verses[i - 1][i];
     }
   } else {
     result = jsonKJV.chapters[Number(a.chapter) - 1].verses[a.from - 1][a.from];
@@ -236,10 +236,13 @@ function changetextAlign() {
 
 // This opens a verse popup for a specific verse
 function openVerse(ref) {
-  openPopup('versePopup');
-  document.getElementById('vs').innerText = ref;
-  document.getElementById('kjvtext').innerText = getKJVVerse(ref);getNETVerse(ref);
-  document.getElementById('searchBox').value = ref;
+  if (ref != '') {
+    openPopup('versePopup');
+    document.getElementById('vs').innerText = ref;
+    document.getElementById('kjvtext').innerText = getKJVVerse(ref);getNETVerse(ref);
+    document.getElementById('searchBox').placeholder = ref;
+    document.getElementById('searchBox').value = '';
+  }
 }
 
 // This closes all popups
