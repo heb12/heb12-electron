@@ -30,10 +30,10 @@
             <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
             <h1>About this Program</h1>
             <div id="technicalInfo">
-              <img src="icon.png" />
-              <p>Version: 0.1.0 <button id="checkUpdates" onclick="checkUpdates()">Check for updates</button></p>
-              <p id="latestUpdate" style="display:none"></p>
-              <p>Website: <span class="link">heb12.github.io</span></p>
+                <img src="icon.png" />
+                <p>Version: 0.1.0 <button id="checkUpdates" onclick="checkUpdates()">Check for updates</button></p>
+                <p id="latestUpdate" style="display:none"></p>
+                <p>Website: <span class="link">heb12.github.io</span></p>
             </div>
             <br /><br />
             <p>This program was built by MasterOfTheTiger (<span class="link">mtiger.tk</span>) as a simple Bible program for desktop systems.</p>
@@ -84,8 +84,8 @@
                 <h2>Reset</h2>
                 <p>This will reset all of your settings and other information stored and restore the program to the state it was in when you installed it.</p>
                 <div id="undoReset" style="display:none;">
-                  <p><em>Reset will occur next time you open the program.</em></p>
-                  <button onclick="localStorage.setItem('firstTime', 'no');document.getElementById('undoReset').style.display='none';document.getElementById('reset').style.display='block';" style="border-color:red">Undo</button>
+                    <p><em>Reset will occur next time you open the program.</em></p>
+                    <button onclick="localStorage.setItem('firstTime', 'no');document.getElementById('undoReset').style.display='none';document.getElementById('reset').style.display='block';" style="border-color:red">Undo</button>
                 </div>
                 <button id="reset" onclick="reset(); document.getElementById('undoReset').style.display='block';this.style.display='none'">Prepare Reset</button>
             </div>
@@ -93,117 +93,117 @@
 
         <!-- Verse Popup -->
         <div id="versePopup" class="popup">
-          <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
-          <h2 id='vs'></h2>
-          <input id="searchBox" type="text" autofocus placeholder="Hebrews 4:12" /><button id="searchAction" onclick="openVerse(document.getElementById('searchBox').value)">Open</button>
-          <div class="verseBox">
-            <p><strong>KJV</strong></p>
-            <p id="kjvtext" class="text"></p>
-          </div>
-          <div class="verseBox">
-            <p><strong>NET</strong></p>
-            <p id="nettext" class="text"><em>No text available. Check your internet connection.</em></p>
-          </div>
+            <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
+            <h2 id='vs'></h2>
+            <input id="searchBox" type="text" autofocus placeholder="Hebrews 4:12" /><button id="searchAction" onclick="openVerse(document.getElementById('searchBox').value)">Open</button>
+            <div class="verseBox">
+                <p><strong>KJV</strong></p>
+                <p id="kjvtext" class="text"></p>
+            </div>
+            <div class="verseBox">
+                <p><strong>NET</strong></p>
+                <p id="nettext" class="text"><em>No text available. Check your internet connection.</em></p>
+            </div>
         </div>
 
         <!-- Selection popups -->
         <div id="translations" class="popup">
-          <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
-          <h2>Translations</h2>
-          <div class="translation">
-            <h3>King James Version (KJV)</h3>
-            <p>This translation is built into the program and can be used offline.</p>
-            <button onclick="updateTranslation('kjv');closePopups();">Use</button>
-          </div>
-          <div class="translation">
-            <h3>New English Translation (NET)</h3>
-            <p>This translation is accessed via labs.bible.org/api. Online only.</p>
-            <button onclick="updateTranslation('net');closePopups();">Use</button>
-          </div>
+            <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
+            <h2>Translations</h2>
+            <div class="translation">
+                <h3>King James Version (KJV)</h3>
+                <p>This translation is built into the program and can be used offline.</p>
+                <button onclick="updateTranslation('kjv');closePopups();">Use</button>
+            </div>
+            <div class="translation">
+                <h3>New English Translation (NET)</h3>
+                <p>This translation is accessed via labs.bible.org/api. Online only.</p>
+                <button onclick="updateTranslation('net');closePopups();">Use</button>
+            </div>
         </div>
         <div id="books" class="popup">
-          <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
-          <h1>Books</h1>
-          <h3>Old Testament</h3>
-          <button class="book ot">Genesis</button>
-          <button value="Exod" class="book ot">Exodus</button>
-          <button value="Lev" class="book ot">Leviticus</button>
-          <button value="Num" class="book ot">Numbers</button>
-          <button value="Deut" class="book ot">Deuteronomy</button>
-          <button value="Josh" class="book ot">Joshua</button>
-          <button value="Judg" class="book ot">Judges</button>
-          <button value="Ruth" class="book ot">Ruth</button>
-          <button value="1Sam" class="book ot">1 Samuel</button>
-          <button value="2Sam" class="book ot">2 Samuel</button>
-          <button value="1Kgs" class="book ot">1 Kings</button>
-          <button value="2Kgs" class="book ot">2 Kings</button>
-          <button value="1Chr" class="book ot">1 Chronicles</button>
-          <button value="2Chr" class="book ot">2 Chronicles</button>
-          <button value="Ezra" class="book ot">Ezra</button>
-          <button value="Neh" class="book ot">Nehemiah</button>
-          <button value="Esth" class="book ot">Esther</button>
-          <button value="Job" class="book ot">Job</button>
-          <button value="Ps" class="book ot">Psalms</button>
-          <button value="Prov" class="book ot">Proverbs</button>
-          <button value="Eccl" class="book ot">Ecclesiastes</button>
-          <button value="Song" class="book ot">Song of Solomon</button>
-          <button value="Isa" class="book ot">Isaiah</button>
-          <button value="Jer" class="book ot">Jeremiah</button>
-          <button value="Lam" class="book ot">Lamentations</button>
-          <button value="Ezek" class="book ot">Ezekiel</button>
-          <button value="Dan" class="book ot">Daniel</button>
-          <button value="Hos" class="book ot">Hosea</button>
-          <button value="Joel" class="book ot">Joel</button>
-          <button value="Amos" class="book ot">Amos</button>
-          <button value="Obad" class="book ot">Obadiah</button>
-          <button value="Jonah" class="book ot">Jonah</button>
-          <button value="Mic" class="book ot">Micah</button>
-          <button value="Nah" class="book ot">Nahum</button>
-          <button value="Hab" class="book ot">Habakkuk</button>
-          <button value="Zeph" class="book ot">Zephaniah</button>
-          <button value="Hag" class="book ot">Haggai</button>
-          <button value="Zech" class="book ot">Zechariah</button>
-          <button value="Mal" class="book ot">Malachi</button>
-          <!-- Now the New Testament -->
-          <h3>New Testament</h3>
-          <button value="Matt" class="book nt">Matthew</button>
-          <button value="Mark" class="book nt">Mark</button>
-          <button value="Luke" class="book nt">Luke</button>
-          <button value="John" class="book nt">John</button>
-          <button value="Acts" class="book nt">Acts</button>
-          <button value="Rom" class="book nt">Romans</button>
-          <button value="1Cor" class="book nt">1 Corinthians</button>
-          <button value="2Cor" class="book nt">2 Corinthians</button>
-          <button value="Gal" class="book nt">Galatians</button>
-          <button value="Eph" class="book nt">Ephesians</button>
-          <button value="Phil" class="book nt">Philippians</button>
-          <button value="Col" class="book nt">Colossians</button>
-          <button value="1Thess" class="book nt">1 Thessalonians</button>
-          <button value="2Thess" class="book nt">2 Thessalonians</button>
-          <button value="1Tim" class="book nt">1 Timothy</button>
-          <button value="2Tim" class="book nt">2 Timothy</button>
-          <button value="Titus" class="book nt">Titus</button>
-          <button value="Phlm" class="book nt">Philemon</button>
-          <button value="Heb" class="book nt" selected>Hebrews</button>
-          <button value="Jas" class="book nt">James</button>
-          <button value="1Pet" class="book nt">1 Peter</button>
-          <button value="2Pet" class="book nt">2 Peter</button>
-          <button value="1John" class="book nt">1 John</button>
-          <button value="2John" class="book nt">2 John</button>
-          <button class="book nt">3 John</button>
-          <button class="book nt">Jude</button>
-          <button class="book nt">Revelation</button>
+            <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
+            <h1>Books</h1>
+            <h3>Old Testament</h3>
+            <button class="book ot">Genesis</button>
+            <button value="Exod" class="book ot">Exodus</button>
+            <button value="Lev" class="book ot">Leviticus</button>
+            <button value="Num" class="book ot">Numbers</button>
+            <button value="Deut" class="book ot">Deuteronomy</button>
+            <button value="Josh" class="book ot">Joshua</button>
+            <button value="Judg" class="book ot">Judges</button>
+            <button value="Ruth" class="book ot">Ruth</button>
+            <button value="1Sam" class="book ot">1 Samuel</button>
+            <button value="2Sam" class="book ot">2 Samuel</button>
+            <button value="1Kgs" class="book ot">1 Kings</button>
+            <button value="2Kgs" class="book ot">2 Kings</button>
+            <button value="1Chr" class="book ot">1 Chronicles</button>
+            <button value="2Chr" class="book ot">2 Chronicles</button>
+            <button value="Ezra" class="book ot">Ezra</button>
+            <button value="Neh" class="book ot">Nehemiah</button>
+            <button value="Esth" class="book ot">Esther</button>
+            <button value="Job" class="book ot">Job</button>
+            <button value="Ps" class="book ot">Psalms</button>
+            <button value="Prov" class="book ot">Proverbs</button>
+            <button value="Eccl" class="book ot">Ecclesiastes</button>
+            <button value="Song" class="book ot">Song of Solomon</button>
+            <button value="Isa" class="book ot">Isaiah</button>
+            <button value="Jer" class="book ot">Jeremiah</button>
+            <button value="Lam" class="book ot">Lamentations</button>
+            <button value="Ezek" class="book ot">Ezekiel</button>
+            <button value="Dan" class="book ot">Daniel</button>
+            <button value="Hos" class="book ot">Hosea</button>
+            <button value="Joel" class="book ot">Joel</button>
+            <button value="Amos" class="book ot">Amos</button>
+            <button value="Obad" class="book ot">Obadiah</button>
+            <button value="Jonah" class="book ot">Jonah</button>
+            <button value="Mic" class="book ot">Micah</button>
+            <button value="Nah" class="book ot">Nahum</button>
+            <button value="Hab" class="book ot">Habakkuk</button>
+            <button value="Zeph" class="book ot">Zephaniah</button>
+            <button value="Hag" class="book ot">Haggai</button>
+            <button value="Zech" class="book ot">Zechariah</button>
+            <button value="Mal" class="book ot">Malachi</button>
+            <!-- Now the New Testament -->
+            <h3>New Testament</h3>
+            <button value="Matt" class="book nt">Matthew</button>
+            <button value="Mark" class="book nt">Mark</button>
+            <button value="Luke" class="book nt">Luke</button>
+            <button value="John" class="book nt">John</button>
+            <button value="Acts" class="book nt">Acts</button>
+            <button value="Rom" class="book nt">Romans</button>
+            <button value="1Cor" class="book nt">1 Corinthians</button>
+            <button value="2Cor" class="book nt">2 Corinthians</button>
+            <button value="Gal" class="book nt">Galatians</button>
+            <button value="Eph" class="book nt">Ephesians</button>
+            <button value="Phil" class="book nt">Philippians</button>
+            <button value="Col" class="book nt">Colossians</button>
+            <button value="1Thess" class="book nt">1 Thessalonians</button>
+            <button value="2Thess" class="book nt">2 Thessalonians</button>
+            <button value="1Tim" class="book nt">1 Timothy</button>
+            <button value="2Tim" class="book nt">2 Timothy</button>
+            <button value="Titus" class="book nt">Titus</button>
+            <button value="Phlm" class="book nt">Philemon</button>
+            <button value="Heb" class="book nt" selected>Hebrews</button>
+            <button value="Jas" class="book nt">James</button>
+            <button value="1Pet" class="book nt">1 Peter</button>
+            <button value="2Pet" class="book nt">2 Peter</button>
+            <button value="1John" class="book nt">1 John</button>
+            <button value="2John" class="book nt">2 John</button>
+            <button class="book nt">3 John</button>
+            <button class="book nt">Jude</button>
+            <button class="book nt">Revelation</button>
         </div>
 
         <div class="popup" id="alertBox">
-          <p id="alertText"></p>
-          <div id="YN">
-            <button id="yes">Yes</button>
-            <button id="no">No</button>
-          </div>
-          <div id="notice">
-            <button id="okay">Okay</button>
-          </div>
+            <p id="alertText"></p>
+            <div id="YN">
+                <button id="yes">Yes</button>
+                <button id="no">No</button>
+            </div>
+            <div id="notice">
+                <button id="okay">Okay</button>
+            </div>
         </div>
 
         <!-- End popups -->

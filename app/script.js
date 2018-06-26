@@ -12,24 +12,24 @@ function getBook(bookGet) {
 }
 
 function getKJVVerse(ref) {
-  let a = chapterAndVerse(ref);
-  jsonKJV = require('./bible/' + a.book.name.split(' ').join('') + '.json');
-  result = '';
-  if (a.from < a.to) {
-    for (var i = a.from; i < a.to + 1; i++) {
-        result = result + ' ' + i + ' ' + jsonKJV.chapters[Number(a.chapter) - 1].verses[i - 1][i];
+    let a = chapterAndVerse(ref);
+    jsonKJV = require('./bible/' + a.book.name.split(' ').join('') + '.json');
+    result = '';
+    if (a.from < a.to) {
+        for (var i = a.from; i < a.to + 1; i++) {
+            result = result + ' ' + i + ' ' + jsonKJV.chapters[Number(a.chapter) - 1].verses[i - 1][i];
+        }
+    } else {
+        result = jsonKJV.chapters[Number(a.chapter) - 1].verses[a.from - 1][a.from];
     }
-  } else {
-    result = jsonKJV.chapters[Number(a.chapter) - 1].verses[a.from - 1][a.from];
-  }
 
-  return result;
+    return result;
 }
 function getNETVerse(ref) {
-  if (!navigator.onLine) {
-      document.getElementById('nettext').innerHTML = '<em>Check your Internet connection.</em>';
-      console.log('Offline ERROR');
-  } else {
+    if (!navigator.onLine) {
+        document.getElementById('nettext').innerHTML = '<em>Check your Internet connection.</em>';
+        console.log('Offline ERROR');
+    } else {
     url = 'https://labs.bible.org/api/?passage= ' + ref + '&formatting=full';
     fetch(url, {
         mode: 'cors'
@@ -42,7 +42,7 @@ function getNETVerse(ref) {
             }
             return result;
         });
-  }
+    }
 }
 
 // This puts the correct reference and version requested of the Bible in the 'script' element
@@ -138,11 +138,11 @@ function nextChapter() {
     if ((chapters > 1) && (chapter.value != chapters)) {
         chapter.selectedIndex = chapter.selectedIndex + 1;
     } else if ((chapter.selectedIndex == chapters - 1) && theBook != 'Revelation') {
-      document.getElementById('book').innerText = chapterAndVerse(bible[Number(getBook(a.book.id)) + 1].id).book.name;
-      theBook = document.getElementById('book').innerText;
-      console.log(theBook);
-      loadChapters();
-      chapter.selectedIndex = 0;
+        document.getElementById('book').innerText = chapterAndVerse(bible[Number(getBook(a.book.id)) + 1].id).book.name;
+        theBook = document.getElementById('book').innerText;
+        console.log(theBook);
+        loadChapters();
+        chapter.selectedIndex = 0;
     }
     updateText();
 }
@@ -156,10 +156,10 @@ function lastChapter() {
     if ((chapters > 1) && (chapter.selectedIndex > 0)) {
         chapter.selectedIndex = chapter.selectedIndex - 1;
     } else if ((chapter.selectedIndex == 0) && (theBook != 'Genesis')) {
-      document.getElementById('book').innerText = chapterAndVerse(bible[Number(getBook(a.book.id)) - 1].id).book.name;
-      theBook = document.getElementById('book').innerText;
-      loadChapters();
-      chapter.selectedIndex = chapters - 1;
+        document.getElementById('book').innerText = chapterAndVerse(bible[Number(getBook(a.book.id)) - 1].id).book.name;
+        theBook = document.getElementById('book').innerText;
+        loadChapters();
+        chapter.selectedIndex = chapters - 1;
     }
     updateText();
 }
@@ -207,7 +207,7 @@ function fontSizePlus() {
     script.style.fontSize = String(Number(fontSize.split('px')[0]) + 1) + 'px';
     let x = document.getElementsByClassName('text');
     for (var i = 0; i < x.length; i++) {
-      x[i].style.fontSize = String(Number(fontSize.split('px')[0]) + 1) + 'px';
+        x[i].style.fontSize = String(Number(fontSize.split('px')[0]) + 1) + 'px';
     }
     localStorage.setItem('fontSize', String(Number(fontSize.split('px')[0]) + 1) + 'px');
 }
@@ -218,7 +218,7 @@ function fontSizeMinus() {
     script.style.fontSize = String(Number(fontSize.split('px')[0]) - 1) + 'px';
     let x = document.getElementsByClassName('text');
     for (var i = 0; i < x.length; i++) {
-      x[i].style.fontSize = String(Number(fontSize.split('px')[0]) - 1) + 'px';
+        x[i].style.fontSize = String(Number(fontSize.split('px')[0]) - 1) + 'px';
     }
     localStorage.setItem('fontSize', String(Number(fontSize.split('px')[0]) - 1) + 'px');
 }
@@ -244,96 +244,96 @@ function changetextAlign() {
 
 // This opens a verse popup for a specific verse
 function openVerse(ref) {
-  if (ref != '') {
-    openPopup('versePopup');
-    document.getElementById('vs').innerText = ref;
-    document.getElementById('kjvtext').innerText = getKJVVerse(ref);getNETVerse(ref);
-    document.getElementById('searchBox').placeholder = ref;
-    document.getElementById('searchBox').value = '';
-  }
+    if (ref != '') {
+        openPopup('versePopup');
+        document.getElementById('vs').innerText = ref;
+        document.getElementById('kjvtext').innerText = getKJVVerse(ref);getNETVerse(ref);
+        document.getElementById('searchBox').placeholder = ref;
+        document.getElementById('searchBox').value = '';
+    }
 }
 
 // This closes all popups
 function closePopups() {
-  var popups = document.getElementsByClassName('popup');
-  for (var i = 0; i < popups.length; i++) {
-    popups[i].style.display = 'none';
-  }
-  document.getElementById('backdrop').style.display = 'none';
-  document.body.style.overflow = 'auto';
-  document.getElementById('backdrop').style.zIndex = '1001';
+    var popups = document.getElementsByClassName('popup');
+    for (var i = 0; i < popups.length; i++) {
+        popups[i].style.display = 'none';
+    }
+    document.getElementById('backdrop').style.display = 'none';
+    document.body.style.overflow = 'auto';
+    document.getElementById('backdrop').style.zIndex = '1001';
 }
 
 // This closes a specific popup
 function closePopup(popup) {
-  if (popup == 'alertBox') {
-    document.getElementById(popup).style.display = 'none';
-  } else {
-    document.getElementById(popup).style.display = 'none';
-    document.getElementById('backdrop').style.display = 'none';
-  }
-  document.getElementById('backdrop').style.zIndex = '1001';
+    if (popup == 'alertBox') {
+        document.getElementById(popup).style.display = 'none';
+    } else {
+        document.getElementById(popup).style.display = 'none';
+        document.getElementById('backdrop').style.display = 'none';
+    }
+    document.getElementById('backdrop').style.zIndex = '1001';
 }
 
 // This prepares a popup
 function openPopup(popup) {
-  document.getElementById(popup).style.display = 'block';
-  document.getElementById('backdrop').style.display = 'block';
-  if (popup == 'alertBox') {
-    document.getElementById('backdrop').style.zIndex = '1003';
-  }
+    document.getElementById(popup).style.display = 'block';
+    document.getElementById('backdrop').style.display = 'block';
+    if (popup == 'alertBox') {
+        document.getElementById('backdrop').style.zIndex = '1003';
+    }
 }
 
 // This is an easy popup maker for either confirming something or just making a notice
 function alertYou(say, mode, callback) {
-  // Set the text for the alertText to the say parimeter
-  document.getElementById('alertText').innerText = say;
-  // If the mode is a confirming of an action
-  if (mode == 'Y/N') {
-    // Show the elements for Y/N
-    document.getElementById('yes').style.display = 'inline-block';
-    document.getElementById('no').style.display = 'inline-block';
-    // Open the alertBox
-    openPopup('alertBox');
-    // If the 'yes' button is clicked run this function
-    document.getElementById('yes').addEventListener('click', function() {
-      // Close alertBox
-      closePopup('alertBox');
-      // Choose which function to run
-      switch (callback) {
-        case 'reset':
-          reset();
-          setup();
-          break;
-        default:
-          break;
-      }
-      return 'yes';
-    });
-    // Cancel everything when no is clicked
-    document.getElementById('no').addEventListener('click', function() {
-      closePopup('alertBox');
-      return 'no';
-    });
-    // 'Okay' is a simple dialoge box to explain something
-  } else {
-    document.getElementById('okay').style.display = 'inline-block';
-    document.getElementById('okay').addEventListener('click', function() {
-      closePopup('alertBox');
-      return 'okay';
-    });
-  }
+    // Set the text for the alertText to the say parimeter
+    document.getElementById('alertText').innerText = say;
+    // If the mode is a confirming of an action
+    if (mode == 'Y/N') {
+        // Show the elements for Y/N
+        document.getElementById('yes').style.display = 'inline-block';
+        document.getElementById('no').style.display = 'inline-block';
+        // Open the alertBox
+        openPopup('alertBox');
+        // If the 'yes' button is clicked run this function
+        document.getElementById('yes').addEventListener('click', function() {
+        // Close alertBox
+        closePopup('alertBox');
+        // Choose which function to run
+        switch (callback) {
+            case 'reset':
+            reset();
+            setup();
+            break;
+            default:
+            break;
+        }
+        return 'yes';
+        });
+        // Cancel everything when no is clicked
+        document.getElementById('no').addEventListener('click', function() {
+            closePopup('alertBox');
+            return 'no';
+        });
+        // 'Okay' is a simple dialoge box to explain something
+    } else {
+        document.getElementById('okay').style.display = 'inline-block';
+        document.getElementById('okay').addEventListener('click', function() {
+        closePopup('alertBox');
+        return 'okay';
+        });
+    }
 }
 // Save scroll position
 document.body.onscroll = function() {
-  localStorage.setItem('scroll', document.body.scrollTop);
-  if (document.body.scrollTop > 0) {
-    document.getElementById('head').className = 'scroll';
-    document.getElementById('result').className = 'scroll';
-  } else {
-    document.getElementById('head').className = '';
-    document.getElementById('result').className = '';
-  }
+    localStorage.setItem('scroll', document.body.scrollTop);
+    if (document.body.scrollTop > 0) {
+        document.getElementById('head').className = 'scroll';
+        document.getElementById('result').className = 'scroll';
+    } else {
+        document.getElementById('head').className = '';
+        document.getElementById('result').className = '';
+    }
 }
 
 // This runs the first time the program is opened
@@ -421,20 +421,20 @@ var translations = localStorage.getItem('translation');
 console.log(translations + ' is the translation loaded from localStorage.');
 
 if (translations == 'kjv' || !navigator.onLine) {
-  document.getElementById('translation').innerText = 'KJV';
+    document.getElementById('translation').innerText = 'KJV';
 } else {
-  document.getElementById('translation').innerText = 'NET';
+    document.getElementById('translation').innerText = 'NET';
 }
 
 // Retrieve last chapter viewed
 window.onload = function() {
-  setChapter(localStorage.getItem('lastRef'));
-  let booksEl = document.getElementsByClassName('book');
-  console.log(booksEl);
-  for (var i = 0; i < booksEl.length; i++) {
-    booksEl[i].addEventListener('click', function() {setChapter(this.innerText + ' 1');closePopups()});
-  }
-  setTimeout(function() {
-    document.body.scrollTop = localStorage.getItem('scroll');
-  }, 200);
+    setChapter(localStorage.getItem('lastRef'));
+    let booksEl = document.getElementsByClassName('book');
+    console.log(booksEl);
+    for (var i = 0; i < booksEl.length; i++) {
+        booksEl[i].addEventListener('click', function() {setChapter(this.innerText + ' 1');closePopups()});
+    }
+    setTimeout(function() {
+        document.body.scrollTop = localStorage.getItem('scroll');
+    }, 200);
 }
