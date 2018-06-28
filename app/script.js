@@ -1,8 +1,12 @@
+// -----
+// Declare functions and variables
+// -----
+
 // Require some outside files
 let bible = require('./bible.json');
 let jsonKJV = require('./bible/Hebrews.json');
 
-// This function gets the book number in bible.json from its name
+// This function gets the book number in bible.json (i.e Genesis is 0, Exodus is 1, etc.) from its name
 function getBook(bookGet) {
     var i = 0;
     while (bible[i].id != bookGet) {
@@ -11,6 +15,7 @@ function getBook(bookGet) {
     return i;
 }
 
+// Gets a single verse from the KJV
 function getKJVVerse(ref) {
     let a = chapterAndVerse(ref);
     jsonKJV = require('./bible/' + a.book.name.split(' ').join('') + '.json');
@@ -25,6 +30,7 @@ function getKJVVerse(ref) {
 
     return result;
 }
+// Gets a single verse from the NET
 function getNETVerse(ref) {
     if (!navigator.onLine) {
         document.getElementById('nettext').innerHTML = '<em>Check your Internet connection.</em>';
@@ -45,10 +51,9 @@ function getNETVerse(ref) {
     }
 }
 
-// This puts the correct reference and version requested of the Bible in the 'script' element
+// This fetches the verses requested and puts it in the 'script' element
 async function getVerses(reference, version) {
     console.log(version);
-    // Hides the scripture element
     document.getElementById('result').style.display = 'hidden';
     // Renders NET
     if (version == 'net') {
@@ -82,7 +87,6 @@ async function getVerses(reference, version) {
                     // Closes the error after 5 seconds
                     setTimeout(function () { document.getElementById('error').style.display = "none" }, 5000);
                 }
-                // Return the result variable for other use if nessessarry
                 return result;
             });
     }
@@ -111,7 +115,7 @@ async function getVerses(reference, version) {
     document.getElementById('scripture').style.display = 'block';
     // Set the title of the page to the Bible reference and 'Heb12 Bible App'
     document.title = chapterAndVerse(document.getElementById('book').innerText).book.name + ' ' + document.getElementById('chapter').value + ' - ' + 'Heb12 Bible App';
-    // Save the reference opened in localStorage
+    // Save the reference opened into localStorage
     localStorage.setItem("lastRef", chapterAndVerse(document.getElementById('book').innerText).book.name + ' ' + document.getElementById('chapter').value);
     console.log(localStorage.getItem('lastRef'));
     return result;
@@ -264,7 +268,7 @@ function closePopups() {
     document.getElementById('backdrop').style.zIndex = '1001';
 }
 
-// This closes a specific popup
+// This closes a specific popup by ID
 function closePopup(popup) {
     if (popup == 'alertBox') {
         document.getElementById(popup).style.display = 'none';
@@ -275,7 +279,7 @@ function closePopup(popup) {
     document.getElementById('backdrop').style.zIndex = '1001';
 }
 
-// This prepares a popup
+// This opens a specific popup by ID
 function openPopup(popup) {
     document.getElementById(popup).style.display = 'block';
     document.getElementById('backdrop').style.display = 'block';
@@ -284,9 +288,8 @@ function openPopup(popup) {
     }
 }
 
-// This is an easy popup maker for either confirming something or just making a notice
+// A script for either alerting or asking for a response. This is not used anywhere currently.
 function alertYou(say, mode, callback) {
-    // Set the text for the alertText to the say parimeter
     document.getElementById('alertText').innerText = say;
     // If the mode is a confirming of an action
     if (mode == 'Y/N') {
@@ -356,9 +359,9 @@ function reset() {
 }
 
 
-
+// -------
 // Retrieves items from localStorage and sets up program
-
+// -------
 
 // Checks if this is the first time you opened the program
 var firstTime = localStorage.getItem('firstTime');
@@ -373,7 +376,7 @@ script = document.getElementById('scripture');
 
 console.log(localStorage.getItem('font') + ' is the font loaded from localStorage');
 
-// Retrieve last font
+// Retrieve last font style
 var val = localStorage.getItem('font');
 var sel = document.getElementById('font');
 var opts = sel.options;
@@ -426,14 +429,15 @@ if (translations == 'kjv' || !navigator.onLine) {
     document.getElementById('translation').innerText = 'NET';
 }
 
-// Retrieve last chapter viewed
 window.onload = function() {
+    // Retrieve last chapter
     setChapter(localStorage.getItem('lastRef'));
     let booksEl = document.getElementsByClassName('book');
     console.log(booksEl);
     for (var i = 0; i < booksEl.length; i++) {
         booksEl[i].addEventListener('click', function() {setChapter(this.innerText + ' 1');closePopups()});
     }
+    // After 200 miliseconds (about the time it takes to fetch the NET) it scrolls to the position when it was closed
     setTimeout(function() {
         document.body.scrollTop = localStorage.getItem('scroll');
     }, 200);
