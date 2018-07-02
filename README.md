@@ -32,10 +32,13 @@ If any of those do not work, then it will not be accepted without changes.
 Please refer (and contribute) to the [wiki](https://github.com/MasterOfTheTiger/heb12/wiki) for helpful instruction for installing, packaging, and more.
 
 ## License
-Copyright 2018 Theodore Jameson.
-This software is released under the GPL license version 2.0 or later. See the [LICENSE](https://github.com/MasterOfTheTiger/heb12/blob/master/LICENSE) file for more information.
+Copyright 2018 MasterOfTheTiger.
+This software is released under the GPL license version 3.0 or later. See the [LICENSE](https://github.com/MasterOfTheTiger/heb12/blob/master/LICENSE) file for more information.
 
 ## Credits
-- @MasterOfTheTiger and @amazinigmech2418 are the authors of the program
+- @MasterOfTheTiger is the main front end developer
+- @amazinigmech2418 is anther front end developer that is working on the auto updater
+- @edxt is the back end developer
+- @doodthedoodthedood for the light blue and red themes (and soon the bookmarking feature)
 - @danday74 for [Chapter and Verse](https://github.com/danday74/chapter-and-verse), a very useful tool for this program
 - Chapter and Verse for the bible.json file
