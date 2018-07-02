@@ -57,6 +57,8 @@ async function getVerses(reference, version) {
     document.getElementById('result').style.display = 'hidden';
     // Renders NET
     if (version == 'net') {
+        console.log('Loading NET');
+        
         // If the program is offline it sends an error message
         if (!navigator.onLine) {
             document.getElementById('error').style.display = 'block';
@@ -128,7 +130,7 @@ async function updateText() {
     theBook = document.getElementById('book').innerText;
     a = chapterAndVerse(theBook);
     chapters = a.book.chapters;
-    var translation = document.getElementById('translation').innerText;
+    var translation = document.getElementById('translation').innerText.toLowerCase();
     var text2 = await getVerses(a.book.name + ' ' + chapter.value, translation);
 }
 
@@ -186,10 +188,12 @@ function loadChapters() {
             chapter.innerHTML = chapter.innerHTML + '<option value=\"' + (x) + '\">' + (x) + '</option>';
         }
     }
-    updateTranslation();
 }
-function updateTranslation(translation) {
-    localStorage.setItem('translation', translation);
+function updateTranslation(theTranslation) {
+    console.log(theTranslation);
+    
+    document.getElementById('translation').innerText = theTranslation.toUpperCase();
+    localStorage.setItem('translation', theTranslation);
     updateText();
 }
 
