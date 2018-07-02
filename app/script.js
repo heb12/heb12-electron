@@ -36,7 +36,7 @@ function getNETVerse(ref) {
         document.getElementById('nettext').innerHTML = '<em>Check your Internet connection.</em>';
         console.log('Offline ERROR');
     } else {
-    url = 'https://labs.bible.org/api/?passage= ' + ref + '&formatting=full';
+    url = 'https://labs.bible.org/api/?passage= ' + ref;
     fetch(url, {
         mode: 'cors'
     })
@@ -90,6 +90,16 @@ async function getVerses(reference, version) {
                     // Closes the error after 5 seconds
                     setTimeout(function () { document.getElementById('error').style.display = "none" }, 5000);
                 }
+                var bold = document.getElementsByTagName('b');
+                var a = chapterAndVerse(reference);
+                    for (let i = 0; i < bold.length; i++) {
+                        const element = bold[i];
+                        element.addEventListener('click', function() {
+                            console.log(reference);
+                            
+                            openVerse(a.book.name + ' ' + a.chapter + ':' + i);
+                        });
+                    }
                 return result;
             });
     }
