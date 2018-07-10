@@ -93,4 +93,4 @@ const getCv = (str = '') => {
   }
 }
 
-module.exports = getCv
+//module.exports = getCv
