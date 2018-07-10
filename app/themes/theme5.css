@@ -2,12 +2,9 @@
     background-color: #FA5555;
     color: white;
 }
-#result {
-  box-shadow: 3px 5px 5px 5px #FA5555;
-}
 
 option {
-	background-color: #FA5555;
+	color: black;
 }
 
 .popup {
@@ -22,11 +19,11 @@ option {
 	color: white;
 }
 .button:hover {
-  background-color: #C90000;
+  background-color: rgb(250, 44, 44);
 }
 /* Other buttons */
 button:active {
-  background-color: #C90000;
+  background-color: rgb(250, 44, 44);
   border-color: #FA5555;
 }
 .closePopup {
@@ -35,5 +32,10 @@ button:active {
 }
 .closePopup:hover {
   transition-duration: 0.5s;
-  color: #C90000;
+  color: rgb(250, 44, 44);
+}
+
+.arrow {
+    color: white;
+    background-color: #FA5555;
 }
