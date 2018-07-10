@@ -31,7 +31,7 @@
             <h1>About this Program</h1>
             <div id="technicalInfo">
                 <img src="icon.png" />
-                <p>Version: 0.2.0 <button id="checkUpdates" onclick="checkUpdates()">Check for updates</button></p>
+                <p>Version: 0.3.0 <button id="checkUpdates" onclick="checkUpdates()">Check for updates</button></p>
                 <p id="latestUpdate" style="display:none"></p>
                 <p>Website: <span class="link">heb12.github.io</span></p>
             </div>
@@ -49,7 +49,7 @@
             <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
             <h1>Settings</h1>
             <div class="settingsBox">
-                <h2>Font</h2>
+                <h2>Text</h2>
                 <span>Font size:</span>
                 <button onclick="fontSizePlus()"><i class="fas fa-plus"></i></button>
                 <button onclick="fontSizeMinus()"><i class="fas fa-minus"></i></button>
@@ -69,6 +69,12 @@
                     <option value="left">Left</option>
                     <option value="center">Center</option>
                     <option value="justify">Justify</option>
+                </select>
+                <br /><br />
+                <span>Line Breaks</span>
+                <select id="lineBreaks" onchange="changeLineBreaks()">
+                    <option value="true">Yes (Default)</option>
+                    <option value="false">No</option>
                 </select>
             </div>
             <div class="settingsBox">
@@ -98,12 +104,48 @@
             <h2 id='vs'></h2>
             <input id="searchBox" type="text" autofocus placeholder="Hebrews 4:12" /><button id="searchAction" onclick="openVerse(document.getElementById('searchBox').value)">Open</button>
             <div class="verseBox">
+                <p><strong>ASV</strong></p>
+                <p id="asvtext" class="text"></p>
+            </div>
+            <div class="verseBox">
+                <p><strong>Darby</strong></p>
+                <p id="dbytext" class="text"></p>
+            </div>
+            <div class="verseBox">
+                <p><strong>Jubilee</strong></p>
+                <p id="jubtext" class="text"></p>
+            </div>
+            <div class="verseBox">
+                <p><strong>KJ2000</strong></p>
+                <p id="kj2000text" class="text"></p>
+            </div>
+            <div class="verseBox">
                 <p><strong>KJV</strong></p>
                 <p id="kjvtext" class="text"></p>
             </div>
             <div class="verseBox">
                 <p><strong>NET</strong></p>
                 <p id="nettext" class="text"><em>No text available. Check your internet connection.</em></p>
+            </div>
+            <div class="verseBox">
+                <p><strong>NHEB</strong></p>
+                <p id="nhebtext" class="text"></p>
+            </div>
+            <div class="verseBox">
+                <p><strong>RSV</strong></p>
+                <p id="rsvtext" class="text"></p>
+            </div>
+            <div class="verseBox">
+                <p><strong>Webster</strong></p>
+                <p id="wbttext" class="text"></p>
+            </div>
+            <div class="verseBox">
+                <p><strong>WEB</strong></p>
+                <p id="webtext" class="text"></p>
+            </div>
+            <div class="verseBox">
+                <p><strong>YLT</strong></p>
+                <p id="ylttext" class="text"></p>
             </div>
         </div>
 
@@ -112,14 +154,54 @@
             <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
             <h2>Translations</h2>
             <div class="translation">
-                <h3>King James Version (KJV)</h3>
-                <p>This translation is built into the program and can be used offline.</p>
+                <h3>American Standard Version (ASV)</h3> <div class="transInfo offline">Offline Available</div>
+                <p>The American Standard Version (ASV) is a translation of the Bible from 1901.</p>
+                <button onclick="updateTranslation('asv');closePopups();">Use</button>
+            </div>
+            <div class="translation">
+                <h3>Darby Bible (DBY)</h3> <div class="transInfo offline">Offline Available</div>
+                <p>The Darby Bible is a translation of the Bible from 1890 by John Nelson Darby for "unlearned who have neither access to manuscript texts nor training and knowledge of ancient languages of the Scriptures".</p>
+                <button onclick="updateTranslation('dby');closePopups();">Use</button>
+            </div>
+            <div class="translation">
+                <h3>Jubilee 2000 Bible (JUB)</h3> <div class="transInfo offline">Offline Available</div>
+                <p></p>
+                <button onclick="updateTranslation('jub');closePopups();">Use</button>
+            </div>
+            <div class="translation">
+                <h3>King James 2000 (KJ2000)</h3> <div class="transInfo offline">Offline Available</div>
+                <p>The King James 2000 translation is "a King James Version brought forward 400 years." It subsitutes old English words for modern English.</p>
+                <button onclick="updateTranslation('kj2000');closePopups();">Use</button>
+            </div>
+            <div class="translation">
+                <h3>King James Version (KJV)</h3> <div class="transInfo offline">Offline Available</div>
+                <p>The King James Version (or Authorised Version) is a translation of the Bible from 1611 commisioned by King James I. </p>
                 <button onclick="updateTranslation('kjv');closePopups();">Use</button>
             </div>
             <div class="translation">
-                <h3>New English Translation (NET)</h3>
-                <p>This translation is accessed via labs.bible.org/api. Online only.</p>
+                <h3>New Heart English Bible (NHEB)</h3> <div class="transInfo offline">Offline Available</div>
+                <p>"The goal of this work is to provide a modern and accurate English translation Bible based on the latest standard texts for the public domain."</p>
+                <button onclick="updateTranslation('nheb');closePopups();">Use</button>
+            </div>
+            <div class="translation">
+                <h3>New English Translation (NET)</h3> <div class="transInfo online">Online Only</div>
+                <p>The New English Translation is a free, "completely new" online English translation of the Bible, "with 60,932 translators' notes" sponsored by the Biblical Studies Foundation and published by Biblical Studies Press. <small>wikipedia</small></p>
                 <button onclick="updateTranslation('net');closePopups();">Use</button>
+            </div>
+            <div class="translation">
+                <h3>Webster (WBT)</h3> <div class="transInfo offline">Offline Available</div>
+                <p>The Webster Bible was translated by Noah Webster in 1833.</p>
+                <button onclick="updateTranslation('wbt');closePopups();">Use</button>
+            </div>
+            <div class="translation">
+                <h3>World English Bible (WEB)</h3> <div class="transInfo offline">Offline Available</div>
+                <p>The World English Bible is a revision of the American Standard Version in the Public Domain. Completed in 2000.</p>
+                <button onclick="updateTranslation('web');closePopups();">Use</button>
+            </div>
+            <div class="translation">
+                <h3>Young's Literal Translation (YLT)</h3> <div class="transInfo offline">Offline Available</div>
+                <p>The Young's Literal Translation is a translation of the Bible by Robert Young in 1862. It is a very literal translation of the text.</p>
+                <button onclick="updateTranslation('ylt');closePopups();">Use</button>
             </div>
         </div>
         <div id="books" class="popup">
