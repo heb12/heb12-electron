@@ -1,61 +1,62 @@
 {
-    "name": "heb12",
-    "productName": "Heb12 Bible",
-    "version": "0.2.0",
-    "description": "A simple program for reading the Bible",
-    "main": "main.js",
-    "scripts": {
-        "start": "electron .",
-        "pack": "electron-builder --dir",
-        "dist": "electron-builder"
-    },
-    "repository": "https://github.com/heb12/heb12",
-    "keywords": [
-        "bible",
-        "study",
-        "reference"
-    ],
-    "author": {
-        "name": "Heb12 Bible Apps",
-        "email": "heb12@protonmail.com"
-    },
-    "license": "GPL-3.0",
-    "devDependencies": {
-        "electron": "~2.0.0",
-        "electron-builder": "^20.6.2"
-    },
-    "dependencies": {
-        "chapter-and-verse": "^3.0.2"
-    },
-    "build": {
-        "appId": "tk.mtiger.heb12",
-        "dmg": {
-            "contents": [
-                {
-                    "x": 110,
-                    "y": 150
-                },
-                {
-                    "x": 240,
-                    "y": 150,
-                    "type": "link",
-                    "path": "/Applications"
-                }
-            ]
+  "name": "heb12",
+  "productName": "Heb12 Bible",
+  "version": "0.3.0",
+  "description": "A simple program for reading the Bible",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "repository": "https://github.com/heb12/heb12",
+  "keywords": [
+    "bible",
+    "study",
+    "reference"
+  ],
+  "author": {
+    "name": "Heb12 Bible Apps",
+    "email": "heb12@protonmail.com"
+  },
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "electron": "~2.0.3",
+    "electron-builder": "^20.6.2"
+  },
+  "dependencies": {
+    "chapter-and-verse": "^3.0.2",
+    "openbibles": "latest"
+  },
+  "build": {
+    "appId": "tk.mtiger.heb12",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
         },
-        "linux": {
-            "target": [
-                "AppImage",
-                "deb",
-                "rpm",
-                "snap"
-            ],
-            "category": "Education;Office"
-        },
-        "win": {
-            "target": "NSIS",
-            "icon": "build/icon.ico"
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
         }
+      ]
     },
-    "postinstall": "electron-builder install-app-deps"
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm",
+        "snap"
+      ],
+      "category": "Education;Office"
+    },
+    "win": {
+      "target": "NSIS",
+      "icon": "build/icon.ico"
+    }
+  },
+  "postinstall": "electron-builder install-app-deps"
 }

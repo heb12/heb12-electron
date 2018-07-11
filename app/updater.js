@@ -1,5 +1,5 @@
 // Update this version number for every release:
-const version = '0.2.0'
+const version = '0.3.0'
 let timesChecked = localStorage.getItem('timesChecked');
 
 function checkUpdates() {

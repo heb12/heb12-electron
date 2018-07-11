@@ -41,6 +41,9 @@ a {
     margin-right: auto;
     text-align: center;
 }
+#translation {
+    text-transform: uppercase;
+}
 
 /* Popups */
 
@@ -151,7 +154,7 @@ a {
 }
 /* Actual Scripture formatting */
 .vref {
-    font-size: 13px;
+    font-size: 80%;
     position: relative;
     bottom: 2px;
 }
@@ -281,6 +284,33 @@ and (max-width : 1000px) {
     padding-right: auto;
     padding-left: auto;
     display: inline-block;
+}
+
+#translations h3 {
+    margin-bottom: 4px;
+}
+#translations p {
+    margin: 5px 0 5px 0;
+}
+.transInfo {
+    margin: 0;
+    padding: 3px 5px;
+    width: max-content;
+    color: white;
+    border-radius: 2px;
+}
+.offline {
+    background-color: rgb(30, 255, 0);
+}
+.online {
+    background-color: purple;
+}
+
+.noBreaks p {
+    display: inline;
+}
+.noBreaks p::before {
+    content: ' ';
 }
 
 /* This button CSS is from https://github.com/MasterOfTheTiger/apod-extension/blob/master/css/style.css under the MIT license */

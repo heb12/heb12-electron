@@ -5,6 +5,7 @@
 // Require some outside files
 let bible = require('./bible.json');
 let jsonKJV = require('./bible/Hebrews.json');
+const bibles = require('openbibles');
 
 // This function gets the book number in bible.json (i.e Genesis is 0, Exodus is 1, etc.) from its name
 function getBook(bookGet) {
@@ -36,7 +37,7 @@ function getNETVerse(ref) {
         document.getElementById('nettext').innerHTML = '<em>Check your Internet connection.</em>';
         console.log('Offline ERROR');
     } else {
-    url = 'https://labs.bible.org/api/?passage= ' + ref;
+    url = 'https://labs.bible.org/api/?passage= ' + ref + '&formatting=plain';
     fetch(url, {
         mode: 'cors'
     })
@@ -104,7 +105,7 @@ async function getVerses(reference, version) {
             });
     }
     // Renders KJV
-    else {
+    else if (version == 'kjv') {
         var a = chapterAndVerse(reference);
         var theChapter = a.chapter;
         var theBook = a.book.name.split(' ').join('');
@@ -119,6 +120,13 @@ async function getVerses(reference, version) {
 
         }
         document.getElementById('scripture').innerHTML = toAdd;
+        document.getElementById('error').style.display = 'none';
+    }
+    // Renders other
+    else {
+        console.log('Loading ' + version);
+        
+        document.getElementById('scripture').innerHTML = bibles(reference, version, true);
         document.getElementById('error').style.display = 'none';
     }
 
@@ -202,7 +210,7 @@ function loadChapters() {
 function updateTranslation(theTranslation) {
     console.log(theTranslation);
     
-    document.getElementById('translation').innerText = theTranslation.toUpperCase();
+    document.getElementById('translation').innerText = theTranslation;
     localStorage.setItem('translation', theTranslation);
     updateText();
 }
@@ -260,13 +268,33 @@ function changetextAlign() {
     localStorage.setItem('textAlign', document.getElementById('textAlign').value);
     document.getElementById('scripture').style.textAlign = document.getElementById('textAlign').value;
 }
+function changeLineBreaks() {
+    let linebreaks = document.getElementById('lineBreaks').value;
+    localStorage.setItem('lineBreaks', linebreaks);
+    if (linebreaks == 'false') {
+        document.getElementById('scripture').className = 'noBreaks';
+    } else {
+        document.getElementById('scripture').className = '';
+    }
+    
+}
 
 // This opens a verse popup for a specific verse
 function openVerse(ref) {
     if (ref != '') {
         openPopup('versePopup');
         document.getElementById('vs').innerText = ref;
-        document.getElementById('kjvtext').innerText = getKJVVerse(ref);getNETVerse(ref);
+        document.getElementById('asvtext').innerText = bibles(ref, 'asv');
+        document.getElementById('dbytext').innerText = bibles(ref, 'darby');
+        document.getElementById('jubtext').innerText = bibles(ref, 'jub');
+        document.getElementById('kj2000text').innerText = bibles(ref, 'kj2000');
+        document.getElementById('kjvtext').innerText = getKJVVerse(ref);
+        document.getElementById('nhebtext').innerText = bibles(ref, 'nheb');
+        getNETVerse(ref);
+        document.getElementById('rsvtext').innerText = bibles(ref, 'rsv');
+        document.getElementById('wbttext').innerText = bibles(ref, 'wbt');
+        document.getElementById('webtext').innerText = bibles(ref, 'web');
+        document.getElementById('ylttext').innerText = bibles(ref, 'ylt');
         document.getElementById('searchBox').placeholder = ref;
         document.getElementById('searchBox').value = '';
     }
@@ -344,8 +372,8 @@ function alertYou(say, mode, callback) {
 }
 // Save scroll position
 document.body.onscroll = function() {
-    localStorage.setItem('scroll', document.body.scrollTop);
-    if (document.body.scrollTop > 0) {
+    localStorage.setItem('scroll', document.scrollingElement.scrollTop);
+    if (document.scrollingElement.scrollTop > 0) {
         document.getElementById('head').className = 'scroll';
         document.getElementById('result').className = 'scroll';
     } else {
@@ -364,6 +392,7 @@ function setup() {
     localStorage.setItem('theme', 'theme1');
     localStorage.setItem('textAlign', 'left');
     localStorage.setItem('translation', 'net');
+    localStorage.setItem('lineBreaks', 'true');
     console.log("Finished first-time setup of localStorage");
 
 }
@@ -418,6 +447,22 @@ for (var opt, j = 0; opt = opts[j]; j++) {
 }
 document.getElementById('scripture').style.textAlign = document.getElementById('textAlign').value;
 
+// Retrieve last lineBreaks
+val = localStorage.getItem('lineBreaks');
+sel = document.getElementById('lineBreaks');
+opts = sel.options;
+for (var opt, j = 0; opt = opts[j]; j++) {
+    if (opt.value == val) {
+        sel.selectedIndex = j;
+        break;
+    }
+}
+if (val == 'false') {
+    document.getElementById('scripture').className = 'noBreaks';
+} else {
+    document.getElementById('scripture').className = '';
+}
+
 // Retrieve last theme
 val = localStorage.getItem('theme');
 console.log(val + ' is the theme stored in localStorage.');
@@ -438,11 +483,7 @@ document.getElementById('themeStyle').href = './themes/' + themeChoice + '.css';
 var translations = localStorage.getItem('translation');
 console.log(translations + ' is the translation loaded from localStorage.');
 
-if (translations == 'kjv' || !navigator.onLine) {
-    document.getElementById('translation').innerText = 'KJV';
-} else {
-    document.getElementById('translation').innerText = 'NET';
-}
+document.getElementById('translation').innerText = translations;
 
 window.onload = function() {
     // Retrieve last chapter

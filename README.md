@@ -1,13 +1,23 @@
-# Heb12 Bible App
+# Heb12 Bible Desktop
 [![Snap Status](https://build.snapcraft.io/badge/heb12/heb12.svg)](https://build.snapcraft.io/user/heb12/heb12)
 
 A desktop program for reading the Bible.
 
 ![capture](https://user-images.githubusercontent.com/16640496/38822095-44efd294-4157-11e8-8f21-797538fe6e0a.PNG)
 
-This application currently uses [this API](http://labs.bible.org/api_web_service), and an offline KJV version. It might support more in the future.
+Heb12 Desktop includes eight translations of the Bible, including:
+- American Standard Version
+- Darby
+- Jubilee 2000 Bible
+- King James 2000
+- King James Version
+- New English Translation
+- New Heart English Bible
+- Webster
+- World English Bible
+- Young's Literal Translation
 
-If you would like to try out a prerelease version (without automatic updates) you can get it [here](https://github.com/heb12/heb12/wiki/Packages).
+To download, visit the [releases page](https://github.com/heb12/heb12/releases).
 
 ## Installation
 To install the program for editing, run these commands:
@@ -20,14 +30,16 @@ $ cd heb12
 Packages for easy installation are available on the [releases page](https://github.com/heb12/heb12/releases).
 
 ## Contributing
-Feel free to make changes to the design, scripts, and even the fundamental code to the program, as it is still in heavy development, and submit a pull request. However, please make sure the following work before submitting your request.
+Feel free to make changes to program. However, please make sure the following work before submitting your request.
 - The API request
 - The rendering of the scripture
 - The selecting of verses
-- Offline use of major features (and at least the KJV translation), i.e, don't make your features depend on external requests unless it is necessary
+- Offline use of major features, i.e, don't make your features depend on external requests unless it is necessary
 - Building on Linux and Windows
 
 If any of those do not work, then it will not be accepted without changes.
+
+Please open an issue first to make sure that we are looking for that kind of contribution.
 
 Please refer (and contribute) to the [wiki](https://github.com/MasterOfTheTiger/heb12/wiki) for helpful instruction for installing, packaging, and more.
 
@@ -35,10 +47,3 @@ Please refer (and contribute) to the [wiki](https://github.com/MasterOfTheTiger/
 Copyright 2018 MasterOfTheTiger.
 This software is released under the GPL license version 3.0 or later. See the [LICENSE](https://github.com/MasterOfTheTiger/heb12/blob/master/LICENSE) file for more information.
 
-## Credits
-- @MasterOfTheTiger is the main front end developer
-- @amazinigmech2418 is anther front end developer that is working on the auto updater
-- @edxt is the back end developer
-- @doodthedoodthedood for the light blue and red themes (and soon the bookmarking feature)
-- @danday74 for [Chapter and Verse](https://github.com/danday74/chapter-and-verse), a very useful tool for this program
-- Chapter and Verse for the bible.json file
