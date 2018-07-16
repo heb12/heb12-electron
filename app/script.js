@@ -4,7 +4,6 @@
 
 // Require some outside files
 let bible = require('./bible.json');
-let jsonKJV = require('./bible/Hebrews.json');
 const bibles = require('openbibles');
 
 // This function gets the book number in bible.json (i.e Genesis is 0, Exodus is 1, etc.) from its name
@@ -16,21 +15,6 @@ function getBook(bookGet) {
     return i;
 }
 
-// Gets a single verse from the KJV
-function getKJVVerse(ref) {
-    let a = chapterAndVerse(ref);
-    jsonKJV = require('./bible/' + a.book.name.split(' ').join('') + '.json');
-    result = '';
-    if (a.from < a.to) {
-        for (var i = a.from; i < a.to + 1; i++) {
-            result = result + ' ' + i + ' ' + jsonKJV.chapters[Number(a.chapter) - 1].verses[i - 1][i];
-        }
-    } else {
-        result = jsonKJV.chapters[Number(a.chapter) - 1].verses[a.from - 1][a.from];
-    }
-
-    return result;
-}
 // Gets a single verse from the NET
 function getNETVerse(ref) {
     if (!navigator.onLine) {
@@ -103,24 +87,6 @@ async function getVerses(reference, version) {
                     }
                 return result;
             });
-    }
-    // Renders KJV
-    else if (version == 'kjv') {
-        var a = chapterAndVerse(reference);
-        var theChapter = a.chapter;
-        var theBook = a.book.name.split(' ').join('');
-        jsonKJV = require('./bible/' + theBook + '.json');
-        //jsonKJV = jsonKJV.chapters[0].verses[0]["1"];
-        var length = "0";
-        var toAdd = '';
-        var i = 0;
-        for (var i = 0; i < jsonKJV.chapters[Number(theChapter) - 1].verses.length; i++) {
-            toAdd = toAdd + '<p class="verse">' + '<b class="vref"' + ' onclick="openVerse(\'' + a.book.name + ' ' + theChapter + ':' + (i + 1) + '\')"' + '>' + (i + 1) + '</b> ' + getKJVVerse(theBook + ' ' + theChapter + ':' + (i + 1)); + '</p>';
-            // jsonKJV.chapters[Number(theChapter) - 1].verses[i][i + 1] replaced with getKJVVerse(theBook, theChapter, (i + 1));
-
-        }
-        document.getElementById('scripture').innerHTML = toAdd;
-        document.getElementById('error').style.display = 'none';
     }
     // Renders other
     else {
@@ -288,7 +254,7 @@ function openVerse(ref) {
         document.getElementById('dbytext').innerText = bibles(ref, 'darby');
         document.getElementById('jubtext').innerText = bibles(ref, 'jub');
         document.getElementById('kj2000text').innerText = bibles(ref, 'kj2000');
-        document.getElementById('kjvtext').innerText = getKJVVerse(ref);
+        document.getElementById('kjvtext').innerText = bibles(ref, 'kjv');
         document.getElementById('nhebtext').innerText = bibles(ref, 'nheb');
         getNETVerse(ref);
         document.getElementById('rsvtext').innerText = bibles(ref, 'rsv');
