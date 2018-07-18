@@ -1,5 +1,5 @@
 # Contributing
-This file gives some information about contributing code to this software. Reading this file will help you a lot while writing your contribution. 
+This file gives some information about contributing code to this software. Reading this file will help you a lot while writing your contribution.
 
 ## Will Not Accept
 There are some things which we will not accept. You should be aware of these because if your code falls into one of these categories, it will not be accepted. However, this does not stop you from making your own project with your own changes.
@@ -35,7 +35,7 @@ We do not have a set coding style, but here are some recommendations:
 - Comment your code to state what it does (not how it does it, that should be obvious). Clearly state what it does, but keep it clear and concise
 - `let` is preferred to `var`
 
-Comments in JavaScript should be simple one-line comments, exept for headings, which are marked the following way:
+Comments in JavaScript should be simple one-line comments, except for headings, which are marked the following way:
 
 ```
 
@@ -54,21 +54,21 @@ Comments in JavaScript should be simple one-line comments, exept for headings, w
 This explains what content is allowed to be fetched from the Internet, and what has to be built into the program.
 
 ### Translations
-Translations must be built into some kind of public API, and not hosted on one of your own servers for Heb12 exclusively. If it needs to be built into a server privately, we will need to host it ourselves. 
+Translation must be built into some kind of public API, and not hosted on one of your own servers for Heb12 exclusively. If it needs to be built into a server privately, we will need to host it ourselves.
 
-Translations should be offline (and come with the program) when allowed. If the copyright does not permit this, then you may use a public API (as stated above). 
+Translations should be offline (and come with the program) when allowed. If the copyright does not permit this, then you may use a public API (as stated above).
 
 ### Commentaries
-Commentaries are allowed to be accessed from a public API, as with translations. Commentaries should not be put into the program without more consideration (due to file size and copyright issues). 
+Commentaries are allowed to be accessed from a public API, as with translations. Commentaries should not be put into the program without more consideration (due to file size and copyright issues).
 
 ### Themes
-Themes should be brought 
+Themes should be brought up in issues before they are implemented. Themes are trivial to make and should be of the highest quality. 
 
 ## Issues
-Before you even work on your contribution, you should open an issue and discuss it. That way you can brainstorm with the team and other contributors about how it should be manifested. 
+Before you even work on your contribution, you should open an issue and discuss it. That way you can brainstorm with the team and other contributors about how it should be manifested.
 
 ## Credits
-Credits should not be applied to the code itself, but to the credits file. 
+Credits should not be applied to the code itself, but to the credits file.
 
 Write your credit in the `CREDITS.md` file under the "Other Contributors" heading. Put it in alphabetical order. For example, if these are the contributors:
 
