@@ -26,7 +26,8 @@
   },
   "dependencies": {
     "chapter-and-verse": "^3.0.2",
-    "openbibles": "latest"
+    "openbibles": "latest",
+    "request": "^2.87.0"
   },
   "build": {
     "appId": "tk.mtiger.heb12",

@@ -5,6 +5,7 @@
 // Require some outside files
 let bible = require('./bible.json');
 const bibles = require('openbibles');
+const request = require('request');
 
 // This function gets the book number in bible.json (i.e Genesis is 0, Exodus is 1, etc.) from its name
 function getBook(bookGet) {
@@ -13,7 +14,7 @@ function getBook(bookGet) {
         i++;
     }
     return i;
-}
+} // Print the error if one occurred
 
 // Gets a single verse from the NET
 function getNETVerse(ref) {
@@ -21,17 +22,15 @@ function getNETVerse(ref) {
         document.getElementById('nettext').innerHTML = '<em>Check your Internet connection.</em>';
         console.log('Offline ERROR');
     } else {
-    url = 'https://labs.bible.org/api/?passage= ' + ref + '&formatting=plain';
-    fetch(url, {
-        mode: 'cors'
-    })
-        .then(response => response.text())
-        .then(result => {
+        url = 'https://labs.bible.org/api/?passage= ' + ref + '&formatting=plain';
+        request(url, function (error, response, body) {
             if (result != '') {
-                document.getElementById('nettext').innerHTML = result;
+                document.getElementById('nettext').innerHTML = body;
                 document.getElementById('error').style.display = 'none';
             }
-            return result;
+            console.log('error:', error);
+            console.log('statusCode:', response && response.statusCode);
+            console.log('body:', body);
         });
     }
 }
@@ -43,7 +42,7 @@ async function getVerses(reference, version) {
     // Renders NET
     if (version == 'net') {
         console.log('Loading NET');
-        
+
         // If the program is offline it sends an error message
         if (!navigator.onLine) {
             document.getElementById('error').style.display = 'block';
@@ -58,40 +57,37 @@ async function getVerses(reference, version) {
         // Add cors proxy - myed
         //url = 'https://cors-anywhere.herokuapp.com/labs.bible.org/api/?passage= ' + reference + '&formatting=full';
         url = 'https://labs.bible.org/api/?passage= ' + reference + '&formatting=full';
-        // Uses the fetch API to request the scripture from the url above
-        fetch(url, {
-            mode: 'cors'
-        })
-            .then(response => response.text())
-            .then(result => {
-                if (result != '') {
-                    document.getElementById('scripture').innerHTML = result;
-                    //document.getElementById('reference').innerHTML = reference;
-                    document.getElementById('error').style.display = 'none';
-                } else {
-                    // If for some reason the request returned as blank, it sends an error
-                    document.getElementById('error').style.display = 'block';
-                    document.getElementById('error').innerHTML = 'Pardon, there was an error fetching the translation, please try again later';
-                    // Closes the error after 5 seconds
-                    setTimeout(function () { document.getElementById('error').style.display = "none" }, 5000);
-                }
+        // Uses the request API to request the scripture from the url above
+        request(url, function (error, response, body) {
+            if (result != '') {
+                document.getElementById('scripture').innerHTML = body;
+                document.getElementById('error').style.display = 'none';
                 var bold = document.getElementsByTagName('b');
                 var a = chapterAndVerse(reference);
                     for (let i = 0; i < bold.length; i++) {
                         const element = bold[i];
                         element.addEventListener('click', function() {
                             console.log(reference);
-                            
+
                             openVerse(a.book.name + ' ' + a.chapter + ':' + i);
                         });
                     }
-                return result;
-            });
+            } else {
+                console.log('error:', error);
+                console.log('statusCode:', response && response.statusCode);
+                console.log('body:', body);
+                // If for some reason the request returned as blank, it sends an error
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error').innerHTML = 'Pardon, there was an error fetching the translation, please try again later';
+                // Closes the error after 5 seconds
+                setTimeout(function () { document.getElementById('error').style.display = "none" }, 5000);
+            }
+        });
     }
     // Renders other
     else {
         console.log('Loading ' + version);
-        
+
         document.getElementById('scripture').innerHTML = bibles(reference, version, true);
         document.getElementById('error').style.display = 'none';
     }
@@ -175,7 +171,7 @@ function loadChapters() {
 }
 function updateTranslation(theTranslation) {
     console.log(theTranslation);
-    
+
     document.getElementById('translation').innerText = theTranslation;
     localStorage.setItem('translation', theTranslation);
     updateText();
@@ -242,7 +238,7 @@ function changeLineBreaks() {
     } else {
         document.getElementById('scripture').className = '';
     }
-    
+
 }
 
 // This opens a verse popup for a specific verse
