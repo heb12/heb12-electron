@@ -6,6 +6,8 @@
 let bible = require('./bible.json');
 const bibles = require('openbibles');
 const request = require('request');
+const Store = require('electron-store');
+const store = new Store();
 
 // This function gets the book number in bible.json (i.e Genesis is 0, Exodus is 1, etc.) from its name
 function getBook(bookGet) {
@@ -98,9 +100,9 @@ async function getVerses(reference, version) {
     document.getElementById('scripture').style.display = 'block';
     // Set the title of the page to the Bible reference and 'Heb12 Bible App'
     document.title = chapterAndVerse(document.getElementById('book').innerText).book.name + ' ' + document.getElementById('chapter').value + ' - ' + 'Heb12 Bible App';
-    // Save the reference opened into localStorage
-    localStorage.setItem("lastRef", chapterAndVerse(document.getElementById('book').innerText).book.name + ' ' + document.getElementById('chapter').value);
-    console.log(localStorage.getItem('lastRef'));
+    // Save the reference opened into storage
+    store.set("lastRef", chapterAndVerse(document.getElementById('book').innerText).book.name + ' ' + document.getElementById('chapter').value);
+    console.log(store.get('lastRef'));
     return result;
 }
 var chapter, chapters, books, theBook, theChapter;
@@ -173,7 +175,7 @@ function updateTranslation(theTranslation) {
     console.log(theTranslation);
 
     document.getElementById('translation').innerText = theTranslation;
-    localStorage.setItem('translation', theTranslation);
+    store.set('translation', theTranslation);
     updateText();
 }
 
@@ -190,7 +192,7 @@ function setChapter(reference) {
 // Increase and decrease text size
 var script;
 function fontSizePlus() {
-    var fontSize = localStorage.getItem('fontSize');
+    var fontSize = store.get('fontSize');
     script = document.getElementById('scripture');
     console.log(String(Number(script.style.fontSize.split('px')[0]) + 1) + 'px');
     script.style.fontSize = String(Number(fontSize.split('px')[0]) + 1) + 'px';
@@ -198,10 +200,10 @@ function fontSizePlus() {
     for (var i = 0; i < x.length; i++) {
         x[i].style.fontSize = String(Number(fontSize.split('px')[0]) + 1) + 'px';
     }
-    localStorage.setItem('fontSize', String(Number(fontSize.split('px')[0]) + 1) + 'px');
+    store.set('fontSize', String(Number(fontSize.split('px')[0]) + 1) + 'px');
 }
 function fontSizeMinus() {
-    var fontSize = localStorage.getItem('fontSize');
+    var fontSize = store.get('fontSize');
     script = document.getElementById('scripture');
     console.log(String(Number(script.style.fontSize.split('px')[0]) - 1) + 'px');
     script.style.fontSize = String(Number(fontSize.split('px')[0]) - 1) + 'px';
@@ -209,11 +211,11 @@ function fontSizeMinus() {
     for (var i = 0; i < x.length; i++) {
         x[i].style.fontSize = String(Number(fontSize.split('px')[0]) - 1) + 'px';
     }
-    localStorage.setItem('fontSize', String(Number(fontSize.split('px')[0]) - 1) + 'px');
+    store.set('fontSize', String(Number(fontSize.split('px')[0]) - 1) + 'px');
 }
 
 function changeFont() {
-    localStorage.setItem('font', document.getElementById('font').value);
+    store.set('font', document.getElementById('font').value);
     if (document.getElementById('font').value == 'default') {
         document.getElementById('scripture').style.fontFamily = 'Arial, Helvetica, sans-serif';
     } else {
@@ -222,17 +224,17 @@ function changeFont() {
 
 }
 function changeTheme() {
-    localStorage.setItem('theme', document.getElementById('theme').value);
+    store.set('theme', document.getElementById('theme').value);
     themeChoice = document.getElementById('theme').value;
     document.getElementById('themeStyle').href = './themes/' + themeChoice +'.css';
 }
 function changetextAlign() {
-    localStorage.setItem('textAlign', document.getElementById('textAlign').value);
+    store.set('textAlign', document.getElementById('textAlign').value);
     document.getElementById('scripture').style.textAlign = document.getElementById('textAlign').value;
 }
 function changeLineBreaks() {
     let linebreaks = document.getElementById('lineBreaks').value;
-    localStorage.setItem('lineBreaks', linebreaks);
+    store.set('lineBreaks', linebreaks);
     if (linebreaks == 'false') {
         document.getElementById('scripture').className = 'noBreaks';
     } else {
@@ -334,7 +336,7 @@ function alertYou(say, mode, callback) {
 }
 // Save scroll position
 document.body.onscroll = function() {
-    localStorage.setItem('scroll', document.scrollingElement.scrollTop);
+    store.set('scroll', document.scrollingElement.scrollTop);
     if (document.scrollingElement.scrollTop > 0) {
         document.getElementById('head').className = 'scroll';
         document.getElementById('result').className = 'scroll';
@@ -346,32 +348,32 @@ document.body.onscroll = function() {
 
 // This runs the first time the program is opened
 function setup() {
-    localStorage.setItem('fontSize', '17px');
-    localStorage.setItem('lineSpacing', '25px');
-    localStorage.setItem('firstTime', 'no');
-    localStorage.setItem("lastRef", 'Hebrews 12');
-    localStorage.setItem('font', 'default');
-    localStorage.setItem('theme', 'theme1');
-    localStorage.setItem('textAlign', 'left');
-    localStorage.setItem('translation', 'net');
-    localStorage.setItem('lineBreaks', 'true');
-    console.log("Finished first-time setup of localStorage");
+    store.set('fontSize', '17px');
+    store.set('lineSpacing', '25px');
+    store.set('firstTime', 'no');
+    store.set("lastRef", 'Hebrews 12');
+    store.set('font', 'default');
+    store.set('theme', 'theme1');
+    store.set('textAlign', 'left');
+    store.set('translation', 'net');
+    store.set('lineBreaks', 'true');
+    console.log("Finished first-time setup of storage");
 
 }
-// Resets the program's localStorage
+// Resets the program's storage
 function reset() {
-    localStorage.removeItem('firstTime');
+    store.delete('firstTime');
     console.log("Set firstTime to false. When startup() funtion is run user information will be erased.");
 }
 
 
 // -------
-// Retrieves items from localStorage and sets up program
+// Retrieves items from storage and sets up program
 // -------
 
 // Checks if this is the first time you opened the program
-var firstTime = localStorage.getItem('firstTime');
-console.log(firstTime + ' is the value of firstTime in localStorage.');
+var firstTime = store.get('firstTime');
+console.log(firstTime + ' is the value of firstTime in storage.');
 
 // If this is the first time you opened the program, run the setup function
 if (firstTime != 'no') {
@@ -380,10 +382,10 @@ if (firstTime != 'no') {
 
 script = document.getElementById('scripture');
 
-console.log(localStorage.getItem('font') + ' is the font loaded from localStorage');
+console.log(store.get('font') + ' is the font loaded from storage');
 
 // Retrieve last font style
-var val = localStorage.getItem('font');
+var val = store.get('font');
 var sel = document.getElementById('font');
 var opts = sel.options;
 for (var opt, j = 0; opt = opts[j]; j++) {
@@ -398,7 +400,7 @@ if (document.getElementById('font').value == 'default') {
     document.getElementById('scripture').style.fontFamily = document.getElementById('font').value;
 }
 // Retrieve last textAlign
-val = localStorage.getItem('textAlign');
+val = store.get('textAlign');
 sel = document.getElementById('textAlign');
 opts = sel.options;
 for (var opt, j = 0; opt = opts[j]; j++) {
@@ -410,7 +412,7 @@ for (var opt, j = 0; opt = opts[j]; j++) {
 document.getElementById('scripture').style.textAlign = document.getElementById('textAlign').value;
 
 // Retrieve last lineBreaks
-val = localStorage.getItem('lineBreaks');
+val = store.get('lineBreaks');
 sel = document.getElementById('lineBreaks');
 opts = sel.options;
 for (var opt, j = 0; opt = opts[j]; j++) {
@@ -426,8 +428,8 @@ if (val == 'false') {
 }
 
 // Retrieve last theme
-val = localStorage.getItem('theme');
-console.log(val + ' is the theme stored in localStorage.');
+val = store.get('theme');
+console.log(val + ' is the theme stored in storage.');
 
 sel = document.getElementById('theme');
 opts = sel.options;
@@ -442,14 +444,14 @@ var themeChoice = document.getElementById('theme').value;
 document.getElementById('themeStyle').href = './themes/' + themeChoice + '.css';
 
 // Retrieve last translation
-var translations = localStorage.getItem('translation');
-console.log(translations + ' is the translation loaded from localStorage.');
+var translations = store.get('translation');
+console.log(translations + ' is the translation loaded from storage.');
 
 document.getElementById('translation').innerText = translations;
 
 window.onload = function() {
     // Retrieve last chapter
-    setChapter(localStorage.getItem('lastRef'));
+    setChapter(store.get('lastRef'));
     let booksEl = document.getElementsByClassName('book');
     console.log(booksEl);
     for (var i = 0; i < booksEl.length; i++) {
@@ -457,6 +459,6 @@ window.onload = function() {
     }
     // After 200 miliseconds (about the time it takes to fetch the NET) it scrolls to the position when it was closed
     setTimeout(function() {
-        document.body.scrollTop = localStorage.getItem('scroll');
+        document.body.scrollTop = store.get('scroll');
     }, 200);
 }

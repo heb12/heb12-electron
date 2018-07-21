@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "chapter-and-verse": "^3.0.2",
+    "electron-store": "^2.0.0",
     "openbibles": "latest",
     "request": "^2.87.0"
   },
