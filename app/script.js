@@ -24,6 +24,7 @@ function getNETVerse(ref) {
         document.getElementById('nettext').innerHTML = '<em>Check your Internet connection.</em>';
         console.log('Offline ERROR');
     } else {
+        document.getElementById('nettext').innerHTML = "<i class=\"fa fa-spinner fa-spin\"></i>";
         url = 'https://labs.bible.org/api/?passage= ' + ref + '&formatting=plain';
         request(url, function (error, response, body) {
             if (result != '') {
@@ -41,9 +42,11 @@ function getNETVerse(ref) {
 async function getVerses(reference, version) {
     console.log(version);
     document.getElementById('result').style.display = 'hidden';
+    document.getElementById('scripture').innerText = "Loading Bible...";
     // Renders NET
     if (version == 'net') {
         console.log('Loading NET');
+        document.getElementById('scripture').innerHTML = "<div class=\"spinner\"><i class=\"fa fa-spinner fa-spin\"></i></div>";
 
         // If the program is offline it sends an error message
         if (!navigator.onLine) {

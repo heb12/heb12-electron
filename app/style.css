@@ -145,6 +145,11 @@ a {
     box-shadow: 3px 5px 5px 5px gray;
     transition-duration: 0.5s;
 }
+.spinner {
+    font-size: 500%;
+    text-align: center;
+    padding-top: 100px;
+}
 #scripture {
     text-align: left;
     padding: 0;
