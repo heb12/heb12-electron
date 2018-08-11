@@ -65,10 +65,11 @@ async function getVerses(reference, version) {
         // Uses the request API to request the scripture from the url above
         request(url, function (error, response, body) {
             if (result != '') {
-                document.getElementById('scripture').innerHTML = body;
-                document.getElementById('error').style.display = 'none';
-                var bold = document.getElementsByTagName('b');
-                var a = chapterAndVerse(reference);
+                if (document.getElementById('translation').innerText.toLowerCase == version.toLowerCase) {
+                    document.getElementById('scripture').innerHTML = body;
+                    document.getElementById('error').style.display = 'none';
+                    var bold = document.getElementsByTagName('b');
+                    var a = chapterAndVerse(reference);
                     for (let i = 0; i < bold.length; i++) {
                         const element = bold[i];
                         element.addEventListener('click', function() {
@@ -77,6 +78,7 @@ async function getVerses(reference, version) {
                             openVerse(a.book.name + ' ' + a.chapter + ':' + i);
                         });
                     }
+                }
             } else {
                 console.log('error:', error);
                 console.log('statusCode:', response && response.statusCode);
@@ -104,7 +106,14 @@ async function getVerses(reference, version) {
     // Set the title of the page to the Bible reference and 'Heb12 Bible App'
     document.title = chapterAndVerse(document.getElementById('book').innerText).book.name + ' ' + document.getElementById('chapter').value + ' - ' + 'Heb12 Bible App';
     // Save the reference opened into storage
-    store.set("lastRef", chapterAndVerse(document.getElementById('book').innerText).book.name + ' ' + document.getElementById('chapter').value);
+    let saveRef = chapterAndVerse(document.getElementById('book').innerText).book.name + ' ' + document.getElementById('chapter').value;
+    store.set("lastRef", saveRef);
+    let history = store.get('history');
+    if (history[history.length - 1] !== saveRef) {
+        history[history.length] = saveRef;
+        store.set('history', history)
+    }
+    console.log(history + ' is the history.');
     console.log(store.get('lastRef'));
     return result;
 }
@@ -117,6 +126,30 @@ async function updateText() {
     chapters = a.book.chapters;
     var translation = document.getElementById('translation').innerText.toLowerCase();
     var text2 = await getVerses(a.book.name + ' ' + chapter.value, translation);
+}
+
+// Loads the history into the historyItems elements
+function loadHistory() {
+    let history = store.get('history');
+    let historyEl = document.getElementById('historyItems');
+    historyEl.innerHTML = '';
+    for (var i = 0; i < history.length; i++) {
+        let wrapper = document.createElement('div');
+        let historyItem = document.createElement('div');
+        let title = document.createElement('h3');
+        let para = document.createElement('p');
+        let button = document.createElement('button');
+        button.innerText = 'Open';
+        para.innerHTML = bibles(history[i] + ':1', 'web');
+        console.log(para);
+        title.innerHTML = history[i];
+        console.log(title);
+        historyItem.appendChild(title);
+        historyItem.appendChild(para);
+        //historyItem.appendChild(button);
+        wrapper.appendChild(historyItem);
+        historyEl.innerHTML = wrapper.innerHTML + historyEl.innerHTML;
+    }
 }
 
 // Changes to the next and last chapters
@@ -354,12 +387,13 @@ function setup() {
     store.set('fontSize', '17px');
     store.set('lineSpacing', '25px');
     store.set('firstTime', 'no');
-    store.set("lastRef", 'Hebrews 12');
+    store.set("lastRef", 'Hebrews 4');
     store.set('font', 'default');
     store.set('theme', 'theme1');
     store.set('textAlign', 'left');
     store.set('translation', 'net');
     store.set('lineBreaks', 'true');
+    store.set('history', ['Hebrews 4'])
     console.log("Finished first-time setup of storage");
 
 }

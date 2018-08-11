@@ -19,6 +19,7 @@
                 <span id="searchButton" class="button" onclick="openVerse('Hebrews 4:12')"><i class="fa fa-search"></i></span>
                 <span id="settingsButton" class="button" onclick="openPopup('settings')"><i class="fas fa-cog"></i></span>
                 <span onclick="openPopup('info')" id="infoButton" class="button"><i class="fas fa-info-circle"></i></span>
+                <span onclick="openPopup('history');loadHistory();" id="historyButton" class="button"><i class="fas fa-history"></i></span>
             </div>
         </div>
         <!-- Buttons for changing chapters -->
@@ -281,6 +282,14 @@
             <button class="book nt">3 John</button>
             <button class="book nt">Jude</button>
             <button class="book nt">Revelation</button>
+        </div>
+
+        <div class="popup" id="history">
+            <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
+            <h2>History</h2>
+            <div id="historyItems">
+
+            </div>
         </div>
 
         <div class="popup" id="alertBox">
