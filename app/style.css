@@ -154,6 +154,7 @@ a {
     text-align: left;
     padding: 0;
     margin: 0;
+    margin-top: 20px;
     line-height: 25px;
     font-size: 17px;
 }
@@ -316,6 +317,13 @@ and (max-width : 1000px) {
 }
 .noBreaks p::before {
     content: ' ';
+}
+
+#bookmark {
+    position: absolute;
+    top: 110;
+    right: 11%;
+    font-size: 25px;
 }
 
 /* This button CSS is from https://github.com/MasterOfTheTiger/apod-extension/blob/master/css/style.css under the MIT license */

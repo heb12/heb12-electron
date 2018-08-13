@@ -93,7 +93,7 @@ async function getVerses(reference, version) {
     }
     // Renders other
     else {
-        console.log('Loading ' + version);
+        console.log('Loading ' + version + ', reference ' + reference);
 
         document.getElementById('scripture').innerHTML = bibles(reference, version, true);
         document.getElementById('error').style.display = 'none';
@@ -139,16 +139,32 @@ function loadHistory() {
         let title = document.createElement('h3');
         let para = document.createElement('p');
         let button = document.createElement('button');
-        button.innerText = 'Open';
-        para.innerHTML = bibles(history[i] + ':1', 'web');
-        console.log(para);
-        title.innerHTML = history[i];
-        console.log(title);
-        historyItem.appendChild(title);
-        historyItem.appendChild(para);
-        //historyItem.appendChild(button);
-        wrapper.appendChild(historyItem);
-        historyEl.innerHTML = wrapper.innerHTML + historyEl.innerHTML;
+        try {
+            button.innerText = 'Open';
+            console.log(chapterAndVerse(history[i]).book.name + ' ' + chapterAndVerse(history[i]).chapter + ':1', 'web');
+            para.innerHTML = bibles(chapterAndVerse(history[i]).book.name + ' ' + chapterAndVerse(history[i]).chapter + ':1', 'web');
+            console.log(para);
+        } catch (e) {
+            historyEl.innerHTML = e + historyEl.innerHTML;
+        } finally {
+            title.innerHTML = history[i];
+            console.log(title);
+            historyItem.appendChild(title);
+            historyItem.appendChild(para);
+            //historyItem.appendChild(button);
+            wrapper.appendChild(historyItem);
+            historyEl.innerHTML = wrapper.innerHTML + historyEl.innerHTML;
+        }
+    }
+}
+
+// Toggles bookmarked chapter
+function toggleBookmark() {
+    if (document.getElementById('bookmarkIcon').className == 'fas fa-bookmark') {
+        document.getElementById('bookmarkIcon').className = 'far fa-bookmark';
+        store.set('bookmarks', );
+    } else {
+        document.getElementById('bookmarkIcon').className = 'fas fa-bookmark';
     }
 }
 
@@ -393,7 +409,8 @@ function setup() {
     store.set('textAlign', 'left');
     store.set('translation', 'net');
     store.set('lineBreaks', 'true');
-    store.set('history', ['Hebrews 4'])
+    store.set('history', ['Hebrews 4']);
+    store.set('bookmarks', ['Hebrews 4']);
     console.log("Finished first-time setup of storage");
 
 }
