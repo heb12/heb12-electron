@@ -162,7 +162,7 @@ function loadHistory() {
 function toggleBookmark() {
     if (document.getElementById('bookmarkIcon').className == 'fas fa-bookmark') {
         document.getElementById('bookmarkIcon').className = 'far fa-bookmark';
-        store.set('bookmarks', );
+        //store.set('bookmarks', );
     } else {
         document.getElementById('bookmarkIcon').className = 'fas fa-bookmark';
     }
