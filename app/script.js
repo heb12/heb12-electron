@@ -216,7 +216,11 @@ function loadChapters() {
     chapters = a.book.chapters;
     chapter.innerHTML = '';
     if (chapters == 1) {
-        chapter.innerHTML = chapter.innerHTML + '<option value=\"1-' + a.book.versesPerChapter[0] + '\">' + '1-' + a.book.versesPerChapter[0] + '</option>';
+        if (theBook === '3 John') {
+          chapter.innerHTML = chapter.innerHTML + '<option value=\"1-' + '14' + '\">' + '1-' + '14' + '</option>';
+        } else {
+          chapter.innerHTML = chapter.innerHTML + '<option value=\"1-' + a.book.versesPerChapter[0] + '\">' + '1-' + a.book.versesPerChapter[0] + '</option>';
+        }
     } else {
         for (var x = 1; x < chapters + 1; x++) {
             chapter.innerHTML = chapter.innerHTML + '<option value=\"' + (x) + '\">' + (x) + '</option>';
