@@ -5,7 +5,7 @@ A desktop program for reading the Bible.
 
 ![capture](https://user-images.githubusercontent.com/16640496/38822095-44efd294-4157-11e8-8f21-797538fe6e0a.PNG)
 
-Heb12 Desktop includes eight translations of the Bible, including:
+Heb12 Desktop includes ten translations of the Bible, including:
 - American Standard Version
 - Darby
 - Jubilee 2000 Bible
@@ -30,20 +30,14 @@ $ cd heb12
 Packages for easy installation are available on the [releases page](https://github.com/heb12/heb12/releases).
 
 ## Contributing
-Feel free to make changes to program. However, please make sure the following work before submitting your request.
-- The API request
-- The rendering of the scripture
-- The selecting of verses
-- Offline use of major features, i.e, don't make your features depend on external requests unless it is necessary
-- Building on Linux and Windows
-
-If any of those do not work, then it will not be accepted without changes.
+Feel free to make changes to program and then make a pull request to have them implimented into the main project.
 
 Please open an issue first to make sure that we are looking for that kind of contribution.
+
+For more information about contributing, please read the CONTRIBUTING.md file.
 
 Please refer (and contribute) to the [wiki](https://github.com/MasterOfTheTiger/heb12/wiki) for helpful instruction for installing, packaging, and more.
 
 ## License
 Copyright 2018 MasterOfTheTiger.
 This software is released under the GPL license version 3.0 or later. See the [LICENSE](https://github.com/MasterOfTheTiger/heb12/blob/master/LICENSE) file for more information.
-
