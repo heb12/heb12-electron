@@ -8,6 +8,7 @@ const bibles = require('openbibles');
 const request = require('request');
 const Store = require('electron-store');
 const store = new Store();
+const randomVerse = require('random-verse');
 
 // This function gets the book number in bible.json (i.e Genesis is 0, Exodus is 1, etc.) from its name
 function getBook(bookGet) {
@@ -300,24 +301,29 @@ function changeLineBreaks() {
 }
 
 // This opens a verse popup for a specific verse
-function openVerse(ref) {
-    if (ref != '') {
-        openPopup('versePopup');
-        document.getElementById('vs').innerText = ref;
-        document.getElementById('asvtext').innerText = bibles(ref, 'asv');
-        document.getElementById('dbytext').innerText = bibles(ref, 'darby');
-        document.getElementById('jubtext').innerText = bibles(ref, 'jub');
-        document.getElementById('kj2000text').innerText = bibles(ref, 'kj2000');
-        document.getElementById('kjvtext').innerText = bibles(ref, 'kjv');
-        document.getElementById('nhebtext').innerText = bibles(ref, 'nheb');
-        getNETVerse(ref);
-        document.getElementById('rsvtext').innerText = bibles(ref, 'rsv');
-        document.getElementById('wbttext').innerText = bibles(ref, 'wbt');
-        document.getElementById('webtext').innerText = bibles(ref, 'web');
-        document.getElementById('ylttext').innerText = bibles(ref, 'ylt');
-        document.getElementById('searchBox').placeholder = ref;
-        document.getElementById('searchBox').value = '';
+function openVerse(pas) {
+    let ref;
+    if (pas != '') {
+        ref = pas;
+
+    } else {
+        ref = randomVerse();
     }
+    openPopup('versePopup');
+    document.getElementById('vs').innerText = ref;
+    document.getElementById('asvtext').innerText = bibles(ref, 'asv');
+    document.getElementById('dbytext').innerText = bibles(ref, 'darby');
+    document.getElementById('jubtext').innerText = bibles(ref, 'jub');
+    document.getElementById('kj2000text').innerText = bibles(ref, 'kj2000');
+    document.getElementById('kjvtext').innerText = bibles(ref, 'kjv');
+    document.getElementById('nhebtext').innerText = bibles(ref, 'nheb');
+    getNETVerse(ref);
+    document.getElementById('rsvtext').innerText = bibles(ref, 'rsv');
+    document.getElementById('wbttext').innerText = bibles(ref, 'wbt');
+    document.getElementById('webtext').innerText = bibles(ref, 'web');
+    document.getElementById('ylttext').innerText = bibles(ref, 'ylt');
+    document.getElementById('searchBox').placeholder = ref;
+    document.getElementById('searchBox').value = '';
 }
 
 // This closes all popups
