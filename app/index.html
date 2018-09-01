@@ -32,7 +32,12 @@
             <h1>About this Program</h1>
             <div id="technicalInfo">
                 <img src="icon.png" />
-                <p>Version: 0.3.0 <button id="checkUpdates" onclick="checkUpdates()">Check for updates</button></p>
+                <p>Version: 0.3.0 <button id="checkUpdates" onclick="checkUpdates()">Check for updates</button>
+                    <select id="channel">
+                        <option value="stable">Stable</option>
+                        <option value="beta">Beta</option>
+                    </select>
+                </p>
                 <p id="latestUpdate" style="display:none"></p>
                 <p>Website: <span class="link">heb12.github.io</span></p>
             </div>

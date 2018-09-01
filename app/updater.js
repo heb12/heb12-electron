@@ -1,10 +1,17 @@
 // Update this version number for every release:
 const version = '0.3.0'
 let timesChecked = localStorage.getItem('timesChecked');
+let channel;
 
 function checkUpdates() {
+    console.log(document.getElementById('channel').value + ' is the channel.');
+    if (document.getElementById('channel').value == 'beta') {
+        channel = 'beta';
+    } else {
+        channel = 'latest';
+    }
     console.log(timesChecked);
-    url = 'https://heb12.github.io/updater/desktop/latest.json' + '?' + timesChecked;
+    url = 'https://heb12.github.io/updater/desktop/' + channel + '.json' + '?' + timesChecked;
     console.log(url);
     if (navigator.onLine) {
         console.log("Checking for updates...");
