@@ -39,5 +39,10 @@ For more information about contributing, please read the CONTRIBUTING.md file.
 Please refer (and contribute) to the [wiki](https://github.com/MasterOfTheTiger/heb12/wiki) for helpful instruction for installing, packaging, and more.
 
 ## License
-Copyright 2018 MasterOfTheTiger.
-This software is released under the GPL license version 3.0 or later. See the [LICENSE](https://github.com/MasterOfTheTiger/heb12/blob/master/LICENSE) file for more information.
+Heb12 Desktop Copyright 2018 MasterOfTheTiger and contributors
+
+All files (except for logos) in are licensed under the Apache License, Version 2.0 (the "License");
+you may not use this program except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0 or in the COPYING file.
