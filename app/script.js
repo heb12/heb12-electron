@@ -448,6 +448,11 @@ script = document.getElementById('scripture');
 
 console.log(store.get('font') + ' is the font loaded from storage');
 
+// Retrieve last font size
+var fontSize = store.get('fontSize');
+script = document.getElementById('scripture');
+script.style.fontSize = String(Number(fontSize.split('px')[0])) + 'px';
+
 // Retrieve last font style
 var val = store.get('font');
 var sel = document.getElementById('font');
