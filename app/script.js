@@ -530,4 +530,21 @@ window.onload = function() {
     setTimeout(function() {
         document.body.scrollTop = store.get('scroll');
     }, 200);
+
+    // Setup default verse popup
+    ref = randomVerse();
+    document.getElementById('vs').innerText = ref;
+    document.getElementById('asvtext').innerText = bibles(ref, 'asv');
+    document.getElementById('dbytext').innerText = bibles(ref, 'darby');
+    document.getElementById('jubtext').innerText = bibles(ref, 'jub');
+    document.getElementById('kj2000text').innerText = bibles(ref, 'kj2000');
+    document.getElementById('kjvtext').innerText = bibles(ref, 'kjv');
+    document.getElementById('nhebtext').innerText = bibles(ref, 'nheb');
+    getNETVerse(ref);
+    document.getElementById('rsvtext').innerText = bibles(ref, 'rsv');
+    document.getElementById('wbttext').innerText = bibles(ref, 'wbt');
+    document.getElementById('webtext').innerText = bibles(ref, 'web');
+    document.getElementById('ylttext').innerText = bibles(ref, 'ylt');
+    document.getElementById('searchBox').placeholder = ref;
+    document.getElementById('searchBox').value = '';
 }
