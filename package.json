@@ -54,7 +54,7 @@
         "rpm",
         "snap"
       ],
-      "category": "Education;Office"
+      "category": "Reference"
     },
     "win": {
       "target": "NSIS",
