@@ -114,6 +114,14 @@ async function getVerses(reference, version) {
         history[history.length] = saveRef;
         store.set('history', history)
     }
+
+    // Checks if the current chapter is bookmarked
+    if (bookmarkCheck(reference)) {
+        document.getElementById('bookmarkIcon').className = 'fas fa-bookmark';
+    } else {
+        document.getElementById('bookmarkIcon').className = 'far fa-bookmark';
+    }
+
     console.log(history + ' is the history.');
     console.log(store.get('lastRef'));
     return result;
@@ -129,43 +137,72 @@ async function updateText() {
     var text2 = await getVerses(a.book.name + ' ' + chapter.value, translation);
 }
 
-// Loads the history into the historyItems elements
-function loadHistory() {
-    let history = store.get('history');
-    let historyEl = document.getElementById('historyItems');
-    historyEl.innerHTML = '';
-    for (var i = 0; i < history.length; i++) {
+// Loads either history or bookmarks
+function loadLogs(type) {
+    console.log(type);
+    let item = store.get(type);
+    let itemEl = document.getElementById(type + 'Items');
+    itemEl.innerHTML = '';
+    for (var i = 0; i < item.length; i++) {
         let wrapper = document.createElement('div');
-        let historyItem = document.createElement('div');
+        let itemItem = document.createElement('div');
         let title = document.createElement('h3');
         let para = document.createElement('p');
         let button = document.createElement('button');
         try {
             button.innerText = 'Open';
-            console.log(chapterAndVerse(history[i]).book.name + ' ' + chapterAndVerse(history[i]).chapter + ':1', 'web');
-            para.innerHTML = bibles(chapterAndVerse(history[i]).book.name + ' ' + chapterAndVerse(history[i]).chapter + ':1', 'web');
+            console.log(chapterAndVerse(item[i]).book.name + ' ' + chapterAndVerse(item[i]).chapter + ':1', 'web');
+            para.innerHTML = bibles(chapterAndVerse(item[i]).book.name + ' ' + chapterAndVerse(item[i]).chapter + ':1', 'web');
             console.log(para);
         } catch (e) {
-            historyEl.innerHTML = e + historyEl.innerHTML;
+            itemEl.innerHTML = e + itemEl.innerHTML;
         } finally {
-            title.innerHTML = history[i];
+            title.innerHTML = item[i];
             console.log(title);
-            historyItem.appendChild(title);
-            historyItem.appendChild(para);
-            //historyItem.appendChild(button);
-            wrapper.appendChild(historyItem);
-            historyEl.innerHTML = wrapper.innerHTML + historyEl.innerHTML;
+            itemItem.appendChild(title);
+            itemItem.appendChild(para);
+            //itemItem.appendChild(button);
+            wrapper.appendChild(itemItem);
+            itemEl.innerHTML = wrapper.innerHTML + itemEl.innerHTML;
         }
     }
+}
+// Loads bookmarks and history
+function loadHistory() {
+    loadLogs('bookmarks');
+    loadLogs('history');
+}
+
+// Finds out if chapter is bookmarked
+function bookmarkCheck(ref) {
+    let bookmarks = store.get('bookmarks');
+    let status = false;
+    for (let i = 0; i < bookmarks.length; i++) {
+        if (bookmarks[i] == ref) {
+            status = true;
+        }
+    }
+    return status;
 }
 
 // Toggles bookmarked chapter
 function toggleBookmark() {
-    if (document.getElementById('bookmarkIcon').className == 'fas fa-bookmark') {
+    let reference = document.getElementById('book').innerText + ' ' + document.getElementById('chapter').value;
+    let bookmarks = store.get('bookmarks');
+    // If the chapter is bookmarked, it unbookmarks it, and vice versa
+    if (bookmarkCheck(reference)) {
         document.getElementById('bookmarkIcon').className = 'far fa-bookmark';
-        //store.set('bookmarks', );
+        // Finds the number in the array which the reference is stored, and deletes it
+        for (let i = 0; i < bookmarks.length; i++) {
+            if (bookmarks[i] == reference) {
+                bookmarks.splice(i, 1);
+                store.set('bookmarks', bookmarks);
+            }
+        }
     } else {
         document.getElementById('bookmarkIcon').className = 'fas fa-bookmark';
+        bookmarks[bookmarks.length] = reference;
+        store.set('bookmarks', bookmarks);
     }
 }
 
