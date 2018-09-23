@@ -27,7 +27,7 @@
   "dependencies": {
     "chapter-and-verse": "https://github.com/heb12/chapter-and-verse/",
     "electron-store": "^2.0.0",
-    "openbibles": "^1.1.2",
+    "openbibles": "^1.2.0",
     "random-verse": "^1.0.1",
     "request": "^2.87.0"
   },
