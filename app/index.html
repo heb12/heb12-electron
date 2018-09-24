@@ -309,6 +309,10 @@ Heb12 Desktop is a simple Electron app for reading the Bible.
 
         <div class="popup" id="history">
             <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
+
+            <h2>Bookmarks</h2>
+            <div id="bookmarksItems"></div>
+
             <h2>History</h2>
             <button onclick="store.set('history', ['Hebrews 4']);loadHistory()">Clear</button>
             <div id="historyItems">
