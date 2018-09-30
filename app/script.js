@@ -16,6 +16,8 @@ Heb12 Desktop is a simple Electron app for reading the Bible.
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+ "use strict";
+
 // -----
 // Declare functions and variables
 // -----
@@ -44,7 +46,7 @@ function getNETVerse(ref) {
         console.log('Offline ERROR');
     } else {
         document.getElementById('nettext').innerHTML = "<i class=\"fa fa-spinner fa-spin\"></i>";
-        url = 'https://labs.bible.org/api/?passage= ' + ref + '&formatting=plain';
+        let url = 'https://labs.bible.org/api/?passage= ' + ref + '&formatting=plain';
         request(url, function (error, response, body) {
             if (result != '') {
                 document.getElementById('nettext').innerHTML = body;
@@ -80,7 +82,7 @@ async function getVerses(reference, version) {
         // This is the url for the NET Bible API. The '&formatting=full' returns the headings and the line spacings of the text
         // Add cors proxy - myed
         //url = 'https://cors-anywhere.herokuapp.com/labs.bible.org/api/?passage= ' + reference + '&formatting=full';
-        url = 'https://labs.bible.org/api/?passage= ' + reference + '&formatting=full';
+        let url = 'https://labs.bible.org/api/?passage= ' + reference + '&formatting=full';
         // Uses the request API to request the scripture from the url above
         request(url, function (error, response, body) {
             if (result != '') {
@@ -149,7 +151,7 @@ var chapter, chapters, books, theBook, theChapter;
 // An easy function to update the text according to the dropdown menus
 async function updateText() {
     theBook = document.getElementById('book').innerText;
-    a = chapterAndVerse(theBook);
+    let a = chapterAndVerse(theBook);
     chapters = a.book.chapters;
     var translation = document.getElementById('translation').innerText.toLowerCase();
     var text2 = await getVerses(a.book.name + ' ' + chapter.value, translation);
@@ -267,7 +269,7 @@ function loadChapters() {
     chapter = document.getElementById('chapter');
     theBook = document.getElementById('book').innerText;
     theBook = document.getElementById('book').innerText;
-    a = chapterAndVerse(theBook);
+    let a = chapterAndVerse(theBook);
     console.log(a);
     chapters = a.book.chapters;
     chapter.innerHTML = '';
@@ -587,7 +589,7 @@ window.onload = function() {
     }, 200);
 
     // Setup default verse popup
-    ref = randomVerse();
+    let ref = randomVerse();
     document.getElementById('vs').innerText = ref;
     document.getElementById('asvtext').innerText = bibles(ref, 'asv');
     document.getElementById('dbytext').innerText = bibles(ref, 'darby');
