@@ -30,7 +30,7 @@ $ cd heb12
 Packages for easy installation are available on the [releases page](https://github.com/heb12/heb12/releases).
 
 ## Contributing
-Feel free to make changes to program and then make a pull request to have them implimented into the main project.
+Feel free to make changes to program and then make a pull request to have them implemented into the main project.
 
 Please open an issue first to make sure that we are looking for that kind of contribution.
 
