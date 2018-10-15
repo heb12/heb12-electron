@@ -1,0 +1,515 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install' ]
+2 info using npm@3.5.2
+3 info using node@v8.10.0
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly install normalizeTree
+8 silly loadCurrentTree Finishing
+9 silly loadIdealTree Starting
+10 silly install loadIdealTree
+11 silly cloneCurrentTree Starting
+12 silly install cloneCurrentTreeToIdealTree
+13 silly cloneCurrentTree Finishing
+14 silly loadShrinkwrap Starting
+15 silly install loadShrinkwrap
+16 silly loadShrinkwrap Finishing
+17 silly loadAllDepsIntoIdealTree Starting
+18 silly install loadAllDepsIntoIdealTree
+19 silly fetchNamedPackageData electron-store
+20 silly mapToRegistry name electron-store
+21 silly mapToRegistry using default registry
+22 silly mapToRegistry registry https://registry.npmjs.org/
+23 silly mapToRegistry uri https://registry.npmjs.org/electron-store
+24 silly fetchNamedPackageData openbibles
+25 silly mapToRegistry name openbibles
+26 silly mapToRegistry using default registry
+27 silly mapToRegistry registry https://registry.npmjs.org/
+28 silly mapToRegistry uri https://registry.npmjs.org/openbibles
+29 silly fetchNamedPackageData random-verse
+30 silly mapToRegistry name random-verse
+31 silly mapToRegistry using default registry
+32 silly mapToRegistry registry https://registry.npmjs.org/
+33 silly mapToRegistry uri https://registry.npmjs.org/random-verse
+34 silly fetchNamedPackageData request
+35 silly mapToRegistry name request
+36 silly mapToRegistry using default registry
+37 silly mapToRegistry registry https://registry.npmjs.org/
+38 silly mapToRegistry uri https://registry.npmjs.org/request
+39 silly fetchOtherPackageData chapter-and-verse@https://github.com/heb12/chapter-and-verse/
+40 silly cache add args [ 'chapter-and-verse@https://github.com/heb12/chapter-and-verse/',
+40 silly cache add   null ]
+41 verbose cache add spec chapter-and-verse@https://github.com/heb12/chapter-and-verse/
+42 verbose request uri https://registry.npmjs.org/electron-store
+43 verbose request no auth needed
+44 info attempt registry request try #1 at 23:00:46
+45 verbose request id 152243f633414678
+46 http request GET https://registry.npmjs.org/electron-store
+47 silly cache add parsed spec Result {
+47 silly cache add   raw: 'chapter-and-verse@https://github.com/heb12/chapter-and-verse/',
+47 silly cache add   scope: null,
+47 silly cache add   name: 'chapter-and-verse',
+47 silly cache add   rawSpec: 'https://github.com/heb12/chapter-and-verse/',
+47 silly cache add   spec: 'https://github.com/heb12/chapter-and-verse/',
+47 silly cache add   type: 'remote' }
+48 silly mapToRegistry name chapter-and-verse@https://github.com/heb12/chapter-and-verse/
+49 silly mapToRegistry using default registry
+50 silly mapToRegistry registry https://registry.npmjs.org/
+51 silly mapToRegistry uri https://registry.npmjs.org/chapter-and-verse@https://github.com/heb12/chapter-and-verse/
+52 verbose addRemoteTarball https://github.com/heb12/chapter-and-verse/ not in flight; adding
+53 verbose addRemoteTarball [ 'https://github.com/heb12/chapter-and-verse/', null ]
+54 verbose request uri https://registry.npmjs.org/random-verse
+55 verbose request no auth needed
+56 info attempt registry request try #1 at 23:00:46
+57 http request GET https://registry.npmjs.org/random-verse
+58 verbose request uri https://registry.npmjs.org/request
+59 verbose request no auth needed
+60 info attempt registry request try #1 at 23:00:46
+61 http request GET https://registry.npmjs.org/request
+62 verbose request uri https://registry.npmjs.org/openbibles
+63 verbose request no auth needed
+64 info attempt registry request try #1 at 23:00:46
+65 http request GET https://registry.npmjs.org/openbibles
+66 info retry fetch attempt 1 at 23:00:46
+67 info attempt registry request try #1 at 23:00:46
+68 http fetch GET https://github.com/heb12/chapter-and-verse/
+69 http 200 https://registry.npmjs.org/request
+70 verbose headers { date: 'Mon, 15 Oct 2018 02:00:46 GMT',
+70 verbose headers   'content-type': 'application/json',
+70 verbose headers   'transfer-encoding': 'chunked',
+70 verbose headers   connection: 'keep-alive',
+70 verbose headers   'set-cookie':
+70 verbose headers    [ '__cfduid=d2e8ba0a2db49ce717475bb389f77a0fb1539568846; expires=Tue, 15-Oct-19 02:00:46 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+70 verbose headers   'cf-cache-status': 'HIT',
+70 verbose headers   'cache-control': 'max-age=300',
+70 verbose headers   'cf-ray': '469eb1ad9b034c8a-GRU',
+70 verbose headers   etag: 'W/"1c0e455fe15649e1c017452a74e737b5"',
+70 verbose headers   'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+70 verbose headers   'last-modified': 'Mon, 01 Oct 2018 09:55:10 GMT',
+70 verbose headers   vary: 'accept-encoding, accept',
+70 verbose headers   'x-amz-meta-rev': '2005-cc0c97a1e8315e3b08660615dc5b2d48',
+70 verbose headers   server: 'cloudflare',
+70 verbose headers   'content-encoding': 'gzip' }
+71 silly get cb [ 200,
+71 silly get   { date: 'Mon, 15 Oct 2018 02:00:46 GMT',
+71 silly get     'content-type': 'application/json',
+71 silly get     'transfer-encoding': 'chunked',
+71 silly get     connection: 'keep-alive',
+71 silly get     'set-cookie':
+71 silly get      [ '__cfduid=d2e8ba0a2db49ce717475bb389f77a0fb1539568846; expires=Tue, 15-Oct-19 02:00:46 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+71 silly get     'cf-cache-status': 'HIT',
+71 silly get     'cache-control': 'max-age=300',
+71 silly get     'cf-ray': '469eb1ad9b034c8a-GRU',
+71 silly get     etag: 'W/"1c0e455fe15649e1c017452a74e737b5"',
+71 silly get     'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+71 silly get     'last-modified': 'Mon, 01 Oct 2018 09:55:10 GMT',
+71 silly get     vary: 'accept-encoding, accept',
+71 silly get     'x-amz-meta-rev': '2005-cc0c97a1e8315e3b08660615dc5b2d48',
+71 silly get     server: 'cloudflare',
+71 silly get     'content-encoding': 'gzip' } ]
+72 verbose get saving request to /home/arthurmts/.npm/registry.npmjs.org/request/.cache.json
+73 silly resolveWithNewModule request@2.88.0 checking installable status
+74 silly cache add args [ 'request@^2.87.0', null ]
+75 verbose cache add spec request@^2.87.0
+76 silly cache add parsed spec Result {
+76 silly cache add   raw: 'request@^2.87.0',
+76 silly cache add   scope: null,
+76 silly cache add   name: 'request',
+76 silly cache add   rawSpec: '^2.87.0',
+76 silly cache add   spec: '>=2.87.0 <3.0.0',
+76 silly cache add   type: 'range' }
+77 silly addNamed request@>=2.87.0 <3.0.0
+78 verbose addNamed ">=2.87.0 <3.0.0" is a valid semver range for request
+79 silly addNameRange { name: 'request', range: '>=2.87.0 <3.0.0', hasData: false }
+80 silly mapToRegistry name request
+81 silly mapToRegistry using default registry
+82 silly mapToRegistry registry https://registry.npmjs.org/
+83 silly mapToRegistry uri https://registry.npmjs.org/request
+84 verbose addNameRange registry:https://registry.npmjs.org/request not in flight; fetching
+85 verbose get https://registry.npmjs.org/request not expired, no request
+86 silly addNameRange number 2 { name: 'request', range: '>=2.87.0 <3.0.0', hasData: true }
+87 silly addNameRange versions [ 'request',
+87 silly addNameRange   [ '0.10.0',
+87 silly addNameRange     '0.8.3',
+87 silly addNameRange     '0.9.0',
+87 silly addNameRange     '0.9.1',
+87 silly addNameRange     '0.9.5',
+87 silly addNameRange     '1.0.0',
+87 silly addNameRange     '1.1.0',
+87 silly addNameRange     '1.1.1',
+87 silly addNameRange     '1.2.0',
+87 silly addNameRange     '1.9.0',
+87 silly addNameRange     '1.9.1',
+87 silly addNameRange     '1.9.2',
+87 silly addNameRange     '1.9.3',
+87 silly addNameRange     '1.9.5',
+87 silly addNameRange     '1.9.7',
+87 silly addNameRange     '1.9.8',
+87 silly addNameRange     '1.9.9',
+87 silly addNameRange     '2.0.0',
+87 silly addNameRange     '2.0.1',
+87 silly addNameRange     '2.0.2',
+87 silly addNameRange     '2.0.3',
+87 silly addNameRange     '2.0.4',
+87 silly addNameRange     '2.0.5',
+87 silly addNameRange     '2.1.0',
+87 silly addNameRange     '2.1.1',
+87 silly addNameRange     '2.2.0',
+87 silly addNameRange     '2.2.5',
+87 silly addNameRange     '2.2.6',
+87 silly addNameRange     '2.2.9',
+87 silly addNameRange     '2.9.0',
+87 silly addNameRange     '2.9.1',
+87 silly addNameRange     '2.9.2',
+87 silly addNameRange     '2.9.3',
+87 silly addNameRange     '2.9.100',
+87 silly addNameRange     '2.9.150',
+87 silly addNameRange     '2.9.151',
+87 silly addNameRange     '2.9.152',
+87 silly addNameRange     '2.9.153',
+87 silly addNameRange     '2.9.200',
+87 silly addNameRange     '2.9.201',
+87 silly addNameRange     '2.9.202',
+87 silly addNameRange     '2.9.203',
+87 silly addNameRange     '2.10.0',
+87 silly addNameRange     '2.11.0',
+87 silly addNameRange     '2.11.1',
+87 silly addNameRange     '2.11.2',
+87 silly addNameRange     '2.11.3',
+87 silly addNameRange     '2.11.4',
+87 silly addNameRange     '2.12.0',
+87 silly addNameRange     '2.14.0',
+87 silly addNameRange     '2.16.0',
+87 silly addNameRange     '2.16.2',
+87 silly addNameRange     '2.16.4',
+87 silly addNameRange     '2.16.6',
+87 silly addNameRange     '2.18.0',
+87 silly addNameRange     '2.19.0',
+87 silly addNameRange     '2.20.0',
+87 silly addNameRange     '2.21.0',
+87 silly addNameRange     '2.22.0',
+87 silly addNameRange     '2.23.0',
+87 silly addNameRange     '2.24.0',
+87 silly addNameRange     '2.25.0',
+87 silly addNameRange     '2.26.0',
+87 silly addNameRange     '2.27.0',
+87 silly addNameRange     '2.28.0',
+87 silly addNameRange     '2.29.0',
+87 silly addNameRange     '2.30.0',
+87 silly addNameRange     '2.31.0',
+87 silly addNameRange     '2.32.0',
+87 silly addNameRange     '2.33.0',
+87 silly addNameRange     '2.34.0',
+87 silly addNameRange     '2.35.0',
+87 silly addNameRange     '2.36.0',
+87 silly addNameRange     '2.37.0',
+87 silly addNameRange     '2.38.0',
+87 silly addNameRange     '2.39.0',
+87 silly addNameRange     '2.40.0',
+87 silly addNameRange     '2.41.0',
+87 silly addNameRange     '2.42.0',
+87 silly addNameRange     '2.43.0',
+87 silly addNameRange     '2.44.0',
+87 silly addNameRange     '2.45.0',
+87 silly addNameRange     '2.46.0',
+87 silly addNameRange     '2.47.0',
+87 silly addNameRange     '2.48.0',
+87 silly addNameRange     '2.49.0',
+87 silly addNameRange     '2.50.0',
+87 silly addNameRange     '2.51.0',
+87 silly addNameRange     '2.52.0',
+87 silly addNameRange     '2.53.0',
+87 silly addNameRange     '2.54.0',
+87 silly addNameRange     '2.55.0',
+87 silly addNameRange     '2.56.0',
+87 silly addNameRange     '2.57.0',
+87 silly addNameRange     '2.58.0',
+87 silly addNameRange     '2.59.0',
+87 silly addNameRange     '2.60.0',
+87 silly addNameRange     '2.61.0',
+87 silly addNameRange     '2.62.0',
+87 silly addNameRange     '2.63.0',
+87 silly addNameRange     ... 25 more items ] ]
+88 silly addNamed request@2.88.0
+89 verbose addNamed "2.88.0" is a plain semver version for request
+90 silly mapToRegistry name request
+91 silly mapToRegistry using default registry
+92 silly mapToRegistry registry https://registry.npmjs.org/
+93 silly mapToRegistry uri https://registry.npmjs.org/request
+94 verbose addRemoteTarball https://registry.npmjs.org/request/-/request-2.88.0.tgz not in flight; adding
+95 verbose addRemoteTarball [ 'https://registry.npmjs.org/request/-/request-2.88.0.tgz',
+95 verbose addRemoteTarball   '9c2fca4f7d35b592efe57c7f0a55e81052124fef' ]
+96 info retry fetch attempt 1 at 23:00:47
+97 info attempt registry request try #1 at 23:00:47
+98 http fetch GET https://registry.npmjs.org/request/-/request-2.88.0.tgz
+99 http fetch 200 https://registry.npmjs.org/request/-/request-2.88.0.tgz
+100 silly fetchAndShaCheck shasum 9c2fca4f7d35b592efe57c7f0a55e81052124fef
+101 verbose addTmpTarball /tmp/npm-12441-f0bd2562/registry.npmjs.org/request/-/request-2.88.0.tgz not in flight; adding
+102 verbose addTmpTarball already have metadata; skipping unpack for request@2.88.0
+103 silly cache afterAdd request@2.88.0
+104 verbose afterAdd /home/arthurmts/.npm/request/2.88.0/package/package.json not in flight; writing
+105 verbose afterAdd /home/arthurmts/.npm/request/2.88.0/package/package.json written
+106 http fetch 200 https://github.com/heb12/chapter-and-verse/
+107 http 200 https://registry.npmjs.org/electron-store
+108 verbose headers { date: 'Mon, 15 Oct 2018 02:00:47 GMT',
+108 verbose headers   'content-type': 'application/json; charset=UTF-8',
+108 verbose headers   'transfer-encoding': 'chunked',
+108 verbose headers   connection: 'keep-alive',
+108 verbose headers   'set-cookie':
+108 verbose headers    [ '__cfduid=daa513a4eee892e517c373ff37a1e98a41539568846; expires=Tue, 15-Oct-19 02:00:46 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+108 verbose headers   'cf-cache-status': 'REVALIDATED',
+108 verbose headers   'cache-control': 'max-age=300',
+108 verbose headers   'cf-ray': '469eb1ad8f2a4b81-GRU',
+108 verbose headers   etag: 'W/"aa665e80ddf36dff387f179c24a86fa8"',
+108 verbose headers   'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+108 verbose headers   'last-modified': 'Wed, 30 May 2018 03:32:40 GMT',
+108 verbose headers   vary: 'accept-encoding, accept',
+108 verbose headers   server: 'cloudflare',
+108 verbose headers   'content-encoding': 'gzip' }
+109 silly get cb [ 200,
+109 silly get   { date: 'Mon, 15 Oct 2018 02:00:47 GMT',
+109 silly get     'content-type': 'application/json; charset=UTF-8',
+109 silly get     'transfer-encoding': 'chunked',
+109 silly get     connection: 'keep-alive',
+109 silly get     'set-cookie':
+109 silly get      [ '__cfduid=daa513a4eee892e517c373ff37a1e98a41539568846; expires=Tue, 15-Oct-19 02:00:46 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+109 silly get     'cf-cache-status': 'REVALIDATED',
+109 silly get     'cache-control': 'max-age=300',
+109 silly get     'cf-ray': '469eb1ad8f2a4b81-GRU',
+109 silly get     etag: 'W/"aa665e80ddf36dff387f179c24a86fa8"',
+109 silly get     'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+109 silly get     'last-modified': 'Wed, 30 May 2018 03:32:40 GMT',
+109 silly get     vary: 'accept-encoding, accept',
+109 silly get     server: 'cloudflare',
+109 silly get     'content-encoding': 'gzip' } ]
+110 verbose get saving electron-store to /home/arthurmts/.npm/registry.npmjs.org/electron-store/.cache.json
+111 silly resolveWithNewModule electron-store@2.0.0 checking installable status
+112 silly cache add args [ 'electron-store@^2.0.0', null ]
+113 verbose cache add spec electron-store@^2.0.0
+114 silly cache add parsed spec Result {
+114 silly cache add   raw: 'electron-store@^2.0.0',
+114 silly cache add   scope: null,
+114 silly cache add   name: 'electron-store',
+114 silly cache add   rawSpec: '^2.0.0',
+114 silly cache add   spec: '>=2.0.0 <3.0.0',
+114 silly cache add   type: 'range' }
+115 silly addNamed electron-store@>=2.0.0 <3.0.0
+116 verbose addNamed ">=2.0.0 <3.0.0" is a valid semver range for electron-store
+117 silly addNameRange { name: 'electron-store',
+117 silly addNameRange   range: '>=2.0.0 <3.0.0',
+117 silly addNameRange   hasData: false }
+118 silly mapToRegistry name electron-store
+119 silly mapToRegistry using default registry
+120 silly mapToRegistry registry https://registry.npmjs.org/
+121 silly mapToRegistry uri https://registry.npmjs.org/electron-store
+122 verbose addNameRange registry:https://registry.npmjs.org/electron-store not in flight; fetching
+123 http 200 https://registry.npmjs.org/random-verse
+124 verbose headers { date: 'Mon, 15 Oct 2018 02:00:47 GMT',
+124 verbose headers   'content-type': 'application/json; charset=UTF-8',
+124 verbose headers   'transfer-encoding': 'chunked',
+124 verbose headers   connection: 'keep-alive',
+124 verbose headers   'set-cookie':
+124 verbose headers    [ '__cfduid=d51fa5476c34a72f5809ac3bd7249c1351539568846; expires=Tue, 15-Oct-19 02:00:46 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+124 verbose headers   'cf-cache-status': 'MISS',
+124 verbose headers   'cache-control': 'max-age=300',
+124 verbose headers   'cf-ray': '469eb1ad9b364a9c-GRU',
+124 verbose headers   etag: 'W/"3e5fbb2ba6c05a608ac3b0cad113f736"',
+124 verbose headers   'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+124 verbose headers   'last-modified': 'Thu, 23 Aug 2018 18:36:47 GMT',
+124 verbose headers   vary: 'accept-encoding, accept',
+124 verbose headers   server: 'cloudflare',
+124 verbose headers   'content-encoding': 'gzip' }
+125 silly get cb [ 200,
+125 silly get   { date: 'Mon, 15 Oct 2018 02:00:47 GMT',
+125 silly get     'content-type': 'application/json; charset=UTF-8',
+125 silly get     'transfer-encoding': 'chunked',
+125 silly get     connection: 'keep-alive',
+125 silly get     'set-cookie':
+125 silly get      [ '__cfduid=d51fa5476c34a72f5809ac3bd7249c1351539568846; expires=Tue, 15-Oct-19 02:00:46 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+125 silly get     'cf-cache-status': 'MISS',
+125 silly get     'cache-control': 'max-age=300',
+125 silly get     'cf-ray': '469eb1ad9b364a9c-GRU',
+125 silly get     etag: 'W/"3e5fbb2ba6c05a608ac3b0cad113f736"',
+125 silly get     'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+125 silly get     'last-modified': 'Thu, 23 Aug 2018 18:36:47 GMT',
+125 silly get     vary: 'accept-encoding, accept',
+125 silly get     server: 'cloudflare',
+125 silly get     'content-encoding': 'gzip' } ]
+126 verbose get saving random-verse to /home/arthurmts/.npm/registry.npmjs.org/random-verse/.cache.json
+127 verbose get https://registry.npmjs.org/electron-store not expired, no request
+128 silly addNameRange number 2 { name: 'electron-store',
+128 silly addNameRange   range: '>=2.0.0 <3.0.0',
+128 silly addNameRange   hasData: true }
+129 silly addNameRange versions [ 'electron-store',
+129 silly addNameRange   [ '0.0.1-alpha.0', '1.1.0', '1.2.0', '1.3.0', '2.0.0' ] ]
+130 silly addNamed electron-store@2.0.0
+131 verbose addNamed "2.0.0" is a plain semver version for electron-store
+132 silly mapToRegistry name electron-store
+133 silly mapToRegistry using default registry
+134 silly mapToRegistry registry https://registry.npmjs.org/
+135 silly mapToRegistry uri https://registry.npmjs.org/electron-store
+136 verbose addRemoteTarball https://registry.npmjs.org/electron-store/-/electron-store-2.0.0.tgz not in flight; adding
+137 verbose addRemoteTarball [ 'https://registry.npmjs.org/electron-store/-/electron-store-2.0.0.tgz',
+137 verbose addRemoteTarball   '1035cca2a95409d1f54c7466606345852450d64a' ]
+138 info retry fetch attempt 1 at 23:00:47
+139 info attempt registry request try #1 at 23:00:47
+140 http fetch GET https://registry.npmjs.org/electron-store/-/electron-store-2.0.0.tgz
+141 silly resolveWithNewModule random-verse@1.0.1 checking installable status
+142 silly cache add args [ 'random-verse@^1.0.1', null ]
+143 verbose cache add spec random-verse@^1.0.1
+144 silly cache add parsed spec Result {
+144 silly cache add   raw: 'random-verse@^1.0.1',
+144 silly cache add   scope: null,
+144 silly cache add   name: 'random-verse',
+144 silly cache add   rawSpec: '^1.0.1',
+144 silly cache add   spec: '>=1.0.1 <2.0.0',
+144 silly cache add   type: 'range' }
+145 silly addNamed random-verse@>=1.0.1 <2.0.0
+146 verbose addNamed ">=1.0.1 <2.0.0" is a valid semver range for random-verse
+147 silly addNameRange { name: 'random-verse', range: '>=1.0.1 <2.0.0', hasData: false }
+148 silly mapToRegistry name random-verse
+149 silly mapToRegistry using default registry
+150 silly mapToRegistry registry https://registry.npmjs.org/
+151 silly mapToRegistry uri https://registry.npmjs.org/random-verse
+152 verbose addNameRange registry:https://registry.npmjs.org/random-verse not in flight; fetching
+153 verbose get https://registry.npmjs.org/random-verse not expired, no request
+154 silly addNameRange number 2 { name: 'random-verse', range: '>=1.0.1 <2.0.0', hasData: true }
+155 silly addNameRange versions [ 'random-verse', [ '1.0.0', '1.0.1' ] ]
+156 silly addNamed random-verse@1.0.1
+157 verbose addNamed "1.0.1" is a plain semver version for random-verse
+158 silly mapToRegistry name random-verse
+159 silly mapToRegistry using default registry
+160 silly mapToRegistry registry https://registry.npmjs.org/
+161 silly mapToRegistry uri https://registry.npmjs.org/random-verse
+162 verbose addRemoteTarball https://registry.npmjs.org/random-verse/-/random-verse-1.0.1.tgz not in flight; adding
+163 verbose addRemoteTarball [ 'https://registry.npmjs.org/random-verse/-/random-verse-1.0.1.tgz',
+163 verbose addRemoteTarball   'df440eabb0be2c2d44b740e531944140bd1d28c4' ]
+164 http 200 https://registry.npmjs.org/openbibles
+165 verbose headers { date: 'Mon, 15 Oct 2018 02:00:47 GMT',
+165 verbose headers   'content-type': 'application/json',
+165 verbose headers   'transfer-encoding': 'chunked',
+165 verbose headers   connection: 'keep-alive',
+165 verbose headers   'set-cookie':
+165 verbose headers    [ '__cfduid=d1c38bc4593da6de7793f53e0a4c5aa341539568846; expires=Tue, 15-Oct-19 02:00:46 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+165 verbose headers   'cf-cache-status': 'MISS',
+165 verbose headers   'cache-control': 'max-age=300',
+165 verbose headers   'cf-ray': '469eb1ad8d818144-GRU',
+165 verbose headers   etag: 'W/"3754076890f4a4671bc2f5852667da56"',
+165 verbose headers   'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+165 verbose headers   'last-modified': 'Sun, 23 Sep 2018 23:17:08 GMT',
+165 verbose headers   vary: 'accept-encoding, accept',
+165 verbose headers   'x-amz-meta-rev': '6-291a0a328d52e9bca50ccaf74bea95ca',
+165 verbose headers   server: 'cloudflare',
+165 verbose headers   'content-encoding': 'gzip' }
+166 silly get cb [ 200,
+166 silly get   { date: 'Mon, 15 Oct 2018 02:00:47 GMT',
+166 silly get     'content-type': 'application/json',
+166 silly get     'transfer-encoding': 'chunked',
+166 silly get     connection: 'keep-alive',
+166 silly get     'set-cookie':
+166 silly get      [ '__cfduid=d1c38bc4593da6de7793f53e0a4c5aa341539568846; expires=Tue, 15-Oct-19 02:00:46 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+166 silly get     'cf-cache-status': 'MISS',
+166 silly get     'cache-control': 'max-age=300',
+166 silly get     'cf-ray': '469eb1ad8d818144-GRU',
+166 silly get     etag: 'W/"3754076890f4a4671bc2f5852667da56"',
+166 silly get     'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+166 silly get     'last-modified': 'Sun, 23 Sep 2018 23:17:08 GMT',
+166 silly get     vary: 'accept-encoding, accept',
+166 silly get     'x-amz-meta-rev': '6-291a0a328d52e9bca50ccaf74bea95ca',
+166 silly get     server: 'cloudflare',
+166 silly get     'content-encoding': 'gzip' } ]
+167 verbose get saving openbibles to /home/arthurmts/.npm/registry.npmjs.org/openbibles/.cache.json
+168 info retry fetch attempt 1 at 23:00:47
+169 info attempt registry request try #1 at 23:00:47
+170 http fetch GET https://registry.npmjs.org/random-verse/-/random-verse-1.0.1.tgz
+171 silly resolveWithNewModule openbibles@1.2.0 checking installable status
+172 silly cache add args [ 'openbibles@^1.2.0', null ]
+173 verbose cache add spec openbibles@^1.2.0
+174 silly cache add parsed spec Result {
+174 silly cache add   raw: 'openbibles@^1.2.0',
+174 silly cache add   scope: null,
+174 silly cache add   name: 'openbibles',
+174 silly cache add   rawSpec: '^1.2.0',
+174 silly cache add   spec: '>=1.2.0 <2.0.0',
+174 silly cache add   type: 'range' }
+175 silly addNamed openbibles@>=1.2.0 <2.0.0
+176 verbose addNamed ">=1.2.0 <2.0.0" is a valid semver range for openbibles
+177 silly addNameRange { name: 'openbibles', range: '>=1.2.0 <2.0.0', hasData: false }
+178 silly mapToRegistry name openbibles
+179 silly mapToRegistry using default registry
+180 silly mapToRegistry registry https://registry.npmjs.org/
+181 silly mapToRegistry uri https://registry.npmjs.org/openbibles
+182 verbose addNameRange registry:https://registry.npmjs.org/openbibles not in flight; fetching
+183 verbose get https://registry.npmjs.org/openbibles not expired, no request
+184 silly addNameRange number 2 { name: 'openbibles', range: '>=1.2.0 <2.0.0', hasData: true }
+185 silly addNameRange versions [ 'openbibles',
+185 silly addNameRange   [ '0.0.1', '1.0.1', '1.1.0', '1.1.1', '1.1.2', '1.2.0' ] ]
+186 silly addNamed openbibles@1.2.0
+187 verbose addNamed "1.2.0" is a plain semver version for openbibles
+188 silly mapToRegistry name openbibles
+189 silly mapToRegistry using default registry
+190 silly mapToRegistry registry https://registry.npmjs.org/
+191 silly mapToRegistry uri https://registry.npmjs.org/openbibles
+192 verbose addRemoteTarball https://registry.npmjs.org/openbibles/-/openbibles-1.2.0.tgz not in flight; adding
+193 verbose addRemoteTarball [ 'https://registry.npmjs.org/openbibles/-/openbibles-1.2.0.tgz',
+193 verbose addRemoteTarball   '64f725357c346e02b3d99d0cbfeaf7d072089372' ]
+194 info retry fetch attempt 1 at 23:00:47
+195 info attempt registry request try #1 at 23:00:47
+196 http fetch GET https://registry.npmjs.org/openbibles/-/openbibles-1.2.0.tgz
+197 http fetch 200 https://registry.npmjs.org/electron-store/-/electron-store-2.0.0.tgz
+198 silly fetchAndShaCheck shasum 1035cca2a95409d1f54c7466606345852450d64a
+199 verbose addTmpTarball /tmp/npm-12441-f0bd2562/registry.npmjs.org/electron-store/-/electron-store-2.0.0.tgz not in flight; adding
+200 verbose addTmpTarball already have metadata; skipping unpack for electron-store@2.0.0
+201 silly cache afterAdd electron-store@2.0.0
+202 verbose afterAdd /home/arthurmts/.npm/electron-store/2.0.0/package/package.json not in flight; writing
+203 verbose afterAdd /home/arthurmts/.npm/electron-store/2.0.0/package/package.json written
+204 silly fetchAndShaCheck shasum 8939fb5c155459d787811a07468805de7c1928c6
+205 verbose addTmpTarball /tmp/npm-12441-f0bd2562/github.com/heb12/chapter-and-verse not in flight; adding
+206 verbose addTmpTarball validating metadata from /tmp/npm-12441-f0bd2562/github.com/heb12/chapter-and-verse
+207 verbose tar unpack /tmp/npm-12441-f0bd2562/github.com/heb12/chapter-and-verse
+208 verbose tar unpacking to /tmp/npm-12441-f0bd2562/unpack-7d221eb5
+209 silly gentlyRm /tmp/npm-12441-f0bd2562/unpack-7d221eb5 is being purged
+210 verbose gentlyRm don't care about contents; nuking /tmp/npm-12441-f0bd2562/unpack-7d221eb5
+211 silly gunzTarPerm modes [ '775', '664' ]
+212 error not a package /tmp/npm-12441-f0bd2562/github.com/heb12/chapter-and-verse
+213 silly fetchPackageMetaData Error: ENOENT: no such file or directory, open '/tmp/npm-12441-f0bd2562/unpack-7d221eb5/package.json'
+213 silly fetchPackageMetaData  error for chapter-and-verse@https://github.com/heb12/chapter-and-verse/ { Error: ENOENT: no such file or directory, open '/tmp/npm-12441-f0bd2562/unpack-7d221eb5/package.json'
+213 silly fetchPackageMetaData   errno: -2,
+213 silly fetchPackageMetaData   code: 'ENOENT',
+213 silly fetchPackageMetaData   syscall: 'open',
+213 silly fetchPackageMetaData   path: '/tmp/npm-12441-f0bd2562/unpack-7d221eb5/package.json' }
+214 http fetch 200 https://registry.npmjs.org/random-verse/-/random-verse-1.0.1.tgz
+215 silly fetchAndShaCheck shasum df440eabb0be2c2d44b740e531944140bd1d28c4
+216 verbose addTmpTarball /tmp/npm-12441-f0bd2562/registry.npmjs.org/random-verse/-/random-verse-1.0.1.tgz not in flight; adding
+217 verbose addTmpTarball already have metadata; skipping unpack for random-verse@1.0.1
+218 silly cache afterAdd random-verse@1.0.1
+219 verbose afterAdd /home/arthurmts/.npm/random-verse/1.0.1/package/package.json not in flight; writing
+220 verbose afterAdd /home/arthurmts/.npm/random-verse/1.0.1/package/package.json written
+221 http fetch 200 https://registry.npmjs.org/openbibles/-/openbibles-1.2.0.tgz
+222 silly fetchAndShaCheck shasum 64f725357c346e02b3d99d0cbfeaf7d072089372
+223 verbose addTmpTarball /tmp/npm-12441-f0bd2562/registry.npmjs.org/openbibles/-/openbibles-1.2.0.tgz not in flight; adding
+224 verbose addTmpTarball already have metadata; skipping unpack for openbibles@1.2.0
+225 silly cache afterAdd openbibles@1.2.0
+226 verbose afterAdd /home/arthurmts/.npm/openbibles/1.2.0/package/package.json not in flight; writing
+227 verbose afterAdd /home/arthurmts/.npm/openbibles/1.2.0/package/package.json written
+228 silly rollbackFailedOptional Starting
+229 silly rollbackFailedOptional Finishing
+230 silly runTopLevelLifecycles Starting
+231 silly runTopLevelLifecycles Finishing
+232 silly install printInstalled
+233 verbose stack Error: ENOENT: no such file or directory, open '/tmp/npm-12441-f0bd2562/unpack-7d221eb5/package.json'
+234 verbose cwd /home/arthurmts/heb12
+235 error Linux 4.15.0-36-generic
+236 error argv "/usr/bin/node" "/usr/bin/npm" "install"
+237 error node v8.10.0
+238 error npm  v3.5.2
+239 error path /tmp/npm-12441-f0bd2562/unpack-7d221eb5/package.json
+240 error code ENOENT
+241 error errno -2
+242 error syscall open
+243 error enoent ENOENT: no such file or directory, open '/tmp/npm-12441-f0bd2562/unpack-7d221eb5/package.json'
+244 error enoent ENOENT: no such file or directory, open '/tmp/npm-12441-f0bd2562/unpack-7d221eb5/package.json'
+244 error enoent This is most likely not a problem with npm itself
+244 error enoent and is related to npm not being able to find a file.
+245 verbose exit [ -2, true ]

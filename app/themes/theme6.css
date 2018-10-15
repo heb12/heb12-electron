@@ -1,0 +1,61 @@
+/*
+Heb12 Desktop is a simple Electron app for reading the Bible.
+    Copyright (C) 2018 The Heb12 Developers <https://heb12.github.io/developers>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+/* This is the More Light Blue theme */
+
+#head {
+    background-color: #4286f4;
+    color: black;
+}
+
+option {
+	color: yellow;
+}
+
+.popup {
+    border-color: ##1b273a;
+}
+/* Link color */
+.link {
+  color: ##1b273a;
+}
+/* Header buttons */
+.button {
+	color: blue;
+}
+.button:hover {
+  background-color: rgb(22, 43, 66);
+}
+/* Other buttons */
+button:active {
+  background-color: rgb(22, 43, 66);
+  border-color: ##1b273a;
+}
+.closePopup {
+  transition-duration: 0.5s;
+  color: #1b273a;
+}
+.closePopup:hover {
+  transition-duration: 0.5s;
+  color: rgb(250, 44, 44);
+}
+
+.arrow {
+    color: white;
+    background-color: #1b273a;
+}
