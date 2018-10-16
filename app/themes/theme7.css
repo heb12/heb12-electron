@@ -1,0 +1,43 @@
+#head {
+  background-color: #E4C6FF;
+  color: purple;
+}
+
+option {
+  color: purple;
+}
+
+.popup {
+  border-color: #E4C6FF;
+}
+  
+/* Link color */
+.link {
+  color: purple;
+}
+
+/* Header buttons */
+.button:hover {
+  background-color: #EFDDFF;
+}
+
+/* Other buttons */
+button:active {
+  background-color: #E4C6FF;
+  border-color: #E4C6FF;
+}
+  
+.closePopup {
+  transition-duration: 0.5s;
+  color: #E4C6FF;
+}
+
+.closePopup:hover {
+  transition-duration: 0.5s;
+  color: purple;
+}
+ 
+.arrow {
+  color: purple;
+  background-color: #E4C6FF;
+} 

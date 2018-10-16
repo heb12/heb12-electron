@@ -1,58 +1,68 @@
-/*
-Heb12 Desktop is a simple Electron app for reading the Bible.
-    Copyright (C) 2018 The Heb12 Developers <https://heb12.github.io/developers>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
-
-/* This is the purple theme */
+body{
+    background-color: #E8DDB5;
+    color: #666A86;
+}
 
 #head {
-  background-color: #E4C6FF;
-  color: purple;
+    background-color: #666A86;
+    color: white;
+}
+.button {
+    color: #E8DDB5;
+    text-shadow: 2px 2px 5px gray;
 }
 
-option {
-color: purple;
-}
-
+/* Popup border color */
 .popup {
-    border-color: #E4C6FF;
+    border-color: #E8DDB5;
+    background-color: #666A86;
+    color: #E8DDB5;
 }
 /* Link color */
 .link {
-  color: purple;
+    color: #92B6B1;
 }
 /* Header buttons */
 .button:hover {
-  background-color: #EFDDFF;
+    background-color: #788AA3;
+}
+.button:hover option, .button:hover optgroup {
+    background-color: #ffffff;
+    color: black;
 }
 /* Other buttons */
 button:active {
-  background-color: #E4C6FF;
-  border-color: #E4C6FF;
+    background-color: #666A86;
+    border-color: #E8DDB5;
 }
+
+button:hover, select:hover{
+    background-color: #E8DDB5;
+    border-color: #E8DDB5;
+    color: #666A86;
+}
+
+button, select {
+    background-color: #666A86;
+    border-color: #E8DDB5;
+    color: #E8DDB5;
+}
+
 .closePopup {
-  transition-duration: 0.5s;
-  color: #E4C6FF;
+    transition-duration: 0.5s;
+    color: #E8DDB5;
 }
 .closePopup:hover {
-  transition-duration: 0.5s;
-  color: purple;
+    transition-duration: 0.5s;
+    color: rgba(232, 221, 181, 0.411);
+}
+
+#result {
+  /*box-shadow: 3px 5px 5px 5px #ffc27d;*/
+  background-color: #E8DDB5;
 }
 
 .arrow {
-  color: purple;
-  background-color: #E4C6FF;
+    background-color: #666A86;
+    color: #E8DDB5;
 }
