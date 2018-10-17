@@ -17,7 +17,14 @@ Heb12 Desktop is a simple Electron app for reading the Bible.
 */
 
 // Update this version number for every release:
-const version = '0.3.0'
+const globalPackageVersion = require('global-package-version');
+globalPackageVersion(require('../package.json'), {
+    wrapper: 'libName',
+    customPackageName: 'version'
+});
+const version = libName.version;
+console.log(version + ' is the version of this program.');
+document.getElementById('version').innerText = version;
 let timesChecked = localStorage.getItem('timesChecked');
 let channel;
 
@@ -39,7 +46,7 @@ function checkUpdates() {
             .then(response => response.text())
             .then(result => {
                 result = JSON.parse(result);
-                if (result != '') {
+                if (result != '') {'0.3.0'
                 console.log(result);
                 if (result.version != version) {
                     console.log('This version is outdated. The newest version is ' + result.newest);
