@@ -21,7 +21,7 @@
   },
   "license": "GPL-3.0",
   "devDependencies": {
-    "electron": "~2.0.3",
+    "electron": "~3.0.4",
     "electron-builder": "^20.24.4"
   },
   "dependencies": {
@@ -29,7 +29,7 @@
     "electron-store": "^2.0.0",
     "openbibles": "^1.2.0",
     "random-verse": "^1.0.1",
-    "request": "^2.87.0"
+    "request": "^2.88.0"
   },
   "build": {
     "appId": "tk.mtiger.heb12",
