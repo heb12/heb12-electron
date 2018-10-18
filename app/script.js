@@ -231,7 +231,7 @@ function nextChapter() {
     books = document.getElementsByClassName('book');
     chapter = document.getElementById('chapter');
     theBook = document.getElementById('book').innerText;
-    a = chapterAndVerse(theBook);
+    let a = chapterAndVerse(theBook);
     chapters = a.book.chapters;
 
     if ((chapters > 1) && (chapter.value != chapters)) {
@@ -249,7 +249,7 @@ function lastChapter() {
     books = document.getElementsByClassName('book');
     chapter = document.getElementById('chapter');
     theBook = document.getElementById('book').innerText;
-    a = chapterAndVerse(theBook);
+    let a = chapterAndVerse(theBook);
     chapters = a.book.chapters;
     // Selected index starts at 0
     if ((chapters > 1) && (chapter.selectedIndex > 0)) {
