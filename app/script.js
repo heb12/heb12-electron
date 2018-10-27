@@ -509,6 +509,10 @@ console.log(store.get('font') + ' is the font loaded from storage');
 var fontSize = store.get('fontSize');
 script = document.getElementById('scripture');
 script.style.fontSize = String(Number(fontSize.split('px')[0])) + 'px';
+let x = document.getElementsByClassName('text');
+for (var i = 0; i < x.length; i++) {
+    x[i].style.fontSize = String(Number(fontSize.split('px')[0]) + 1) + 'px';
+}
 
 // Retrieve last font style
 var val = store.get('font');
