@@ -147,8 +147,13 @@ async function getVerses(reference, version) {
     let saveRef = chapterAndVerse(document.getElementById('book').innerText).book.name + ' ' + document.getElementById('chapter').value;
     store.set("lastRef", saveRef);
     let history = store.get('history');
+
     if (history[history.length - 1] !== saveRef) {
-        history[history.length] = saveRef;
+        if (history[0] == '') {
+            history[0] = saveRef;
+        } else {
+            history[history.length] = saveRef;
+        }
         store.set('history', history)
     }
 
@@ -176,35 +181,43 @@ async function updateText() {
 
 // Loads either history or bookmarks
 function loadLogs(type) {
-    console.log(type);
     let item = store.get(type);
+
     let itemEl = document.getElementById(type + 'Items');
     itemEl.innerHTML = '';
-    for (var i = 0; i < item.length; i++) {
-        let wrapper = document.createElement('div');
-        let itemItem = document.createElement('div');
-        let title = document.createElement('h3');
-        let para = document.createElement('p');
-        let button = document.createElement('button');
-        try {
-            button.innerText = 'Open';
-            console.log(chapterAndVerse(item[i]).book.name + ' ' + chapterAndVerse(item[i]).chapter + ':1', 'web');
-            para.innerHTML = bibles(chapterAndVerse(item[i]).book.name + ' ' + chapterAndVerse(item[i]).chapter + ':1', 'web');
-            console.log(para);
-        } catch (e) {
-            itemEl.innerHTML = e + itemEl.innerHTML;
-        } finally {
-            title.innerHTML = item[i];
-            console.log(title);
-            itemItem.appendChild(title);
-            itemItem.appendChild(para);
-            //itemItem.appendChild(button);
-            wrapper.appendChild(itemItem);
-            itemEl.innerHTML = wrapper.innerHTML + itemEl.innerHTML;
-        }
-    }
-    if (itemEl.innerHTML == '') {
+
+    // Only load history or bookmarks if there's actually history or bookmarks
+    if (item == '') {
         itemEl.innerText = 'You currently have no ' + type + '.';
+
+        document.getElementById('clearHistoryButton').style.display = 'none';
+    }
+    else {
+        document.getElementById('clearHistoryButton').style.display = 'block';
+        
+        for (var i = 0; i < item.length; i++) {
+            let wrapper = document.createElement('div');
+            let itemItem = document.createElement('div');
+            let title = document.createElement('h3');
+            let para = document.createElement('p');
+            let button = document.createElement('button');
+            try {
+                button.innerText = 'Open';
+                console.log(chapterAndVerse(item[i]).book.name + ' ' + chapterAndVerse(item[i]).chapter + ':1', 'web');
+                para.innerHTML = bibles(chapterAndVerse(item[i]).book.name + ' ' + chapterAndVerse(item[i]).chapter + ':1', 'web');
+                console.log(para);
+            } catch (e) {
+                itemEl.innerHTML = e + itemEl.innerHTML;
+            } finally {
+                title.innerHTML = item[i];
+                console.log(title);
+                itemItem.appendChild(title);
+                itemItem.appendChild(para);
+                //itemItem.appendChild(button);
+                wrapper.appendChild(itemItem);
+                itemEl.innerHTML = wrapper.innerHTML + itemEl.innerHTML;
+            }
+        }
     }
 }
 // Loads bookmarks and history
@@ -346,6 +359,14 @@ function fontSizeMinus() {
         x[i].style.fontSize = String(Number(fontSize.split('px')[0]) - 1) + 'px';
     }
     store.set('fontSize', String(Number(fontSize.split('px')[0]) - 1) + 'px');
+}
+
+// New function for controlling font size directly
+function changeFontSize(size) {
+    let x = document.getElementsByClassName('text');
+    for (let i = 0; i < x.length; i++) {
+        x[i].style.fontSize = String(size);
+    }
 }
 
 function changeFont() {
