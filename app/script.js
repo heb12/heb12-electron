@@ -358,6 +358,7 @@ function changeFontSize(size) {
     for (let i = 0; i < x.length; i++) {
         x[i].style.fontSize = String(size) + 'px';
     }
+    store.set('fontSize', size);
 }
 
 function changeFont() {
@@ -433,45 +434,6 @@ function openPopup(popup) {
     }
 }
 
-// A script for either alerting or asking for a response. This is not used anywhere currently.
-function alertYou(say, mode, callback) {
-    document.getElementById('alertText').innerText = say;
-    // If the mode is a confirming of an action
-    if (mode == 'Y/N') {
-        // Show the elements for Y/N
-        document.getElementById('yes').style.display = 'inline-block';
-        document.getElementById('no').style.display = 'inline-block';
-        // Open the alertBox
-        openPopup('alertBox');
-        // If the 'yes' button is clicked run this function
-        document.getElementById('yes').addEventListener('click', function() {
-        // Close alertBox
-        closePopup('alertBox');
-        // Choose which function to run
-        switch (callback) {
-            case 'reset':
-            reset();
-            setup();
-            break;
-            default:
-            break;
-        }
-        return 'yes';
-        });
-        // Cancel everything when no is clicked
-        document.getElementById('no').addEventListener('click', function() {
-            closePopup('alertBox');
-            return 'no';
-        });
-        // 'Okay' is a simple dialoge box to explain something
-    } else {
-        document.getElementById('okay').style.display = 'inline-block';
-        document.getElementById('okay').addEventListener('click', function() {
-        closePopup('alertBox');
-        return 'okay';
-        });
-    }
-}
 // Save scroll position
 document.body.onscroll = function() {
     store.set('scroll', document.scrollingElement.scrollTop);
