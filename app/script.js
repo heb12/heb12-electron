@@ -203,6 +203,9 @@ function loadLogs(type) {
             itemEl.innerHTML = wrapper.innerHTML + itemEl.innerHTML;
         }
     }
+    if (itemEl.innerHTML == '') {
+        itemEl.innerText = 'You currently have no ' + type + '.';
+    }
 }
 // Loads bookmarks and history
 function loadHistory() {
