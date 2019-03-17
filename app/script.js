@@ -200,8 +200,7 @@ function loadLogs(type) {
             let para = document.createElement('p');
             let button = document.createElement('button');
             try {
-                button.innerText = 'Open';
-                console.log(chapterAndVerse(item[i]).book.name + ' ' + chapterAndVerse(item[i]).chapter + ':1', 'web');
+                //console.log(chapterAndVerse(item[i]).book.name + ' ' + chapterAndVerse(item[i]).chapter + ':1', 'web');
                 para.innerHTML = bibles(chapterAndVerse(item[i]).book.name + ' ' + chapterAndVerse(item[i]).chapter + ':1', 'web');
                 //console.log(para);
             } catch (e) {
@@ -211,10 +210,20 @@ function loadLogs(type) {
                 //console.log(title);
                 itemItem.appendChild(title);
                 itemItem.appendChild(para);
-                //itemItem.appendChild(button);
                 wrapper.appendChild(itemItem);
                 itemEl.innerHTML = wrapper.innerHTML + itemEl.innerHTML;
+                
             }
+        }
+
+        // Make individual history items clickable
+        let elements = itemEl.getElementsByTagName('div')
+        for (let i = 0; i < elements.length; i++) {
+            const element = elements[i];
+            element.addEventListener('click', function () {
+                setChapter(this.getElementsByTagName('h3')[0].innerText);
+                closePopup('history');
+            });
         }
     }
 }

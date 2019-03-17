@@ -144,6 +144,18 @@ a {
     display: inline-block;
 }
 
+
+#historyItems div, #bookmarksItems div {
+    margin-top: 5px;
+    padding: 7px;
+}
+
+#historyItems div:hover, #bookmarksItems div:hover {
+    border: solid gray 2px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
 /* End */
 
 #result {
