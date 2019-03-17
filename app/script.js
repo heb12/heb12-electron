@@ -337,9 +337,6 @@ function setChapter(reference) {
 var script;
 function fontSizePlus() {
     var fontSize = store.get('fontSize');
-    script = document.getElementById('scripture');
-    console.log(String(Number(script.style.fontSize.split('px')[0]) + 1) + 'px');
-    script.style.fontSize = String(Number(fontSize.split('px')[0]) + 1) + 'px';
     let x = document.getElementsByClassName('text');
     for (var i = 0; i < x.length; i++) {
         x[i].style.fontSize = String(Number(fontSize.split('px')[0]) + 1) + 'px';
@@ -348,9 +345,6 @@ function fontSizePlus() {
 }
 function fontSizeMinus() {
     var fontSize = store.get('fontSize');
-    script = document.getElementById('scripture');
-    console.log(String(Number(script.style.fontSize.split('px')[0]) - 1) + 'px');
-    script.style.fontSize = String(Number(fontSize.split('px')[0]) - 1) + 'px';
     let x = document.getElementsByClassName('text');
     for (var i = 0; i < x.length; i++) {
         x[i].style.fontSize = String(Number(fontSize.split('px')[0]) - 1) + 'px';
@@ -362,7 +356,7 @@ function fontSizeMinus() {
 function changeFontSize(size) {
     let x = document.getElementsByClassName('text');
     for (let i = 0; i < x.length; i++) {
-        x[i].style.fontSize = String(size);
+        x[i].style.fontSize = String(size) + 'px';
     }
 }
 
@@ -383,16 +377,6 @@ function changeTheme() {
 function changetextAlign() {
     store.set('textAlign', document.getElementById('textAlign').value);
     document.getElementById('scripture').style.textAlign = document.getElementById('textAlign').value;
-}
-function changeLineBreaks() {
-    let linebreaks = document.getElementById('lineBreaks').value;
-    store.set('lineBreaks', linebreaks);
-    if (linebreaks == 'false') {
-        document.getElementById('scripture').className = 'noBreaks';
-    } else {
-        document.getElementById('scripture').className = '';
-    }
-
 }
 
 // This opens a verse popup for a specific verse
@@ -510,7 +494,6 @@ function setup() {
     store.set('theme', 'theme1');
     store.set('textAlign', 'left');
     store.set('translation', 'net');
-    store.set('lineBreaks', 'true');
     store.set('history', ['Hebrews 4']);
     store.set('bookmarks', ['Hebrews 4']);
     console.log("Finished first-time setup of storage");
@@ -542,8 +525,8 @@ console.log(store.get('font') + ' is the font loaded from storage');
 
 // Retrieve last font size
 var fontSize = store.get('fontSize');
-script = document.getElementById('scripture');
-script.style.fontSize = String(Number(fontSize.split('px')[0])) + 'px';
+//script = document.getElementById('scripture');
+//script.style.fontSize = String(Number(fontSize.split('px')[0])) + 'px';
 let x = document.getElementsByClassName('text');
 for (var i = 0; i < x.length; i++) {
     x[i].style.fontSize = String(Number(fontSize.split('px')[0]) + 1) + 'px';
@@ -575,22 +558,6 @@ for (var opt, j = 0; opt = opts[j]; j++) {
     }
 }
 document.getElementById('scripture').style.textAlign = document.getElementById('textAlign').value;
-
-// Retrieve last lineBreaks
-val = store.get('lineBreaks');
-sel = document.getElementById('lineBreaks');
-opts = sel.options;
-for (var opt, j = 0; opt = opts[j]; j++) {
-    if (opt.value == val) {
-        sel.selectedIndex = j;
-        break;
-    }
-}
-if (val == 'false') {
-    document.getElementById('scripture').className = 'noBreaks';
-} else {
-    document.getElementById('scripture').className = '';
-}
 
 // Retrieve last theme
 val = store.get('theme');
