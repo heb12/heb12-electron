@@ -1,6 +1,6 @@
 /*
 Heb12 Desktop is a simple Electron app for reading the Bible.
-    Copyright (C) 2018 The Heb12 Developers <https://heb12.github.io/developers>
+    Copyright (C) 2018, 2019 The Heb12 Developers <https://heb12.github.io/developers>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
