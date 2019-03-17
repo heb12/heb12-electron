@@ -344,6 +344,11 @@ and (max-width : 1000px) {
     font-size: 25px;
 }
 
+#licenseFrame {
+    width: 100%;
+    height: 100%;
+}
+
 /* This button CSS is from https://github.com/MasterOfTheTiger/apod-extension/blob/master/css/style.css under the MIT license */
 button {
     border-radius: 5px;
