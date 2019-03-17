@@ -75,7 +75,6 @@ function getNETVerse(ref) {
 
 // This fetches the verses requested and puts it in the 'script' element
 async function getVerses(reference, version) {
-    console.log(version);
     document.getElementById('result').style.display = 'hidden';
     document.getElementById('scripture').innerText = "Loading Bible...";
     // Renders NET
@@ -164,8 +163,7 @@ async function getVerses(reference, version) {
         document.getElementById('bookmarkIcon').className = 'far fa-bookmark';
     }
 
-    console.log(history + ' is the history.');
-    console.log(store.get('lastRef'));
+    console.log(store.get('lastRef') + ' is the last reference loaded');
     return result;
 }
 var chapter, chapters, books, theBook, theChapter;
@@ -205,12 +203,12 @@ function loadLogs(type) {
                 button.innerText = 'Open';
                 console.log(chapterAndVerse(item[i]).book.name + ' ' + chapterAndVerse(item[i]).chapter + ':1', 'web');
                 para.innerHTML = bibles(chapterAndVerse(item[i]).book.name + ' ' + chapterAndVerse(item[i]).chapter + ':1', 'web');
-                console.log(para);
+                //console.log(para);
             } catch (e) {
                 itemEl.innerHTML = e + itemEl.innerHTML;
             } finally {
                 title.innerHTML = item[i];
-                console.log(title);
+                //console.log(title);
                 itemItem.appendChild(title);
                 itemItem.appendChild(para);
                 //itemItem.appendChild(button);
@@ -303,7 +301,7 @@ function loadChapters() {
     theBook = document.getElementById('book').innerText;
     theBook = document.getElementById('book').innerText;
     let a = chapterAndVerse(theBook);
-    console.log(a);
+    
     chapters = a.book.chapters;
     chapter.innerHTML = '';
     if (chapters == 1) {
@@ -329,7 +327,6 @@ function updateTranslation(theTranslation) {
 // This lets you easily open a chapter
 function setChapter(reference) {
     var a = chapterAndVerse(reference);
-    console.log(reference);
     document.getElementById('book').innerText = a.book.name;
     loadChapters();
     document.getElementById('chapter').selectedIndex = a.chapter - 1;
@@ -597,7 +594,6 @@ if (val == 'false') {
 
 // Retrieve last theme
 val = store.get('theme');
-console.log(val + ' is the theme stored in storage.');
 
 sel = document.getElementById('theme');
 opts = sel.options;
@@ -611,6 +607,8 @@ for (var opt, j = 0; opt = opts[j]; j++) {
 var themeChoice = document.getElementById('theme').value;
 document.getElementById('themeStyle').href = './themes/' + themeChoice + '.css';
 
+console.log(themeChoice + ' is the theme loaded from storage.');
+
 // Retrieve last translation
 var translations = store.get('translation');
 console.log(translations + ' is the translation loaded from storage.');
@@ -621,7 +619,7 @@ window.onload = function() {
     // Retrieve last chapter
     setChapter(store.get('lastRef'));
     let booksEl = document.getElementsByClassName('book');
-    console.log(booksEl);
+    
     for (var i = 0; i < booksEl.length; i++) {
         booksEl[i].addEventListener('click', function() {setChapter(this.innerText + ' 1');closePopups()});
     }
@@ -637,9 +635,10 @@ window.onload = function() {
     for (let i = 0; i < obtranslations.length; i++) {
         let element = obtranslations[i];
         document.getElementById(element + 'text').innerText = bibles(ref, element);
-        console.log('Loading translation ' + element + ' into verse lookup popup.');
+        //console.log('Loading translation ' + element + ' into verse lookup popup.');
         
     }
+    console.log('Loaded text into verse popup.')
     getNETVerse(ref);
     document.getElementById('searchBox').placeholder = ref;
     document.getElementById('searchBox').value = '';
