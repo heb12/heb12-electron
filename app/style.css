@@ -16,8 +16,6 @@ Heb12 Desktop is a simple Electron app for reading the Bible.
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-@import url('./fonts/googlefonts.css');
-
 body {
     font-family: Arial, Helvetica, sans-serif;
     overflow-x: hidden;
