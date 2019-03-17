@@ -342,6 +342,8 @@ function fontSizePlus() {
         x[i].style.fontSize = String(Number(fontSize.split('px')[0]) + 1) + 'px';
     }
     store.set('fontSize', String(Number(fontSize.split('px')[0]) + 1) + 'px');
+    console.log(fontSize);
+    
 }
 function fontSizeMinus() {
     var fontSize = store.get('fontSize');
@@ -356,9 +358,10 @@ function fontSizeMinus() {
 function changeFontSize(size) {
     let x = document.getElementsByClassName('text');
     for (let i = 0; i < x.length; i++) {
-        x[i].style.fontSize = String(size) + 'px';
+        x[i].style.fontSize = size.split('px')[0] + 'px';
     }
-    store.set('fontSize', size);
+    store.set('fontSize', size.split('px')[0] + 'px');
+    // Ends with 'px' to maintain backwards compatibility with versions 0.3.0 and older
 }
 
 function changeFont() {
@@ -448,7 +451,7 @@ document.body.onscroll = function() {
 
 // This runs the first time the program is opened
 function setup() {
-    store.set('fontSize', '17px');
+    store.set('fontSize', '18px');
     store.set('lineSpacing', '25px');
     store.set('firstTime', 'no');
     store.set("lastRef", 'Hebrews 4');
@@ -483,21 +486,41 @@ if (firstTime != 'no') {
 
 script = document.getElementById('scripture');
 
-console.log(store.get('font') + ' is the font loaded from storage');
+// Load storage into dropdowns
+let val, sel, opts;
 
 // Retrieve last font size
-var fontSize = store.get('fontSize');
-//script = document.getElementById('scripture');
-//script.style.fontSize = String(Number(fontSize.split('px')[0])) + 'px';
-let x = document.getElementsByClassName('text');
-for (var i = 0; i < x.length; i++) {
-    x[i].style.fontSize = String(Number(fontSize.split('px')[0]) + 1) + 'px';
+let fontSize = store.get('fontSize');
+sel = document.getElementById('fontSize');
+opts = sel.options;
+for (var opt, j = 0; opt = opts[j]; j++) {
+    if (opt.innerText == fontSize) {
+        sel.selectedIndex = j;
+        break;
+    }
+    // Maintain backwards compatability with versions 0.3.0 and earlier
+    else {
+        sel.selectedIndex = 3;
+    }
+}
+
+// Load font size
+changeFontSize(fontSize);
+
+val = store.get('textAlign');
+sel = document.getElementById('textAlign');
+opts = sel.options;
+for (var opt, j = 0; opt = opts[j]; j++) {
+    if (opt.value == val) {
+        sel.selectedIndex = j;
+        break;
+    }
 }
 
 // Retrieve last font style
-var val = store.get('font');
-var sel = document.getElementById('font');
-var opts = sel.options;
+val = store.get('font');
+sel = document.getElementById('font');
+opts = sel.options;
 for (var opt, j = 0; opt = opts[j]; j++) {
     if (opt.value == val) {
         sel.selectedIndex = j;
