@@ -446,9 +446,8 @@ function openPopup(popup) {
     }
 }
 
-// Save scroll position
+// Change header when scrolling
 document.body.onscroll = function() {
-    store.set('scroll', document.scrollingElement.scrollTop);
     if (document.scrollingElement.scrollTop > 0) {
         document.getElementById('head').className = 'scroll';
         document.getElementById('result').className = 'scroll';
@@ -584,10 +583,6 @@ window.onload = function() {
     for (var i = 0; i < booksEl.length; i++) {
         booksEl[i].addEventListener('click', function() {setChapter(this.innerText + ' 1');closePopups()});
     }
-    // After 200 miliseconds (about the time it takes to fetch the NET) it scrolls to the position when it was closed
-    setTimeout(function() {
-        document.body.scrollTop = store.get('scroll');
-    }, 200);
 
     // Setup default verse popup
     let ref = randomVerse();
