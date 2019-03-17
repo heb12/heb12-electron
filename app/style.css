@@ -145,12 +145,13 @@ a {
 }
 
 
-#historyItems div, #bookmarksItems div {
+.brickSelect div {
     margin-top: 5px;
     padding: 7px;
+    cursor: default;
 }
 
-#historyItems div:hover, #bookmarksItems div:hover {
+.brickSelect div:hover {
     border: solid gray 2px;
     padding: 5px;
     border-radius: 5px;

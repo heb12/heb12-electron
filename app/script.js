@@ -584,6 +584,16 @@ window.onload = function() {
         booksEl[i].addEventListener('click', function() {setChapter(this.innerText + ' 1');closePopups()});
     }
 
+    // Make individual translation options clickable
+    let elements = document.getElementsByClassName('translation');
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+        element.addEventListener('click', function () {
+            updateTranslation(this.getElementsByTagName('h3')[0].innerText.split('(')[1].split(')')[0]);
+            closePopup('translations');
+        });
+    }
+
     // Setup default verse popup
     let ref = randomVerse();
     document.getElementById('vs').innerText = ref;
