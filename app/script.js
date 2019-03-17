@@ -57,7 +57,7 @@ function getBook(bookGet) {
 function getNETVerse(ref) {
     if (!navigator.onLine) {
         document.getElementById('nettext').innerHTML = '<em>Check your Internet connection.</em>';
-        console.log('Offline ERROR');
+        console.log('Offline ERROR. Cannot load NET verse');
     } else {
         document.getElementById('nettext').innerHTML = "<i class=\"fa fa-spinner fa-spin\"></i>";
         let url = 'https://labs.bible.org/api/?passage= ' + ref + '&formatting=plain';
@@ -85,50 +85,53 @@ async function getVerses(reference, version) {
 
         // If the program is offline it sends an error message
         if (!navigator.onLine) {
+            console.log("ERROR: no Internet connection. Cannot load NET translation.");
+            
+
             document.getElementById('error').style.display = 'block';
-            document.getElementById('error').innerHTML = '<strong>No Internet!</strong> Internet connection is required for some features, including the NET translation.';
-            // Set translation back to KJV
-            document.getElementById('translation').innerText = 'kjv';
-            updateTranslation();
+            document.getElementById('error').innerHTML = '<strong>No Internet!</strong> Internet connection is required for some features, including the NET translation. <span class=\"link\" onclick=\"updateTranslation(\'web\')\">Use WEB instead.</span>.';
+
+            document.getElementById('scripture').innerHTML = '';
         } else {
             document.getElementById('error').style.display = 'none';
-        }
-        // This is the url for the NET Bible API. The '&formatting=full' returns the headings and the line spacings of the text
-        // Add cors proxy - myed
-        //url = 'https://cors-anywhere.herokuapp.com/labs.bible.org/api/?passage= ' + reference + '&formatting=full';
-        let url = 'https://labs.bible.org/api/?passage= ' + reference + '&formatting=full';
-        // Uses the request API to request the scripture from the url above
-        request(url, function (error, response, body) {
-            if (result != '') {
-                if (document.getElementById('translation').innerText.toLowerCase == version.toLowerCase) {
-                    document.getElementById('scripture').innerHTML = body;
-                    document.getElementById('error').style.display = 'none';
-                    var bold = document.getElementsByTagName('b');
-                    var a = chapterAndVerse(reference);
-                    for (let i = 0; i < bold.length; i++) {
-                        const element = bold[i];
-                        element.addEventListener('click', function() {
-                            console.log(reference);
 
-                            openVerse(a.book.name + ' ' + a.chapter + ':' + i);
-                        });
+            // Only load NET while online
+
+            // This is the url for the NET Bible API. The '&formatting=full' returns the headings and the line spacings of the text
+            let url = 'https://labs.bible.org/api/?passage= ' + reference + '&formatting=full';
+            // Uses the request API to request the scripture from the url above
+            request(url, function (error, response, body) {
+                if (result != '') {
+                    if (document.getElementById('translation').innerText.toLowerCase == version.toLowerCase) {
+                        document.getElementById('scripture').innerHTML = body;
+                        document.getElementById('error').style.display = 'none';
+                        var bold = document.getElementsByTagName('b');
+                        var a = chapterAndVerse(reference);
+                        for (let i = 0; i < bold.length; i++) {
+                            const element = bold[i];
+                            element.addEventListener('click', function() {
+                                console.log(reference);
+
+                                openVerse(a.book.name + ' ' + a.chapter + ':' + i);
+                            });
+                        }
                     }
+                } else {
+                    console.log('error:', error);
+                    console.log('statusCode:', response && response.statusCode);
+                    console.log('body:', body);
+                    // If for some reason the request returned as blank, it sends an error
+                    document.getElementById('error').style.display = 'block';
+                    document.getElementById('error').innerHTML = 'Pardon, there was an error fetching the translation, please try again later';
+                    // Closes the error after 5 seconds
+                    setTimeout(function () { document.getElementById('error').style.display = "none" }, 5000);
                 }
-            } else {
-                console.log('error:', error);
-                console.log('statusCode:', response && response.statusCode);
-                console.log('body:', body);
-                // If for some reason the request returned as blank, it sends an error
-                document.getElementById('error').style.display = 'block';
-                document.getElementById('error').innerHTML = 'Pardon, there was an error fetching the translation, please try again later';
-                // Closes the error after 5 seconds
-                setTimeout(function () { document.getElementById('error').style.display = "none" }, 5000);
-            }
-        });
+            });
+        }
     }
     // Renders other
     else {
-        console.log('Loading ' + version + ', reference ' + reference);
+        console.log('Loading ' + version + ', reference ' + reference + ' into main result.');
 
         document.getElementById('scripture').innerHTML = bibles(reference, version, true);
         document.getElementById('error').style.display = 'none';
@@ -386,7 +389,7 @@ function openVerse(pas) {
     for (let i = 0; i < obtranslations.length; i++) {
         let element = obtranslations[i];
         document.getElementById(element + 'text').innerText = bibles(ref, element);
-        console.log('loading ' + element);
+        console.log('Loading translation ' + element + ' into verse lookup popup.');
         
     }
     getNETVerse(ref);
@@ -610,7 +613,7 @@ window.onload = function() {
     for (let i = 0; i < obtranslations.length; i++) {
         let element = obtranslations[i];
         document.getElementById(element + 'text').innerText = bibles(ref, element);
-        console.log('loading ' + element);
+        console.log('Loading translation ' + element + ' into verse lookup popup.');
         
     }
     getNETVerse(ref);
