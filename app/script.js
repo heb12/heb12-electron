@@ -140,8 +140,8 @@ async function getVerses(reference, version) {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     // Show the scripture element
     document.getElementById('scripture').style.display = 'block';
-    // Set the title of the page to the Bible reference and 'Heb12 Bible App'
-    document.title = chapterAndVerse(document.getElementById('book').innerText).book.name + ' ' + document.getElementById('chapter').value + ' - ' + 'Heb12 Bible App';
+    // Set the title of the page to the Bible reference and 'Heb12 Bible'
+    document.title = chapterAndVerse(document.getElementById('book').innerText).book.name + ' ' + document.getElementById('chapter').value + ' - ' + 'Heb12 Bible';
     // Save the reference opened into storage
     let saveRef = chapterAndVerse(document.getElementById('book').innerText).book.name + ' ' + document.getElementById('chapter').value;
     store.set("lastRef", saveRef);
