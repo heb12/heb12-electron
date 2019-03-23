@@ -50,7 +50,7 @@ document.getElementById('settings-language').addEventListener('change', function
 // List supported translations from OpenBibles
 const obtranslations = [
     'en-asv',
-    'en-dby',
+    'en-darby',
     'en-jub',
     'en-kj2000',
     'en-kjv',
