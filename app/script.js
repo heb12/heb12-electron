@@ -30,19 +30,43 @@ const Store = require('electron-store');
 const store = new Store();
 const randomVerse = require('random-verse');
 
+// *The* variable for holding the current book being used
+let currentBook = 'Genesis';
+
+// Require for translations
+let language = document.getElementById('settings-language').value;
+language = ifDefault(language);
+let bibleBooks = require('./translations/' + language + '/books.json').books;
+
+document.getElementById('settings-language').addEventListener('change', function () {
+    language = document.getElementById('settings-language').value;
+    language = ifDefault(language);
+    bibleBooks = require('./translations/' + language + '/books.json').books;
+
+    document.getElementById('book').innerHTML = bibleBooks[getBook(chapterAndVerse(currentBook).book.id)];
+});
+
+
 // List supported translations from OpenBibles
 const obtranslations = [
-    'asv',
-    'dby',
-    'jub',
-    'kj2000',
-    'kjv',
-    'nheb',
-    'rsv',
-    'wbt',
-    'web',
-    'ylt'
+    'en-asv',
+    'en-dby',
+    'en-jub',
+    'en-kj2000',
+    'en-kjv',
+    'en-nheb',
+    'en-rsv',
+    'en-wbt',
+    'en-web',
+    'en-ylt',
+    'fr-bdc'
 ]
+
+// Preferred translations from the above of different languages for scripture excerpts
+const preferredTranslations = {
+    "en-US":"en-web",
+    "fr":"fr-bdc"
+}
 
 // This function gets the book number in bible.json (i.e Genesis is 0, Exodus is 1, etc.) from its name
 function getBook(bookGet) {
@@ -141,9 +165,9 @@ async function getVerses(reference, version) {
     // Show the scripture element
     document.getElementById('scripture').style.display = 'block';
     // Set the title of the page to the Bible reference and 'Heb12 Bible'
-    document.title = chapterAndVerse(document.getElementById('book').innerText).book.name + ' ' + document.getElementById('chapter').value + ' - ' + 'Heb12 Bible';
+    document.title = bibleBooks[getBook(chapterAndVerse(currentBook).book.id)]  + ' ' + document.getElementById('chapter').value + ' - ' + 'Heb12 Bible';
     // Save the reference opened into storage
-    let saveRef = chapterAndVerse(document.getElementById('book').innerText).book.name + ' ' + document.getElementById('chapter').value;
+    let saveRef = chapterAndVerse(currentBook).book.name + ' ' + document.getElementById('chapter').value;
     store.set("lastRef", saveRef);
     let history = store.get('history');
 
@@ -170,7 +194,7 @@ var chapter, chapters, books, theBook, theChapter;
 
 // An easy function to update the text according to the dropdown menus
 async function updateText() {
-    theBook = document.getElementById('book').innerText;
+    theBook = currentBook;
     let a = chapterAndVerse(theBook);
     chapters = a.book.chapters;
     var translation = document.getElementById('translation').innerText.toLowerCase();
@@ -201,7 +225,7 @@ function loadLogs(type) {
             let button = document.createElement('button');
             try {
                 //console.log(chapterAndVerse(item[i]).book.name + ' ' + chapterAndVerse(item[i]).chapter + ':1', 'web');
-                para.innerHTML = bibles(chapterAndVerse(item[i]).book.name + ' ' + chapterAndVerse(item[i]).chapter + ':1', 'web');
+                para.innerHTML = bibles(chapterAndVerse(item[i]).book.name + ' ' + chapterAndVerse(item[i]).chapter + ':1', preferredTranslations[language]);
                 //console.log(para);
             } catch (e) {
                 itemEl.innerHTML = e + itemEl.innerHTML;
@@ -247,7 +271,7 @@ function bookmarkCheck(ref) {
 
 // Toggles bookmarked chapter
 function toggleBookmark() {
-    let reference = document.getElementById('book').innerText + ' ' + document.getElementById('chapter').value;
+    let reference = currentBook + ' ' + document.getElementById('chapter').value;
     let bookmarks = store.get('bookmarks');
     // If the chapter is bookmarked, it unbookmarks it, and vice versa
     if (bookmarkCheck(reference)) {
@@ -270,16 +294,14 @@ function toggleBookmark() {
 function nextChapter() {
     books = document.getElementsByClassName('book');
     chapter = document.getElementById('chapter');
-    theBook = document.getElementById('book').innerText;
+    theBook = currentBook;
     let a = chapterAndVerse(theBook);
     chapters = a.book.chapters;
 
     if ((chapters > 1) && (chapter.value != chapters)) {
         chapter.selectedIndex = chapter.selectedIndex + 1;
     } else if ((chapter.selectedIndex == chapters - 1) && theBook != 'Revelation') {
-        document.getElementById('book').innerText = chapterAndVerse(bible[Number(getBook(a.book.id)) + 1].id).book.name;
-        theBook = document.getElementById('book').innerText;
-        console.log(theBook);
+        setChapter(chapterAndVerse(bible[Number(getBook(a.book.id)) + 1].id).book.id);
         loadChapters();
         chapter.selectedIndex = 0;
     }
@@ -288,15 +310,15 @@ function nextChapter() {
 function lastChapter() {
     books = document.getElementsByClassName('book');
     chapter = document.getElementById('chapter');
-    theBook = document.getElementById('book').innerText;
+    theBook = currentBook;
     let a = chapterAndVerse(theBook);
     chapters = a.book.chapters;
     // Selected index starts at 0
     if ((chapters > 1) && (chapter.selectedIndex > 0)) {
         chapter.selectedIndex = chapter.selectedIndex - 1;
     } else if ((chapter.selectedIndex == 0) && (theBook != 'Genesis')) {
-        document.getElementById('book').innerText = chapterAndVerse(bible[Number(getBook(a.book.id)) - 1].id).book.name;
-        theBook = document.getElementById('book').innerText;
+        setChapter(chapterAndVerse(bible[Number(getBook(a.book.id)) - 1].id).book.id);
+        theBook = currentBook;
         loadChapters();
         chapter.selectedIndex = chapters - 1;
     }
@@ -307,8 +329,7 @@ function lastChapter() {
 function loadChapters() {
     books = document.getElementsByClassName('book');
     chapter = document.getElementById('chapter');
-    theBook = document.getElementById('book').innerText;
-    theBook = document.getElementById('book').innerText;
+    theBook = currentBook;
     let a = chapterAndVerse(theBook);
     
     chapters = a.book.chapters;
@@ -336,7 +357,9 @@ function updateTranslation(theTranslation) {
 // This lets you easily open a chapter
 function setChapter(reference) {
     var a = chapterAndVerse(reference);
-    document.getElementById('book').innerText = a.book.name;
+    // Sets the book text in header to book name for current language
+    document.getElementById('book').innerText = bibleBooks[getBook(a.book.id)];
+    currentBook = a.book.name;
     loadChapters();
     document.getElementById('chapter').selectedIndex = a.chapter - 1;
     updateText();
@@ -374,22 +397,22 @@ function changeFontSize(size) {
 }
 
 function changeFont() {
-    store.set('font', document.getElementById('font').value);
-    if (document.getElementById('font').value == 'default') {
+    store.set('font', document.getElementById('settings-text-font-select').value);
+    if (document.getElementById('settings-text-font-select').value == 'default') {
         document.getElementById('scripture').style.fontFamily = 'Arial, Helvetica, sans-serif';
     } else {
-        document.getElementById('scripture').style.fontFamily = document.getElementById('font').value;
+        document.getElementById('scripture').style.fontFamily = document.getElementById('settings-text-font-select').value;
     }
 
 }
 function changeTheme() {
-    store.set('theme', document.getElementById('theme').value);
-    themeChoice = document.getElementById('theme').value;
+    store.set('theme', document.getElementById('settings-color-theme-select').value);
+    themeChoice = document.getElementById('settings-color-theme-select').value;
     document.getElementById('themeStyle').href = './themes/' + themeChoice +'.css';
 }
 function changetextAlign() {
-    store.set('textAlign', document.getElementById('textAlign').value);
-    document.getElementById('scripture').style.textAlign = document.getElementById('textAlign').value;
+    store.set('textAlign', document.getElementById('settings-text-align-select').value);
+    document.getElementById('scripture').style.textAlign = document.getElementById('settings-text-align-select').value;
 }
 
 // This opens a verse popup for a specific verse
@@ -475,6 +498,7 @@ function setup() {
 // Resets the program's storage
 function reset() {
     store.delete('firstTime');
+    store.delete('translation');
     console.log("Set firstTime to false. When startup() funtion is run user information will be erased.");
 }
 
@@ -516,7 +540,7 @@ for (var opt, j = 0; opt = opts[j]; j++) {
 changeFontSize(fontSize);
 
 val = store.get('textAlign');
-sel = document.getElementById('textAlign');
+sel = document.getElementById('settings-text-align-select');
 opts = sel.options;
 for (var opt, j = 0; opt = opts[j]; j++) {
     if (opt.value == val) {
@@ -527,7 +551,7 @@ for (var opt, j = 0; opt = opts[j]; j++) {
 
 // Retrieve last font style
 val = store.get('font');
-sel = document.getElementById('font');
+sel = document.getElementById('settings-text-font-select');
 opts = sel.options;
 for (var opt, j = 0; opt = opts[j]; j++) {
     if (opt.value == val) {
@@ -535,14 +559,14 @@ for (var opt, j = 0; opt = opts[j]; j++) {
         break;
     }
 }
-if (document.getElementById('font').value == 'default') {
+if (document.getElementById('settings-text-font-select').value == 'default') {
     document.getElementById('scripture').style.fontFamily = 'Arial, Helvetica, sans-serif';
 } else {
-    document.getElementById('scripture').style.fontFamily = document.getElementById('font').value;
+    document.getElementById('scripture').style.fontFamily = document.getElementById('settings-text-font-select').value;
 }
 // Retrieve last textAlign
 val = store.get('textAlign');
-sel = document.getElementById('textAlign');
+sel = document.getElementById('settings-text-align-select');
 opts = sel.options;
 for (var opt, j = 0; opt = opts[j]; j++) {
     if (opt.value == val) {
@@ -550,12 +574,12 @@ for (var opt, j = 0; opt = opts[j]; j++) {
         break;
     }
 }
-document.getElementById('scripture').style.textAlign = document.getElementById('textAlign').value;
+document.getElementById('scripture').style.textAlign = document.getElementById('settings-text-align-select').value;
 
 // Retrieve last theme
 val = store.get('theme');
 
-sel = document.getElementById('theme');
+sel = document.getElementById('settings-color-theme-select');
 opts = sel.options;
 for (var opt, j = 0; opt = opts[j]; j++) {
     if (opt.value == val) {
@@ -564,7 +588,7 @@ for (var opt, j = 0; opt = opts[j]; j++) {
     }
 }
 // Set the theme
-var themeChoice = document.getElementById('theme').value;
+var themeChoice = document.getElementById('settings-color-theme-select').value;
 document.getElementById('themeStyle').href = './themes/' + themeChoice + '.css';
 
 console.log(themeChoice + ' is the theme loaded from storage.');
@@ -581,7 +605,10 @@ window.onload = function() {
     let booksEl = document.getElementsByClassName('book');
     
     for (var i = 0; i < booksEl.length; i++) {
-        booksEl[i].addEventListener('click', function() {setChapter(this.innerText + ' 1');closePopups()});
+        booksEl[i].addEventListener('click', function() {
+            setChapter(this.id + ' 1')
+            closePopups();
+        });
     }
 
     // Make individual translation options clickable
