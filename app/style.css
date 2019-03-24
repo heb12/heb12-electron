@@ -313,6 +313,7 @@ and (max-width : 1000px) {
     text-align: left;
 }
 .book {
+    font-size: 15px;
     height: 40px;
     min-width: 100px;
     margin: 1px -1px;
