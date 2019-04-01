@@ -1,6 +1,6 @@
 {
     "error-no-internet-bold": "Pas d'Internet! ",
-    "error-no-internet-text": "Une connexion Internet est requise pour certaines composantes, incluant la traduction en ligne.",
+    "error-no-internet-text": "Une connexion Internet est requise pour certaines composantes, incluant la Bible anglaise en version NET Translation.",
 
     "info-header": "À propos de ce programme",
     "info-update-button": "Vérifier les mises à jour",
@@ -15,8 +15,6 @@
     "bookmarks-header": "Marque-pages",
     "history-header": "Historique",
     "clearHistoryButton": "Effacer",
-    "no-bookmarks": "",
-    "no-history": "",
 
     "settings-header": "Paramètres",
     "settings-text-header": "Texte",
@@ -55,14 +53,11 @@
     "settings-reset-text": "Ceci va réinitialiser tout vos paramètres et autres données enregistrées et ensuite restaurer le programme dans le même état que lors de l'installation.",
     "settings-reset-button": "Préparer la réinitialisation",
     "settings-reset-undo": "Rétablir",
-    "settings-reset-undo-text": "La réinitialisation seras active la prochaine fois que vous ouvrirez le programme.",
+    "settings-reset-undo-text": "La réinitialisation sera active la prochaine fois que vous ouvrirez le programme.",
 
     "books-header": "Livre",
     "books-ot": "Ancien Testament",
     "books-nt": "Nouveau Testament",
 
-    "translations-header": "Traductions",
-
-    "license-header": "",
-    "license-info": ""
+    "translations-header": "Traductions"
 }
