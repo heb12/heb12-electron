@@ -712,8 +712,7 @@ console.log(themeChoice + ' is the theme loaded from storage.');
 let storedTranslations = store.get('translation');
 console.log(storedTranslations + ' is the translation loaded from storage.');
 
-currentTranslation = storedTranslations;
-updateText();
+updateTranslation(storedTranslations);
 
 window.onload = function() {
     // Retrieve last chapter
