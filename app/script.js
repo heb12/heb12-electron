@@ -523,9 +523,7 @@ function buildVersesHTML(lang = 'en') {
 }
 
 // This loads the actual verses into the verse popup
-function loadVerse(ref) {
-    console.log(ref.split(' '));
-    
+function loadVerse(ref) {    
     document.getElementById('vs').innerText = bibleBooks[getBook(chapterAndVerse(ref).book.id)] + ' ' + ref.split(' ')[ref.split(' ').length-1];
 
     let lang = document.getElementById('verse-popup-languages').value;
