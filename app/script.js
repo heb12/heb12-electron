@@ -44,6 +44,7 @@ document.getElementById('settings-language').addEventListener('change', function
     language = document.getElementById('settings-language').value;
     language = ifDefault(language);
     bibleBooks = require('./locales/' + language + '/books.json').books;
+    ui = require('./locales/' + language + '/interface.json');
 
     document.getElementById('book').innerHTML = bibleBooks[getBook(chapterAndVerse(currentBook).book.id)];
 });
