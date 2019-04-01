@@ -447,7 +447,7 @@ function loadTranslations() {
     let lang = document.getElementById('translations-languages').value;
     let translations = getTranslations('language', lang);
     let translationsEl = document.getElementById('translations-available');
-    let toAdd = '';
+    let toAdd = document.createElement('div');
 
     for (let i = 0; i < translations.length; i++) {
         const translation = translations[i];
@@ -457,6 +457,7 @@ function loadTranslations() {
 
         let title = document.createElement('h3');
         title.innerText = supportedTranslations.translations[translations[i]].names.fullName + ' (' + supportedTranslations.translations[translations[i]].names.codename.toUpperCase() + ')';
+        title.id = supportedTranslations.translations[translations[i]].names.codename;
         element.appendChild(title);
 
         let transInfo = document.createElement('div');
@@ -472,10 +473,21 @@ function loadTranslations() {
         element.appendChild(description);
 
         wrapper.appendChild(element);
-        toAdd = toAdd + wrapper.innerHTML;
+        toAdd.appendChild(element);
     }
 
-    translationsEl.innerHTML = toAdd;
+    translationsEl.innerHTML = toAdd.innerHTML;
+
+    // Make individual translation options clickable
+    let elements = document.getElementsByClassName('translation');
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+        element.addEventListener('click', function () {
+            updateTranslation(this.getElementsByTagName('h3')[0].id);
+            closePopup('translations');
+        });
+    }
+
 }
 
 // This is a function which builds the HTML for supported translations in verse popup
@@ -708,16 +720,6 @@ window.onload = function() {
         booksEl[i].addEventListener('click', function() {
             setChapter(this.id + ' 1')
             closePopups();
-        });
-    }
-
-    // Make individual translation options clickable
-    let elements = document.getElementsByClassName('translation');
-    for (let i = 0; i < elements.length; i++) {
-        const element = elements[i];
-        element.addEventListener('click', function () {
-            updateTranslation(this.getElementsByTagName('h3')[0].innerText.split('(')[1].split(')')[0]);
-            closePopup('translations');
         });
     }
 
