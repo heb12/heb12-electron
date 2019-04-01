@@ -94,7 +94,7 @@ async function getVerses(reference, version) {
     document.getElementById('result').style.display = 'hidden';
     document.getElementById('scripture').innerText = "Loading Bible...";
     // Renders NET
-    if (version == 'net') {
+    if (version == 'en-net') {
         console.log('Loading NET');
         document.getElementById('scripture').innerHTML = "<div class=\"spinner\"><i class=\"fa fa-spinner fa-spin\"></i></div>";
 
