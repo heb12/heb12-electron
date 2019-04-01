@@ -70,8 +70,8 @@ function translate() {
 
     language = ifDefault(language);
 
-    let interface = require('./translations/' + language + '/interface.json');
-    let fallbackInterface = require('./translations/en-US/interface.json')
+    let interface = require('./locales/' + language + '/interface.json');
+    let fallbackInterface = require('./locales/en-US/interface.json')
 
     let elements = document.getElementsByClassName('translate');
     
@@ -104,7 +104,7 @@ function translate() {
 
     // Translate books of the Bible
     let booksEl = document.getElementsByClassName('book');
-    let books = require('./translations/' + language +'/books.json');
+    let books = require('./locales/' + language +'/books.json');
     books = books.books;
             
     for (let i = 0; i < books.length; i++) {
