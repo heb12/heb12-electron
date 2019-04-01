@@ -81,7 +81,7 @@ function getBook(bookGet) {
 // Gets a single verse from the NET
 function getNETVerse(ref) {
     if (!navigator.onLine) {
-        document.getElementById('nettext').innerHTML = '<em>Check your Internet connection.</em>';
+        document.getElementById('nettext').innerHTML = '<em>' + ui['error-no-internet-bold'] + '</em>';
         console.log('Offline ERROR. Cannot load NET verse');
     } else {
         document.getElementById('nettext').innerHTML = "<i class=\"fa fa-spinner fa-spin\"></i>";
