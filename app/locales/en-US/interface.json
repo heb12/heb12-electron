@@ -15,6 +15,8 @@
     "bookmarks-header": "Bookmarks",
     "history-header": "History",
     "clearHistoryButton": "Clear",
+    "no-bookmarks": "You currently have no bookmarks.",
+    "no-history": "You currently have no history.",
 
     "settings-header": "Settings",
     "settings-text-header": "Text",
@@ -59,5 +61,8 @@
     "books-ot": "Old Testament",
     "books-nt": "New Testament",
 
-    "translations-header": "Translations"
+    "translations-header": "Translations",
+
+    "license-header": "License",
+    "license-info": "This is the license for Heb12 Bible Desktop (this program). You may modify and redistribute this program under the terms of this license."
 }

@@ -33,15 +33,16 @@ const randomVerse = require('random-verse');
 // *The* variable for holding the current book being used
 let currentBook = 'Genesis';
 
-// Require for translations
+// Require for locales
 let language = document.getElementById('settings-language').value;
 language = ifDefault(language);
-let bibleBooks = require('./translations/' + language + '/books.json').books;
+let bibleBooks = require('./locales/' + language + '/books.json').books;
+let ui = require('./locales/' + language + '/interface.json');
 
 document.getElementById('settings-language').addEventListener('change', function () {
     language = document.getElementById('settings-language').value;
     language = ifDefault(language);
-    bibleBooks = require('./translations/' + language + '/books.json').books;
+    bibleBooks = require('./locales/' + language + '/books.json').books;
 
     document.getElementById('book').innerHTML = bibleBooks[getBook(chapterAndVerse(currentBook).book.id)];
 });
@@ -112,7 +113,8 @@ async function getVerses(reference, version) {
             
 
             document.getElementById('error').style.display = 'block';
-            document.getElementById('error').innerHTML = '<strong>No Internet!</strong> Internet connection is required for some features, including the NET translation. <span class=\"link\" onclick=\"updateTranslation(\'web\')\">Use WEB instead.</span>.';
+
+            document.getElementById('error').innerHTML = '<strong>' + ui['error-no-internet-bold'] + '</strong> ' + ui['error-no-internet-text'] + '<span class=\"link\" onclick=\"updateTranslation(\' ' + preferredTranslations[language] + '\')\">' + preferredTranslations[language].toUpperCase() + '</span>.';
 
             document.getElementById('scripture').innerHTML = '';
         } else {
@@ -210,7 +212,7 @@ function loadLogs(type) {
 
     // Only load history or bookmarks if there's actually history or bookmarks
     if (item == '') {
-        itemEl.innerText = 'You currently have no ' + type + '.';
+        itemEl.innerText = ui['no-' + type];
 
         document.getElementById('clearHistoryButton').style.display = 'none';
     }
@@ -230,7 +232,10 @@ function loadLogs(type) {
             } catch (e) {
                 itemEl.innerHTML = e + itemEl.innerHTML;
             } finally {
-                title.innerHTML = item[i];
+                console.log(item[i]);
+                title.className = chapterAndVerse(item[i]).book.name + ' ' + item[i].split(' ')[1];
+                title.innerHTML = bibleBooks[getBook(chapterAndVerse(item[i]).book.id)] + ' ' + item[i].split(' ')[1];
+                
                 //console.log(title);
                 itemItem.appendChild(title);
                 itemItem.appendChild(para);
@@ -245,7 +250,7 @@ function loadLogs(type) {
         for (let i = 0; i < elements.length; i++) {
             const element = elements[i];
             element.addEventListener('click', function () {
-                setChapter(this.getElementsByTagName('h3')[0].innerText);
+                setChapter(this.getElementsByTagName('h3')[0].className);
                 closePopup('history');
             });
         }
@@ -425,7 +430,7 @@ function openVerse(pas) {
         ref = randomVerse();
     }
     openPopup('versePopup');
-    document.getElementById('vs').innerText = ref;
+    document.getElementById('vs').innerText = bibleBooks[getBook(chapterAndVerse(ref).book.id)] + ' ' + ref.split(' ')[1];
 
     for (let i = 0; i < obtranslations.length; i++) {
         let element = obtranslations[i];
