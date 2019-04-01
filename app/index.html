@@ -136,116 +136,25 @@ Heb12 Desktop is a simple Electron app for reading the Bible.
             <h2 id='vs'>Verse name</h2>
             <input id="searchBox" type="text" autofocus placeholder="Hebrews 4:12" /><button id="searchAction" onclick="openVerse(document.getElementById('searchBox').value)">Open</button>
             
-            <select id="verse-popup-languages" class="translate">
-                <option value="en-US">English</option>
-                <option value="fr">French</option>
+            <select id="verse-popup-languages" onchange="openVerse(document.getElementById('searchBox').placeholder)">
+                <option value="en">English</option>
+                <option value="fr">Français</option>
             </select>
 
-            <div class="verseBox text">
-                <p><strong>ASV</strong></p>
-                <p id="en-asvtext" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>Darby</strong></p>
-                <p id="en-darbytext" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>Jubilee</strong></p>
-                <p id="en-jubtext" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>KJ2000</strong></p>
-                <p id="en-kj2000text" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>KJV</strong></p>
-                <p id="en-kjvtext" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>NET</strong></p>
-                <p id="nettext" class="text verseText"><em>No text available. Check your internet connection.</em></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>NHEB</strong></p>
-                <p id="en-nhebtext" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>RSV</strong></p>
-                <p id="en-rsvtext" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>Webster</strong></p>
-                <p id="en-wbttext" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>WEB</strong></p>
-                <p id="en-webtext" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>YLT</strong></p>
-                <p id="en-ylttext" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>FR-BDC</strong></p>
-                <p id="fr-bdctext" class="text verseText"></p>
-            </div>
+            <div id="verseBoxes"></div>
         </div>
 
         <!-- Selection popups -->
         <div id="translations" class="popup">
             <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
             <h2 id="translations-header" class="translate">Translations</h2>
-            <div class="brickSelect">
-                <div class="translation">
-                    <h3>American Standard Version (ASV)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p>The American Standard Version (ASV) is a translation of the Bible from 1901.</p>
-                </div>
-                <div class="translation">
-                    <h3>Darby Bible (DARBY)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p>The Darby Bible is a translation of the Bible from 1890 by John Nelson Darby for "unlearned who have neither access to manuscript texts nor training and knowledge of ancient languages of the Scriptures".</p>
-                </div>
-                <div class="translation">
-                    <h3>Jubilee 2000 Bible (JUB)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p></p>
-                </div>
-                <div class="translation">
-                    <h3>King James 2000 (KJ2000)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p>The King James 2000 translation is "a King James Version brought forward 400 years." It subsitutes old English words for modern English.</p>
-                </div>
-                <div class="translation">
-                    <h3>King James Version (KJV)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p>The King James Version (or Authorised Version) is a translation of the Bible from 1611 commisioned by King James I. </p>
-                </div>
-                <div class="translation">
-                    <h3>New Heart English Bible (NHEB)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p>"The goal of this work is to provide a modern and accurate English translation Bible based on the latest standard texts for the public domain."</p>
-                </div>
-                <div class="translation">
-                    <h3>New English Translation (NET)</h3> <div class="transInfo online">Online Only</div>
-                    <p>The New English Translation is a free, "completely new" online English translation of the Bible, "with 60,932 translators' notes" sponsored by the Biblical Studies Foundation and published by Biblical Studies Press. <small>wikipedia</small></p>
-                </div>
-                <div class="translation">
-                    <h3>Revised Standard Version (RSV)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p>The Revised Standard Version is a translation written in easy to read English.</p>
-                </div>
-                <div class="translation">
-                    <h3>Webster (WBT)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p>The Webster Bible was translated by Noah Webster in 1833.</p>
-                </div>
-                <div class="translation">
-                    <h3>World English Bible (WEB)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p>The World English Bible is a revision of the American Standard Version in the Public Domain. Completed in 2000.</p>
-                </div>
-                <div class="translation">
-                    <h3>Young's Literal Translation (YLT)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p>The Young's Literal Translation is a translation of the Bible by Robert Young in 1862. It is a very literal translation of the text.</p>
-                </div>
-                <div class="translation">
-                    <h3>Bible Pirot-Clamer (FR-BDC)</h3>
-                    <div class="transInfo offline">Offline Available</div>
-                    <p>"La Sainte Bible commencée sous la direction de Louis Pirot ; continuée sous la direction de Albert Clamer, avec le concours de professeurs d'universités et de grands séminaires."</p>
-                </div>
-            </div>
+
+            <select id="translations-languages" onchange="loadTranslations()">
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+            </select>
+
+            <div id="translations-available" class="brickSelect"></div>
         </div>
                 </div>
             </div>

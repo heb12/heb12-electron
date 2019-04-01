@@ -29,6 +29,7 @@ const request = require('request');
 const Store = require('electron-store');
 const store = new Store();
 const randomVerse = require('random-verse');
+const supportedTranslations = require('./translations.json');
 
 // *The* variable for holding the current book being used
 let currentBook = 'Genesis';
@@ -49,19 +50,7 @@ document.getElementById('settings-language').addEventListener('change', function
 
 
 // List supported translations from OpenBibles
-const obtranslations = [
-    'en-asv',
-    'en-darby',
-    'en-jub',
-    'en-kj2000',
-    'en-kjv',
-    'en-nheb',
-    'en-rsv',
-    'en-wbt',
-    'en-web',
-    'en-ylt',
-    'fr-bdc'
-]
+const obtranslations = getTranslations('type', 'openbibles');
 
 // Preferred translations from the above of different languages for scripture excerpts
 const preferredTranslations = {
@@ -81,7 +70,7 @@ function getBook(bookGet) {
 // Gets a single verse from the NET
 function getNETVerse(ref) {
     if (!navigator.onLine) {
-        document.getElementById('nettext').innerHTML = '<em>' + ui['error-no-internet-bold'] + '</em>';
+        document.getElementById('en-nettext').innerHTML = '<em>' + ui['error-no-internet-bold'] + '</em>';
         console.log('Offline ERROR. Cannot load NET verse');
     } else {
         document.getElementById('nettext').innerHTML = "<i class=\"fa fa-spinner fa-spin\"></i>";
@@ -420,6 +409,119 @@ function changetextAlign() {
     document.getElementById('scripture').style.textAlign = document.getElementById('settings-text-align-select').value;
 }
 
+// Provides certain items from translations.json depending on factors such as language and type
+function getTranslations(identity, value) {
+    let translations = [];
+
+    // If value is a string, convert it into an array with one item
+    if (typeof(value) == 'string') {
+        value = [value];
+    }
+    if (typeof(identity) == 'string') {
+        identity = [identity];
+    }
+
+    for (let i = 0; i < supportedTranslations.translationsList.length; i++) {
+        const translation = supportedTranslations.translationsList[i];
+
+        let passing = true;
+        
+        for (let index = 0; index < value.length; index++) {
+            if (supportedTranslations.translations[translation][identity[index]] != value[index]) {
+                passing = false
+            }
+        }
+
+        if (passing) {
+            translations.push(translation);
+        }
+        
+    }
+    
+    return translations;
+}
+
+// Loads translations into translations popup
+function loadTranslations() {
+    let lang = document.getElementById('translations-languages').value;
+    let translations = getTranslations('language', lang);
+    let translationsEl = document.getElementById('translations-available');
+    let toAdd = '';
+
+    for (let i = 0; i < translations.length; i++) {
+        const translation = translations[i];
+        let wrapper = document.createElement('div');
+        let element = document.createElement('div');
+        element.className = 'translation';
+
+        let title = document.createElement('h3');
+        title.innerText = supportedTranslations.translations[translations[i]].names.fullName + ' (' + supportedTranslations.translations[translations[i]].names.codename.toUpperCase() + ')';
+        element.appendChild(title);
+
+        let transInfo = document.createElement('div');
+        transInfo.className = 'transInfo offline';
+        if (supportedTranslations.translations[translations[i]].type == 'online') {
+            transInfo.className = 'transInfo online';
+        }
+        transInfo.innerHTML = supportedTranslations.translations[translations[i]].type;
+        element.appendChild(transInfo);
+
+        let description = document.createElement('p');
+        description.innerText = supportedTranslations.translations[translations[i]].description;
+        element.appendChild(description);
+
+        wrapper.appendChild(element);
+        toAdd = toAdd + wrapper.innerHTML;
+    }
+
+    translationsEl.innerHTML = toAdd;
+}
+
+// This is a function which builds the HTML for supported translations in verse popup
+function buildVersesHTML(lang = 'en') {
+    let toAdd = '';
+    toAdd = toAdd + '<div class="verseBox text"><p><strong>NET</strong></p><p id="en-nettext" class="text verseText"></p></div>'
+    let translations = getTranslations(['type', 'language'], ['openbibles', lang]);
+    for (let i = 0; i < translations.length; i++) {
+        const translation = translations[i];
+        let wrapper = document.createElement('div');
+        let element = document.createElement('div');
+        element.className = 'verseBox text';
+
+        let title = document.createElement('p');
+        title.innerHTML = '<strong>' + supportedTranslations.translations[translation].names.codename.toUpperCase();
+
+        let verseBox = document.createElement('p');
+        verseBox.id = translation + 'text';
+        verseBox.className = 'text verseText';
+
+        element.appendChild(title);
+        element.appendChild(verseBox);
+
+        wrapper.appendChild(element);
+
+        toAdd = toAdd + wrapper.innerHTML;
+    }
+
+    document.getElementById('verseBoxes').innerHTML = toAdd;
+}
+
+// This loads the actual verses into the verse popup
+function loadVerse(ref) {
+    document.getElementById('vs').innerText = bibleBooks[getBook(chapterAndVerse(ref).book.id)] + ' ' + ref.split(' ')[1];
+
+    let lang = document.getElementById('verse-popup-languages').value;
+    buildVersesHTML(lang);
+    let translations = getTranslations(['language', 'type'], [lang, 'openbibles']);
+    for (let i = 0; i < translations.length; i++) {
+        let element = translations[i];
+        document.getElementById(element + 'text').innerText = bibles(ref, element);
+        console.log('Loading translation ' + element + ' into verse lookup popup.');
+        
+    }
+    getNETVerse(ref);
+}
+
 // This opens a verse popup for a specific verse
 function openVerse(pas) {
     let ref;
@@ -429,16 +531,8 @@ function openVerse(pas) {
     } else {
         ref = randomVerse();
     }
+    loadVerse(ref);
     openPopup('versePopup');
-    document.getElementById('vs').innerText = bibleBooks[getBook(chapterAndVerse(ref).book.id)] + ' ' + ref.split(' ')[1];
-
-    for (let i = 0; i < obtranslations.length; i++) {
-        let element = obtranslations[i];
-        document.getElementById(element + 'text').innerText = bibles(ref, element);
-        console.log('Loading translation ' + element + ' into verse lookup popup.');
-        
-    }
-    getNETVerse(ref);
     document.getElementById('searchBox').placeholder = ref;
     document.getElementById('searchBox').value = '';
 }
@@ -599,10 +693,10 @@ document.getElementById('themeStyle').href = './themes/' + themeChoice + '.css';
 console.log(themeChoice + ' is the theme loaded from storage.');
 
 // Retrieve last translation
-var translations = store.get('translation');
-console.log(translations + ' is the translation loaded from storage.');
+let storedTranslations = store.get('translation');
+console.log(storedTranslations + ' is the translation loaded from storage.');
 
-document.getElementById('translation').innerText = translations;
+document.getElementById('translation').innerText = storedTranslations;
 
 window.onload = function() {
     // Retrieve last chapter
@@ -626,18 +720,16 @@ window.onload = function() {
         });
     }
 
+    // Build verse popup HTML
+    buildVersesHTML()
     // Setup default verse popup
     let ref = randomVerse();
-    document.getElementById('vs').innerText = ref;
+    loadVerse(ref);
 
-    for (let i = 0; i < obtranslations.length; i++) {
-        let element = obtranslations[i];
-        document.getElementById(element + 'text').innerText = bibles(ref, element);
-        //console.log('Loading translation ' + element + ' into verse lookup popup.');
-        
-    }
-    console.log('Loaded text into verse popup.')
-    getNETVerse(ref);
     document.getElementById('searchBox').placeholder = ref;
     document.getElementById('searchBox').value = '';
+
+
+    // Load translations into translation popup
+    loadTranslations();
 }

@@ -328,6 +328,7 @@ and (max-width : 1000px) {
     margin: 5px 0 5px 0;
 }
 .transInfo {
+    text-transform: capitalize;
     margin: 0;
     padding: 3px 5px;
     width: max-content;
