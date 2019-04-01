@@ -31,8 +31,9 @@ const store = new Store();
 const randomVerse = require('random-verse');
 const supportedTranslations = require('./translations.json');
 
-// *The* variable for holding the current book being used
+// *The* variable for holding the current book and translation being used
 let currentBook = 'Genesis';
+let currentTranslation = 'en-web'
 
 // Require for locales
 let language = document.getElementById('settings-language').value;
@@ -117,7 +118,7 @@ async function getVerses(reference, version) {
             // Uses the request API to request the scripture from the url above
             request(url, function (error, response, body) {
                 if (result != '') {
-                    if (document.getElementById('translation').innerText.toLowerCase == version.toLowerCase) {
+                    if (currentTranslation == version.toLowerCase) {
                         document.getElementById('scripture').innerHTML = body;
                         document.getElementById('error').style.display = 'none';
                         var bold = document.getElementsByTagName('b');
@@ -187,10 +188,10 @@ var chapter, chapters, books, theBook, theChapter;
 // An easy function to update the text according to the dropdown menus
 async function updateText() {
     theBook = currentBook;
+    chapter = document.getElementById('chapter');
     let a = chapterAndVerse(theBook);
     chapters = a.book.chapters;
-    var translation = document.getElementById('translation').innerText.toLowerCase();
-    var text2 = await getVerses(a.book.name + ' ' + chapter.value, translation);
+    getVerses(a.book.name + ' ' + document.getElementById('chapter').value, currentTranslation);
 }
 
 // Loads either history or bookmarks
@@ -344,8 +345,10 @@ function loadChapters() {
 function updateTranslation(theTranslation) {
     console.log(theTranslation);
 
-    document.getElementById('translation').innerText = theTranslation;
-    store.set('translation', theTranslation);
+    currentTranslation = theTranslation;
+    
+    document.getElementById('translation').innerText = supportedTranslations.translations[currentTranslation].names.codename;
+    store.set('translation', currentTranslation);
     updateText();
 }
 
@@ -457,7 +460,7 @@ function loadTranslations() {
 
         let title = document.createElement('h3');
         title.innerText = supportedTranslations.translations[translations[i]].names.fullName + ' (' + supportedTranslations.translations[translations[i]].names.codename.toUpperCase() + ')';
-        title.id = supportedTranslations.translations[translations[i]].names.codename;
+        title.id = supportedTranslations.translations[translations[i]].language + '-' + supportedTranslations.translations[translations[i]].names.codename;
         element.appendChild(title);
 
         let transInfo = document.createElement('div');
@@ -709,7 +712,8 @@ console.log(themeChoice + ' is the theme loaded from storage.');
 let storedTranslations = store.get('translation');
 console.log(storedTranslations + ' is the translation loaded from storage.');
 
-document.getElementById('translation').innerText = storedTranslations;
+currentTranslation = storedTranslations;
+updateText();
 
 window.onload = function() {
     // Retrieve last chapter
