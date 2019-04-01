@@ -343,8 +343,6 @@ function loadChapters() {
     }
 }
 function updateTranslation(theTranslation) {
-    console.log(theTranslation);
-
     currentTranslation = theTranslation;
     
     document.getElementById('translation').innerText = supportedTranslations.translations[currentTranslation].names.codename;
@@ -604,7 +602,7 @@ function setup() {
     store.set('font', 'default');
     store.set('theme', 'theme1');
     store.set('textAlign', 'left');
-    store.set('translation', 'net');
+    store.set('translation', 'en-net');
     store.set('history', ['Hebrews 4']);
     store.set('bookmarks', ['Hebrews 4']);
     console.log("Finished first-time setup of storage");
