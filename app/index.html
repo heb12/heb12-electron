@@ -328,22 +328,17 @@ Heb12 Desktop is a simple Electron app for reading the Bible.
             <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
 
             <h2 id="bookmarks-header" class="translate">Bookmarks</h2>
-            <div id="bookmarksItems" class="brickSelect">
-                You currently have no bookmarks.
-            </div>
+            <div id="bookmarksItems" class="brickSelect"></div>
 
             <h2 id="history-header" class="translate">History</h2>
             <button id="clearHistoryButton" class="translate" onclick="store.set('history', ['']);loadHistory()">Clear</button>
-            <div id="historyItems" class="brickSelect">
-                You currently have no history.
-            </div>
+            <div id="historyItems" class="brickSelect"></div>
         </div>
 
         <div class="popup" id="license">
             <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
             <h2>License</h2>
-            <p>This is the license for Heb12 Bible Desktop (this program). You may modify and redistribute this program under the terms of this license. </p>
-            <p>The GNU General Public License is a license that gives the users freedom with the software to run it, to modify it, to redistribute (or sell) it as obtained, and to redistribute (or sell) it with modification, as long as everyone that has the software has  (the previous is not legal advice and has no legal value whatsoever, read the license below for legal information).</p>
+            <p id="license-info" class="translate"></p>
             <iframe id="licenseFrame" src="license.html">
 
             </iframe>
