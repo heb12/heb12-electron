@@ -17,7 +17,7 @@ Heb12 Desktop is a simple Electron app for reading the Bible.
 -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="UTF-8"/>
         <title>Heb12 Bible</title>
@@ -47,34 +47,31 @@ Heb12 Desktop is a simple Electron app for reading the Bible.
         <div id="backdrop" onclick="closePopups()"></div>
         <div id="info" class="popup">
             <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
-            <h1>About this Program</h1>
+            <h1 id="info-header" class="translate">About this Program</h1>
             <div id="technicalInfo">
                 <img alt="Heb12 Icon" src="icon.png" />
-                <p>Version: <span id="version">x.x.x</span> <button id="checkUpdates" onclick="checkUpdates()">Check for updates</button>
+                <p><span id="info-version" class="translate"></span>: <span id="version">x.x.x</span> <button id="info-update-button" id="translate" onclick="checkUpdates()">Check for updates</button>
                     <select id="channel">
                         <option value="stable">Stable</option>
                         <option value="beta">Beta</option>
                     </select>
                 </p>
                 <p id="latestUpdate" style="display:none"></p>
-                <p>Website: <span class="link">heb12.github.io</span></p>
+                <p><span id="info-website" class="translate"></span>: <span class="link">heb12.github.io</span></p>
             </div>
             <br /><br />
-            <p>This program was built by MasterOfTheTiger (<span class="link">mtiger.xyz</span>) as a simple Bible program for desktop systems.</p>
-            <blockquote><b>4:12</b> For the word of God is living and active and sharper than any double-edged sword, piercing even to the point of dividing soul from spirit, and joints from marrow; it is able to judge the desires and thoughts of the heart. <span class="link" onclick="closePopups();openVerse('Hebrews 4:12')">Hebrews 4:12</span></blockquote>
-            <p>Heb12 Desktop Copyright &copy; 2018, 2019 The Heb12 Developers <span class="link">heb12.github.io/developers</span></p>
-            <p>This program is free software: you can redistribute it and/or modify
-            it under the terms of the GNU General Public License as published by
-            the Free Software Foundation, either version 3 of the License, or
-            (at your option) any later version.<br />
-            <a onclick="closePopups();openPopup('license')" class="link">Read the license</a>.</p>
+            <p id="info-basic-description" class="translate"></p>
+            <blockquote><b>4:12</b> <span id="info-verse" class="translate"></span> <span class="link" onclick="closePopups();openVerse('Hebrews 4:12')">Hebrews 4:12</span></blockquote>
+            <p><span id="info-copyright" class="translate"></span> <span class="link">heb12.github.io/developers</span></p>
+            <p><span id="info-license" class="translate"></span><br />
+            <a onclick="closePopups();openPopup('license')" id="info-license-link" class="link translate"></a>.</p>
         </div>
         <div id="settings" class="popup">
             <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
-            <h1>Settings</h1>
+            <h1 id="settings-header" class="translate">Settings</h1>
             <div class="settingsBox">
                 <h2>Text</h2>
-                <span>Font size:</span>
+                <span id="settings-text-font-size" class="translate"></span>:
                 <select id="fontSize" onchange="changeFontSize(this.value)">
                     <option value="12">12px</option>
                     <option value="14">14px</option>
@@ -85,42 +82,51 @@ Heb12 Desktop is a simple Electron app for reading the Bible.
                     <option value="24">24px</option>
                 </select>
                 <br /><br />
-                <span>Font family:</span>
-                <select id="font" onchange="changeFont()">
-                    <option value="default">Arial</option>
-                    <option value="'Times New Roman'">Times New Roman</option>
-                    <option value="Open Sans">Open Sans</option>
-                    <option value="Roboto">Roboto</option>
-                    <option value="'Roboto Mono'">Roboto Mono</option>
-                    <option value="Montserrat">Montserrat</option>
+                <span id="settings-text-font" class="translate"></span>:
+                <select id="settings-text-font-select" class="translate" onchange="changeFont()">
+                    <option value="default"></option>
+                    <option value="'Times New Roman'"></option>
+                    <option value="Open Sans"></option>
+                    <option value="Roboto"></option>
+                    <option value="'Roboto Mono'"></option>
+                    <option value="Montserrat"></option>
                 </select>
                 <br /><br />
-                <span>Font align:</span>
-                <select id="textAlign" onchange="changetextAlign()">
-                    <option value="left">Left</option>
-                    <option value="center">Center</option>
-                    <option value="justify">Justify</option>
+                <span id="settings-text-align" class="translate"></span>:
+                <select id="settings-text-align-select" class="translate" onchange="changetextAlign()">
+                    <option value="left"></option>
+                    <option value="center"></option>
+                    <option value="justify"></option>
                 </select>
             </div>
             <div class="settingsBox">
-                <h2>Color Theme</h2>
-                <select id="theme" onchange="changeTheme()">
-                    <option value="theme1">Default</option>
-                    <option value="theme6">Amethyst</option>
-                    <option value="theme3">Dark</option>
-                    <option value="theme4">Light Blue</option>
-                    <option value="theme2">Orange</option>
-		    <option value="theme5">Red</option>
+                <h2>Language</h2>
+                <select id="settings-language">
+                    <option value="default">Default</option>
+                    <option value="en-US">English</option>
+                    <option value="fr">Français</option>
+                </select>
+                
+                <h2 id="settings-color-theme-header" class="translate">Color Theme</h2>
+                <select id="settings-color-theme-select" class="translate" onchange="changeTheme()">
+                    <option value="theme1"></option>
+                    <option value="theme6"></option>
+                    <option value="theme3"></option>
+                    <option value="theme4"></option>
+                    <option value="theme2"></option>
+		            <option value="theme5"></option>
                 </select>
             </div>
             <div class="settingsBox">
-                <h2>Reset</h2>
-                <p>This will reset all of your settings and other information stored and restore the program to the state it was in when you installed it.</p>
+                <h2 id="settings-reset-header" class="translate">Reset</h2>
+                <p id="settings-reset-text" class="translate"></p>
                 <div id="undoReset" style="display:none;">
-                    <p><em>Reset will occur next time you open the program.</em></p>
-                    <button onclick="localStorage.setItem('firstTime', 'no');document.getElementById('undoReset').style.display='none';document.getElementById('reset').style.display='block';" style="border-color:red">Undo</button>
+                    <p><em id="settings-reset-undo-text" class="translate"></em></p>
+                    <button onclick="localStorage.setItem('firstTime', 'no');document.getElementById('undoReset').style.display='none';document.getElementById('settings-reset-button').style.display='block';" style="border-color:red" id = "settings-reset-undo" class="translate">
+                    <!-- Undo -->
+                    </button>
                 </div>
-                <button id="reset" onclick="reset(); document.getElementById('undoReset').style.display='block';this.style.display='none'">Prepare Reset</button>
+                <button id="settings-reset-button" class="translate" onclick="reset(); document.getElementById('undoReset').style.display='block';this.style.display='none'"></button>
             </div>
         </div>
 
@@ -129,200 +135,119 @@ Heb12 Desktop is a simple Electron app for reading the Bible.
             <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
             <h2 id='vs'>Verse name</h2>
             <input id="searchBox" type="text" autofocus placeholder="Hebrews 4:12" /><button id="searchAction" onclick="openVerse(document.getElementById('searchBox').value)">Open</button>
-            <div class="verseBox text">
-                <p><strong>ASV</strong></p>
-                <p id="asvtext" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>Darby</strong></p>
-                <p id="dbytext" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>Jubilee</strong></p>
-                <p id="jubtext" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>KJ2000</strong></p>
-                <p id="kj2000text" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>KJV</strong></p>
-                <p id="kjvtext" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>NET</strong></p>
-                <p id="nettext" class="text verseText"><em>No text available. Check your internet connection.</em></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>NHEB</strong></p>
-                <p id="nhebtext" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>RSV</strong></p>
-                <p id="rsvtext" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>Webster</strong></p>
-                <p id="wbttext" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>WEB</strong></p>
-                <p id="webtext" class="text verseText"></p>
-            </div>
-            <div class="verseBox text">
-                <p><strong>YLT</strong></p>
-                <p id="ylttext" class="text verseText"></p>
-            </div>
+            
+            <select id="verse-popup-languages" onchange="openVerse(document.getElementById('searchBox').placeholder)">
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+            </select>
+
+            <div id="verseBoxes"></div>
         </div>
 
         <!-- Selection popups -->
         <div id="translations" class="popup">
             <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
-            <h2>Translations</h2>
-            <div class="brickSelect">
-                <div class="translation">
-                    <h3>American Standard Version (ASV)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p>The American Standard Version (ASV) is a translation of the Bible from 1901.</p>
-                </div>
-                <div class="translation">
-                    <h3>Darby Bible (DBY)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p>The Darby Bible is a translation of the Bible from 1890 by John Nelson Darby for "unlearned who have neither access to manuscript texts nor training and knowledge of ancient languages of the Scriptures".</p>
-                </div>
-                <div class="translation">
-                    <h3>Jubilee 2000 Bible (JUB)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p></p>
-                </div>
-                <div class="translation">
-                    <h3>King James 2000 (KJ2000)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p>The King James 2000 translation is "a King James Version brought forward 400 years." It subsitutes old English words for modern English.</p>
-                </div>
-                <div class="translation">
-                    <h3>King James Version (KJV)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p>The King James Version (or Authorised Version) is a translation of the Bible from 1611 commisioned by King James I. </p>
-                </div>
-                <div class="translation">
-                    <h3>New Heart English Bible (NHEB)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p>"The goal of this work is to provide a modern and accurate English translation Bible based on the latest standard texts for the public domain."</p>
-                </div>
-                <div class="translation">
-                    <h3>New English Translation (NET)</h3> <div class="transInfo online">Online Only</div>
-                    <p>The New English Translation is a free, "completely new" online English translation of the Bible, "with 60,932 translators' notes" sponsored by the Biblical Studies Foundation and published by Biblical Studies Press. <small>wikipedia</small></p>
-                </div>
-                <div class="translation">
-                    <h3>Revised Standard Version (RSV)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p>The Revised Standard Version is a translation written in easy to read English.</p>
-                </div>
-                <div class="translation">
-                    <h3>Webster (WBT)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p>The Webster Bible was translated by Noah Webster in 1833.</p>
-                </div>
-                <div class="translation">
-                    <h3>World English Bible (WEB)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p>The World English Bible is a revision of the American Standard Version in the Public Domain. Completed in 2000.</p>
-                </div>
-                <div class="translation">
-                    <h3>Young's Literal Translation (YLT)</h3> <div class="transInfo offline">Offline Available</div>
-                    <p>The Young's Literal Translation is a translation of the Bible by Robert Young in 1862. It is a very literal translation of the text.</p><div class="translation">
-                </div>
-            </div>
+            <h2 id="translations-header" class="translate">Translations</h2>
+
+            <select id="translations-languages" onchange="loadTranslations()">
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+            </select>
+
+            <div id="translations-available" class="brickSelect"></div>
         </div>
                 </div>
             </div>
         </div>
         <div id="books" class="popup">
             <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
-            <h1>Books</h1>
-            <h3>Old Testament</h3>
-            <button class="book ot">Genesis</button>
-            <button value="Exod" class="book ot">Exodus</button>
-            <button value="Lev" class="book ot">Leviticus</button>
-            <button value="Num" class="book ot">Numbers</button>
-            <button value="Deut" class="book ot">Deuteronomy</button>
-            <button value="Josh" class="book ot">Joshua</button>
-            <button value="Judg" class="book ot">Judges</button>
-            <button value="Ruth" class="book ot">Ruth</button>
-            <button value="1Sam" class="book ot">1 Samuel</button>
-            <button value="2Sam" class="book ot">2 Samuel</button>
-            <button value="1Kgs" class="book ot">1 Kings</button>
-            <button value="2Kgs" class="book ot">2 Kings</button>
-            <button value="1Chr" class="book ot">1 Chronicles</button>
-            <button value="2Chr" class="book ot">2 Chronicles</button>
-            <button value="Ezra" class="book ot">Ezra</button>
-            <button value="Neh" class="book ot">Nehemiah</button>
-            <button value="Esth" class="book ot">Esther</button>
-            <button value="Job" class="book ot">Job</button>
-            <button value="Ps" class="book ot">Psalms</button>
-            <button value="Prov" class="book ot">Proverbs</button>
-            <button value="Eccl" class="book ot">Ecclesiastes</button>
-            <button value="Song" class="book ot">Song of Solomon</button>
-            <button value="Isa" class="book ot">Isaiah</button>
-            <button value="Jer" class="book ot">Jeremiah</button>
-            <button value="Lam" class="book ot">Lamentations</button>
-            <button value="Ezek" class="book ot">Ezekiel</button>
-            <button value="Dan" class="book ot">Daniel</button>
-            <button value="Hos" class="book ot">Hosea</button>
-            <button value="Joel" class="book ot">Joel</button>
-            <button value="Amos" class="book ot">Amos</button>
-            <button value="Obad" class="book ot">Obadiah</button>
-            <button value="Jonah" class="book ot">Jonah</button>
-            <button value="Mic" class="book ot">Micah</button>
-            <button value="Nah" class="book ot">Nahum</button>
-            <button value="Hab" class="book ot">Habakkuk</button>
-            <button value="Zeph" class="book ot">Zephaniah</button>
-            <button value="Hag" class="book ot">Haggai</button>
-            <button value="Zech" class="book ot">Zechariah</button>
-            <button value="Mal" class="book ot">Malachi</button>
+            <h1 id="books-header" class="translate">Books</h1>
+            <h3 id="books-ot" class="translate"></h3>
+            <button id="Gen" class="book ot">Genesis</button>
+            <button id="Exod" class="book ot">Exodus</button>
+            <button id="Lev" class="book ot">Leviticus</button>
+            <button id="Num" class="book ot">Numbers</button>
+            <button id="Deut" class="book ot">Deuteronomy</button>
+            <button id="Josh" class="book ot">Joshua</button>
+            <button id="Judg" class="book ot">Judges</button>
+            <button id="Ruth" class="book ot">Ruth</button>
+            <button id="1Sam" class="book ot">1 Samuel</button>
+            <button id="2Sam" class="book ot">2 Samuel</button>
+            <button id="1Kgs" class="book ot">1 Kings</button>
+            <button id="2Kgs" class="book ot">2 Kings</button>
+            <button id="1Chr" class="book ot">1 Chronicles</button>
+            <button id="2Chr" class="book ot">2 Chronicles</button>
+            <button id="Ezra" class="book ot">Ezra</button>
+            <button id="Neh" class="book ot">Nehemiah</button>
+            <button id="Esth" class="book ot">Esther</button>
+            <button id="Job" class="book ot">Job</button>
+            <button id="Ps" class="book ot">Psalms</button>
+            <button id="Prov" class="book ot">Proverbs</button>
+            <button id="Eccl" class="book ot">Ecclesiastes</button>
+            <button id="Song" class="book ot">Song of Solomon</button>
+            <button id="Isa" class="book ot">Isaiah</button>
+            <button id="Jer" class="book ot">Jeremiah</button>
+            <button id="Lam" class="book ot">Lamentations</button>
+            <button id="Ezek" class="book ot">Ezekiel</button>
+            <button id="Dan" class="book ot">Daniel</button>
+            <button id="Hos" class="book ot">Hosea</button>
+            <button id="Joel" class="book ot">Joel</button>
+            <button id="Amos" class="book ot">Amos</button>
+            <button id="Obad" class="book ot">Obadiah</button>
+            <button id="Jonah" class="book ot">Jonah</button>
+            <button id="Mic" class="book ot">Micah</button>
+            <button id="Nah" class="book ot">Nahum</button>
+            <button id="Hab" class="book ot">Habakkuk</button>
+            <button id="Zeph" class="book ot">Zephaniah</button>
+            <button id="Hag" class="book ot">Haggai</button>
+            <button id="Zech" class="book ot">Zechariah</button>
+            <button id="Mal" class="book ot">Malachi</button>
             <!-- Now the New Testament -->
-            <h3>New Testament</h3>
-            <button value="Matt" class="book nt">Matthew</button>
-            <button value="Mark" class="book nt">Mark</button>
-            <button value="Luke" class="book nt">Luke</button>
-            <button value="John" class="book nt">John</button>
-            <button value="Acts" class="book nt">Acts</button>
-            <button value="Rom" class="book nt">Romans</button>
-            <button value="1Cor" class="book nt">1 Corinthians</button>
-            <button value="2Cor" class="book nt">2 Corinthians</button>
-            <button value="Gal" class="book nt">Galatians</button>
-            <button value="Eph" class="book nt">Ephesians</button>
-            <button value="Phil" class="book nt">Philippians</button>
-            <button value="Col" class="book nt">Colossians</button>
-            <button value="1Thess" class="book nt">1 Thessalonians</button>
-            <button value="2Thess" class="book nt">2 Thessalonians</button>
-            <button value="1Tim" class="book nt">1 Timothy</button>
-            <button value="2Tim" class="book nt">2 Timothy</button>
-            <button value="Titus" class="book nt">Titus</button>
-            <button value="Phlm" class="book nt">Philemon</button>
-            <button value="Heb" class="book nt">Hebrews</button>
-            <button value="Jas" class="book nt">James</button>
-            <button value="1Pet" class="book nt">1 Peter</button>
-            <button value="2Pet" class="book nt">2 Peter</button>
-            <button value="1John" class="book nt">1 John</button>
-            <button value="2John" class="book nt">2 John</button>
-            <button class="book nt">3 John</button>
-            <button class="book nt">Jude</button>
-            <button class="book nt">Revelation</button>
+            <h3 id="books-nt" class="translate"></h3>
+            <button id="Matt" class="book nt">Matthew</button>
+            <button id="Mark" class="book nt">Mark</button>
+            <button id="Luke" class="book nt">Luke</button>
+            <button id="John" class="book nt">John</button>
+            <button id="Acts" class="book nt">Acts</button>
+            <button id="Rom" class="book nt">Romans</button>
+            <button id="1Cor" class="book nt">1 Corinthians</button>
+            <button id="2Cor" class="book nt">2 Corinthians</button>
+            <button id="Gal" class="book nt">Galatians</button>
+            <button id="Eph" class="book nt">Ephesians</button>
+            <button id="Phil" class="book nt">Philippians</button>
+            <button id="Col" class="book nt">Colossians</button>
+            <button id="1Thess" class="book nt">1 Thessalonians</button>
+            <button id="2Thess" class="book nt">2 Thessalonians</button>
+            <button id="1Tim" class="book nt">1 Timothy</button>
+            <button id="2Tim" class="book nt">2 Timothy</button>
+            <button id="Titus" class="book nt">Titus</button>
+            <button id="Phlm" class="book nt">Philemon</button>
+            <button id="Heb" class="book nt">Hebrews</button>
+            <button id="Jas" class="book nt">James</button>
+            <button id="1Pet" class="book nt">1 Peter</button>
+            <button id="2Pet" class="book nt">2 Peter</button>
+            <button id="1John" class="book nt">1 John</button>
+            <button id="2John" class="book nt">2 John</button>
+            <button id="3John" class="book nt">3 John</button>
+            <button id="Jude" class="book nt">Jude</button>
+            <button id="Rev" class="book nt">Revelation</button>
         </div>
 
         <div class="popup" id="history">
             <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
 
-            <h2>Bookmarks</h2>
-            <div id="bookmarksItems" class="brickSelect">
-                You currently have no bookmarks.
-            </div>
+            <h2 id="bookmarks-header" class="translate">Bookmarks</h2>
+            <div id="bookmarksItems" class="brickSelect"></div>
 
-            <h2>History</h2>
-            <button id="clearHistoryButton" onclick="store.set('history', ['']);loadHistory()">Clear</button>
-            <div id="historyItems" class="brickSelect">
-                You currently have no history.
-            </div>
+            <h2 id="history-header" class="translate">History</h2>
+            <button id="clearHistoryButton" class="translate" onclick="store.set('history', ['']);loadHistory()">Clear</button>
+            <div id="historyItems" class="brickSelect"></div>
         </div>
 
         <div class="popup" id="license">
             <div class="closePopup" onclick="closePopups()"><i class="fas fa-times"></i></div>
             <h2>License</h2>
-            <p>This is the license for Heb12 Bible Desktop (this program). You may modify and redistribute this program under the terms of this license. </p>
-            <p>The GNU General Public License is a license that gives the users freedom with the software to run it, to modify it, to redistribute (or sell) it as obtained, and to redistribute (or sell) it with modification, as long as everyone that has the software has  (the previous is not legal advice and has no legal value whatsoever, read the license below for legal information).</p>
+            <p id="license-info" class="translate"></p>
             <iframe id="licenseFrame" src="license.html">
 
             </iframe>
@@ -347,6 +272,7 @@ Heb12 Desktop is a simple Electron app for reading the Bible.
             <p id="scripture" class="text">Chapter will be here...</p>
         </div>
         <script src="../node_modules/chapter-and-verse/chapterAndVerse.js"></script>
+        <script src="./translate.js"></script>
         <script src="./script.js"></script>
         <script src="updater.js"></script>
     </body>

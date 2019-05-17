@@ -29,20 +29,36 @@ const request = require('request');
 const Store = require('electron-store');
 const store = new Store();
 const randomVerse = require('random-verse');
+const supportedTranslations = require('./translations.json');
+
+// *The* variable for holding the current book and translation being used
+let currentBook = 'Genesis';
+let currentTranslation = 'en-web'
+
+// Require for locales
+let language = document.getElementById('settings-language').value;
+language = ifDefault(language);
+let bibleBooks = require('./locales/' + language + '/books.json').books;
+let ui = require('./locales/' + language + '/interface.json');
+
+document.getElementById('settings-language').addEventListener('change', function () {
+    language = document.getElementById('settings-language').value;
+    language = ifDefault(language);
+    bibleBooks = require('./locales/' + language + '/books.json').books;
+    ui = require('./locales/' + language + '/interface.json');
+
+    document.getElementById('book').innerHTML = bibleBooks[getBook(chapterAndVerse(currentBook).book.id)];
+});
+
 
 // List supported translations from OpenBibles
-const obtranslations = [
-    'asv',
-    'dby',
-    'jub',
-    'kj2000',
-    'kjv',
-    'nheb',
-    'rsv',
-    'wbt',
-    'web',
-    'ylt'
-]
+const obtranslations = getTranslations('type', 'openbibles');
+
+// Preferred translations from the above of different languages for scripture excerpts
+const preferredTranslations = {
+    "en-US":"en-web",
+    "fr":"fr-bdc"
+}
 
 // This function gets the book number in bible.json (i.e Genesis is 0, Exodus is 1, etc.) from its name
 function getBook(bookGet) {
@@ -56,7 +72,7 @@ function getBook(bookGet) {
 // Gets a single verse from the NET
 function getNETVerse(ref) {
     if (!navigator.onLine) {
-        document.getElementById('nettext').innerHTML = '<em>Check your Internet connection.</em>';
+        document.getElementById('en-nettext').innerHTML = '<em>' + ui['error-no-internet-bold'] + '</em>';
         console.log('Offline ERROR. Cannot load NET verse');
     } else {
         document.getElementById('nettext').innerHTML = "<i class=\"fa fa-spinner fa-spin\"></i>";
@@ -78,7 +94,7 @@ async function getVerses(reference, version) {
     document.getElementById('result').style.display = 'hidden';
     document.getElementById('scripture').innerText = "Loading Bible...";
     // Renders NET
-    if (version == 'net') {
+    if (version == 'en-net') {
         console.log('Loading NET');
         document.getElementById('scripture').innerHTML = "<div class=\"spinner\"><i class=\"fa fa-spinner fa-spin\"></i></div>";
 
@@ -88,7 +104,8 @@ async function getVerses(reference, version) {
             
 
             document.getElementById('error').style.display = 'block';
-            document.getElementById('error').innerHTML = '<strong>No Internet!</strong> Internet connection is required for some features, including the NET translation. <span class=\"link\" onclick=\"updateTranslation(\'web\')\">Use WEB instead.</span>.';
+
+            document.getElementById('error').innerHTML = '<strong>' + ui['error-no-internet-bold'] + '</strong> ' + ui['error-no-internet-text'] + '<span class=\"link\" onclick=\"updateTranslation(\' ' + preferredTranslations[language] + '\')\">' + preferredTranslations[language].toUpperCase() + '</span>.';
 
             document.getElementById('scripture').innerHTML = '';
         } else {
@@ -101,7 +118,7 @@ async function getVerses(reference, version) {
             // Uses the request API to request the scripture from the url above
             request(url, function (error, response, body) {
                 if (result != '') {
-                    if (document.getElementById('translation').innerText.toLowerCase == version.toLowerCase) {
+                    if (currentTranslation == version.toLowerCase) {
                         document.getElementById('scripture').innerHTML = body;
                         document.getElementById('error').style.display = 'none';
                         var bold = document.getElementsByTagName('b');
@@ -141,9 +158,9 @@ async function getVerses(reference, version) {
     // Show the scripture element
     document.getElementById('scripture').style.display = 'block';
     // Set the title of the page to the Bible reference and 'Heb12 Bible'
-    document.title = chapterAndVerse(document.getElementById('book').innerText).book.name + ' ' + document.getElementById('chapter').value + ' - ' + 'Heb12 Bible';
+    document.title = bibleBooks[getBook(chapterAndVerse(currentBook).book.id)]  + ' ' + document.getElementById('chapter').value + ' - ' + 'Heb12 Bible';
     // Save the reference opened into storage
-    let saveRef = chapterAndVerse(document.getElementById('book').innerText).book.name + ' ' + document.getElementById('chapter').value;
+    let saveRef = chapterAndVerse(currentBook).book.name + ' ' + document.getElementById('chapter').value;
     store.set("lastRef", saveRef);
     let history = store.get('history');
 
@@ -170,11 +187,11 @@ var chapter, chapters, books, theBook, theChapter;
 
 // An easy function to update the text according to the dropdown menus
 async function updateText() {
-    theBook = document.getElementById('book').innerText;
+    theBook = currentBook;
+    chapter = document.getElementById('chapter');
     let a = chapterAndVerse(theBook);
     chapters = a.book.chapters;
-    var translation = document.getElementById('translation').innerText.toLowerCase();
-    var text2 = await getVerses(a.book.name + ' ' + chapter.value, translation);
+    getVerses(a.book.name + ' ' + document.getElementById('chapter').value, currentTranslation);
 }
 
 // Loads either history or bookmarks
@@ -186,7 +203,7 @@ function loadLogs(type) {
 
     // Only load history or bookmarks if there's actually history or bookmarks
     if (item == '') {
-        itemEl.innerText = 'You currently have no ' + type + '.';
+        itemEl.innerText = ui['no-' + type];
 
         document.getElementById('clearHistoryButton').style.display = 'none';
     }
@@ -201,12 +218,15 @@ function loadLogs(type) {
             let button = document.createElement('button');
             try {
                 //console.log(chapterAndVerse(item[i]).book.name + ' ' + chapterAndVerse(item[i]).chapter + ':1', 'web');
-                para.innerHTML = bibles(chapterAndVerse(item[i]).book.name + ' ' + chapterAndVerse(item[i]).chapter + ':1', 'web');
+                para.innerHTML = bibles(chapterAndVerse(item[i]).book.name + ' ' + chapterAndVerse(item[i]).chapter + ':1', preferredTranslations[language]);
                 //console.log(para);
             } catch (e) {
                 itemEl.innerHTML = e + itemEl.innerHTML;
             } finally {
-                title.innerHTML = item[i];
+                console.log(item[i]);
+                title.className = chapterAndVerse(item[i]).book.name + ' ' + item[i].split(' ')[1];
+                title.innerHTML = bibleBooks[getBook(chapterAndVerse(item[i]).book.id)] + ' ' + item[i].split(' ')[1];
+                
                 //console.log(title);
                 itemItem.appendChild(title);
                 itemItem.appendChild(para);
@@ -221,7 +241,7 @@ function loadLogs(type) {
         for (let i = 0; i < elements.length; i++) {
             const element = elements[i];
             element.addEventListener('click', function () {
-                setChapter(this.getElementsByTagName('h3')[0].innerText);
+                setChapter(this.getElementsByTagName('h3')[0].className);
                 closePopup('history');
             });
         }
@@ -247,7 +267,7 @@ function bookmarkCheck(ref) {
 
 // Toggles bookmarked chapter
 function toggleBookmark() {
-    let reference = document.getElementById('book').innerText + ' ' + document.getElementById('chapter').value;
+    let reference = currentBook + ' ' + document.getElementById('chapter').value;
     let bookmarks = store.get('bookmarks');
     // If the chapter is bookmarked, it unbookmarks it, and vice versa
     if (bookmarkCheck(reference)) {
@@ -270,16 +290,14 @@ function toggleBookmark() {
 function nextChapter() {
     books = document.getElementsByClassName('book');
     chapter = document.getElementById('chapter');
-    theBook = document.getElementById('book').innerText;
+    theBook = currentBook;
     let a = chapterAndVerse(theBook);
     chapters = a.book.chapters;
 
     if ((chapters > 1) && (chapter.value != chapters)) {
         chapter.selectedIndex = chapter.selectedIndex + 1;
     } else if ((chapter.selectedIndex == chapters - 1) && theBook != 'Revelation') {
-        document.getElementById('book').innerText = chapterAndVerse(bible[Number(getBook(a.book.id)) + 1].id).book.name;
-        theBook = document.getElementById('book').innerText;
-        console.log(theBook);
+        setChapter(chapterAndVerse(bible[Number(getBook(a.book.id)) + 1].id).book.id);
         loadChapters();
         chapter.selectedIndex = 0;
     }
@@ -288,15 +306,15 @@ function nextChapter() {
 function lastChapter() {
     books = document.getElementsByClassName('book');
     chapter = document.getElementById('chapter');
-    theBook = document.getElementById('book').innerText;
+    theBook = currentBook;
     let a = chapterAndVerse(theBook);
     chapters = a.book.chapters;
     // Selected index starts at 0
     if ((chapters > 1) && (chapter.selectedIndex > 0)) {
         chapter.selectedIndex = chapter.selectedIndex - 1;
     } else if ((chapter.selectedIndex == 0) && (theBook != 'Genesis')) {
-        document.getElementById('book').innerText = chapterAndVerse(bible[Number(getBook(a.book.id)) - 1].id).book.name;
-        theBook = document.getElementById('book').innerText;
+        setChapter(chapterAndVerse(bible[Number(getBook(a.book.id)) - 1].id).book.id);
+        theBook = currentBook;
         loadChapters();
         chapter.selectedIndex = chapters - 1;
     }
@@ -307,8 +325,7 @@ function lastChapter() {
 function loadChapters() {
     books = document.getElementsByClassName('book');
     chapter = document.getElementById('chapter');
-    theBook = document.getElementById('book').innerText;
-    theBook = document.getElementById('book').innerText;
+    theBook = currentBook;
     let a = chapterAndVerse(theBook);
     
     chapters = a.book.chapters;
@@ -326,17 +343,19 @@ function loadChapters() {
     }
 }
 function updateTranslation(theTranslation) {
-    console.log(theTranslation);
-
-    document.getElementById('translation').innerText = theTranslation;
-    store.set('translation', theTranslation);
+    currentTranslation = theTranslation;
+    
+    document.getElementById('translation').innerText = supportedTranslations.translations[currentTranslation].names.codename;
+    store.set('translation', currentTranslation);
     updateText();
 }
 
 // This lets you easily open a chapter
 function setChapter(reference) {
     var a = chapterAndVerse(reference);
-    document.getElementById('book').innerText = a.book.name;
+    // Sets the book text in header to book name for current language
+    document.getElementById('book').innerText = bibleBooks[getBook(a.book.id)];
+    currentBook = a.book.name;
     loadChapters();
     document.getElementById('chapter').selectedIndex = a.chapter - 1;
     updateText();
@@ -374,22 +393,147 @@ function changeFontSize(size) {
 }
 
 function changeFont() {
-    store.set('font', document.getElementById('font').value);
-    if (document.getElementById('font').value == 'default') {
+    store.set('font', document.getElementById('settings-text-font-select').value);
+    if (document.getElementById('settings-text-font-select').value == 'default') {
         document.getElementById('scripture').style.fontFamily = 'Arial, Helvetica, sans-serif';
     } else {
-        document.getElementById('scripture').style.fontFamily = document.getElementById('font').value;
+        document.getElementById('scripture').style.fontFamily = document.getElementById('settings-text-font-select').value;
     }
 
 }
 function changeTheme() {
-    store.set('theme', document.getElementById('theme').value);
-    themeChoice = document.getElementById('theme').value;
+    store.set('theme', document.getElementById('settings-color-theme-select').value);
+    themeChoice = document.getElementById('settings-color-theme-select').value;
     document.getElementById('themeStyle').href = './themes/' + themeChoice +'.css';
 }
 function changetextAlign() {
-    store.set('textAlign', document.getElementById('textAlign').value);
-    document.getElementById('scripture').style.textAlign = document.getElementById('textAlign').value;
+    store.set('textAlign', document.getElementById('settings-text-align-select').value);
+    document.getElementById('scripture').style.textAlign = document.getElementById('settings-text-align-select').value;
+}
+
+// Provides certain items from translations.json depending on factors such as language and type
+function getTranslations(identity, value) {
+    let translations = [];
+
+    // If value is a string, convert it into an array with one item
+    if (typeof(value) == 'string') {
+        value = [value];
+    }
+    if (typeof(identity) == 'string') {
+        identity = [identity];
+    }
+
+    for (let i = 0; i < supportedTranslations.translationsList.length; i++) {
+        const translation = supportedTranslations.translationsList[i];
+
+        let passing = true;
+        
+        for (let index = 0; index < value.length; index++) {
+            if (supportedTranslations.translations[translation][identity[index]] != value[index]) {
+                passing = false
+            }
+        }
+
+        if (passing) {
+            translations.push(translation);
+        }
+        
+    }
+    
+    return translations;
+}
+
+// Loads translations into translations popup
+function loadTranslations() {
+    let lang = document.getElementById('translations-languages').value;
+    let translations = getTranslations('language', lang);
+    let translationsEl = document.getElementById('translations-available');
+    let toAdd = document.createElement('div');
+
+    for (let i = 0; i < translations.length; i++) {
+        const translation = translations[i];
+        let wrapper = document.createElement('div');
+        let element = document.createElement('div');
+        element.className = 'translation';
+
+        let title = document.createElement('h3');
+        title.innerText = supportedTranslations.translations[translations[i]].names.fullName + ' (' + supportedTranslations.translations[translations[i]].names.codename.toUpperCase() + ')';
+        title.id = supportedTranslations.translations[translations[i]].language + '-' + supportedTranslations.translations[translations[i]].names.codename;
+        element.appendChild(title);
+
+        let transInfo = document.createElement('div');
+        transInfo.className = 'transInfo offline';
+        if (supportedTranslations.translations[translations[i]].type == 'online') {
+            transInfo.className = 'transInfo online';
+        }
+        transInfo.innerHTML = supportedTranslations.translations[translations[i]].type;
+        element.appendChild(transInfo);
+
+        let description = document.createElement('p');
+        description.innerText = supportedTranslations.translations[translations[i]].description;
+        element.appendChild(description);
+
+        wrapper.appendChild(element);
+        toAdd.appendChild(element);
+    }
+
+    translationsEl.innerHTML = toAdd.innerHTML;
+
+    // Make individual translation options clickable
+    let elements = document.getElementsByClassName('translation');
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+        element.addEventListener('click', function () {
+            updateTranslation(this.getElementsByTagName('h3')[0].id);
+            closePopup('translations');
+        });
+    }
+
+}
+
+// This is a function which builds the HTML for supported translations in verse popup
+function buildVersesHTML(lang = 'en') {
+    let toAdd = '';
+    toAdd = toAdd + '<div class="verseBox text"><p><strong>NET</strong></p><p id="en-nettext" class="text verseText"></p></div>'
+    let translations = getTranslations(['type', 'language'], ['openbibles', lang]);
+    for (let i = 0; i < translations.length; i++) {
+        const translation = translations[i];
+        let wrapper = document.createElement('div');
+        let element = document.createElement('div');
+        element.className = 'verseBox text';
+
+        let title = document.createElement('p');
+        title.innerHTML = '<strong>' + supportedTranslations.translations[translation].names.codename.toUpperCase();
+
+        let verseBox = document.createElement('p');
+        verseBox.id = translation + 'text';
+        verseBox.className = 'text verseText';
+
+        element.appendChild(title);
+        element.appendChild(verseBox);
+
+        wrapper.appendChild(element);
+
+        toAdd = toAdd + wrapper.innerHTML;
+    }
+
+    document.getElementById('verseBoxes').innerHTML = toAdd;
+}
+
+// This loads the actual verses into the verse popup
+function loadVerse(ref) {    
+    document.getElementById('vs').innerText = bibleBooks[getBook(chapterAndVerse(ref).book.id)] + ' ' + ref.split(' ')[ref.split(' ').length-1];
+
+    let lang = document.getElementById('verse-popup-languages').value;
+    buildVersesHTML(lang);
+    let translations = getTranslations(['language', 'type'], [lang, 'openbibles']);
+    for (let i = 0; i < translations.length; i++) {
+        let element = translations[i];
+        document.getElementById(element + 'text').innerText = bibles(ref, element);
+        console.log('Loading translation ' + element + ' into verse lookup popup.');
+        
+    }
+    getNETVerse(ref);
 }
 
 // This opens a verse popup for a specific verse
@@ -401,16 +545,8 @@ function openVerse(pas) {
     } else {
         ref = randomVerse();
     }
+    loadVerse(ref);
     openPopup('versePopup');
-    document.getElementById('vs').innerText = ref;
-
-    for (let i = 0; i < obtranslations.length; i++) {
-        let element = obtranslations[i];
-        document.getElementById(element + 'text').innerText = bibles(ref, element);
-        console.log('Loading translation ' + element + ' into verse lookup popup.');
-        
-    }
-    getNETVerse(ref);
     document.getElementById('searchBox').placeholder = ref;
     document.getElementById('searchBox').value = '';
 }
@@ -466,7 +602,7 @@ function setup() {
     store.set('font', 'default');
     store.set('theme', 'theme1');
     store.set('textAlign', 'left');
-    store.set('translation', 'net');
+    store.set('translation', 'en-net');
     store.set('history', ['Hebrews 4']);
     store.set('bookmarks', ['Hebrews 4']);
     console.log("Finished first-time setup of storage");
@@ -475,6 +611,7 @@ function setup() {
 // Resets the program's storage
 function reset() {
     store.delete('firstTime');
+    store.delete('translation');
     console.log("Set firstTime to false. When startup() funtion is run user information will be erased.");
 }
 
@@ -516,7 +653,7 @@ for (var opt, j = 0; opt = opts[j]; j++) {
 changeFontSize(fontSize);
 
 val = store.get('textAlign');
-sel = document.getElementById('textAlign');
+sel = document.getElementById('settings-text-align-select');
 opts = sel.options;
 for (var opt, j = 0; opt = opts[j]; j++) {
     if (opt.value == val) {
@@ -527,7 +664,7 @@ for (var opt, j = 0; opt = opts[j]; j++) {
 
 // Retrieve last font style
 val = store.get('font');
-sel = document.getElementById('font');
+sel = document.getElementById('settings-text-font-select');
 opts = sel.options;
 for (var opt, j = 0; opt = opts[j]; j++) {
     if (opt.value == val) {
@@ -535,14 +672,14 @@ for (var opt, j = 0; opt = opts[j]; j++) {
         break;
     }
 }
-if (document.getElementById('font').value == 'default') {
+if (document.getElementById('settings-text-font-select').value == 'default') {
     document.getElementById('scripture').style.fontFamily = 'Arial, Helvetica, sans-serif';
 } else {
-    document.getElementById('scripture').style.fontFamily = document.getElementById('font').value;
+    document.getElementById('scripture').style.fontFamily = document.getElementById('settings-text-font-select').value;
 }
 // Retrieve last textAlign
 val = store.get('textAlign');
-sel = document.getElementById('textAlign');
+sel = document.getElementById('settings-text-align-select');
 opts = sel.options;
 for (var opt, j = 0; opt = opts[j]; j++) {
     if (opt.value == val) {
@@ -550,12 +687,12 @@ for (var opt, j = 0; opt = opts[j]; j++) {
         break;
     }
 }
-document.getElementById('scripture').style.textAlign = document.getElementById('textAlign').value;
+document.getElementById('scripture').style.textAlign = document.getElementById('settings-text-align-select').value;
 
 // Retrieve last theme
 val = store.get('theme');
 
-sel = document.getElementById('theme');
+sel = document.getElementById('settings-color-theme-select');
 opts = sel.options;
 for (var opt, j = 0; opt = opts[j]; j++) {
     if (opt.value == val) {
@@ -564,16 +701,16 @@ for (var opt, j = 0; opt = opts[j]; j++) {
     }
 }
 // Set the theme
-var themeChoice = document.getElementById('theme').value;
+var themeChoice = document.getElementById('settings-color-theme-select').value;
 document.getElementById('themeStyle').href = './themes/' + themeChoice + '.css';
 
 console.log(themeChoice + ' is the theme loaded from storage.');
 
 // Retrieve last translation
-var translations = store.get('translation');
-console.log(translations + ' is the translation loaded from storage.');
+let storedTranslations = store.get('translation');
+console.log(storedTranslations + ' is the translation loaded from storage.');
 
-document.getElementById('translation').innerText = translations;
+updateTranslation(storedTranslations);
 
 window.onload = function() {
     // Retrieve last chapter
@@ -581,31 +718,22 @@ window.onload = function() {
     let booksEl = document.getElementsByClassName('book');
     
     for (var i = 0; i < booksEl.length; i++) {
-        booksEl[i].addEventListener('click', function() {setChapter(this.innerText + ' 1');closePopups()});
-    }
-
-    // Make individual translation options clickable
-    let elements = document.getElementsByClassName('translation');
-    for (let i = 0; i < elements.length; i++) {
-        const element = elements[i];
-        element.addEventListener('click', function () {
-            updateTranslation(this.getElementsByTagName('h3')[0].innerText.split('(')[1].split(')')[0]);
-            closePopup('translations');
+        booksEl[i].addEventListener('click', function() {
+            setChapter(this.id + ' 1')
+            closePopups();
         });
     }
 
+    // Build verse popup HTML
+    buildVersesHTML()
     // Setup default verse popup
     let ref = randomVerse();
-    document.getElementById('vs').innerText = ref;
+    loadVerse(ref);
 
-    for (let i = 0; i < obtranslations.length; i++) {
-        let element = obtranslations[i];
-        document.getElementById(element + 'text').innerText = bibles(ref, element);
-        //console.log('Loading translation ' + element + ' into verse lookup popup.');
-        
-    }
-    console.log('Loaded text into verse popup.')
-    getNETVerse(ref);
     document.getElementById('searchBox').placeholder = ref;
     document.getElementById('searchBox').value = '';
+
+
+    // Load translations into translation popup
+    loadTranslations();
 }

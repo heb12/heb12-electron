@@ -1,0 +1,124 @@
+{
+    "translationsList": [
+        "en-asv",
+        "en-darby",
+        "en-kj2000",
+        "en-kjv",
+        "en-nheb",
+        "en-net",
+        "en-wbt",
+        "en-web",
+        "en-ylt",
+        "fr-bdc"
+    ],
+    "translations": {
+        "en-asv": {
+            "type":"openbibles",
+            "language":"en",
+            "names": {
+                "fullName":"American Standard Version",
+                "codename":"asv"
+            },
+            "description":"The American Standard Version of 1901 is an Americanization of the English Revised Bible, which is an update of the KJV to less archaic spelling and greater accuracy of translation. It has been called \"The Rock of Biblical Honesty.\" It is the product of the work of over 50 Evangelical Christian scholars.",
+            "copyright":"Public Domain"
+        },
+
+        "en-darby": {
+            "type":"openbibles",
+            "lanugage":"en",
+            "names": {
+                "fullName": "Darby Bible",
+                "codename":"darby"
+            },
+            "description":"First published in 1890 by John Nelson Darby, an Anglo-Irish bible teacher associated with the early years of the Plymouth Brethren. Darby also published translations of the Bible in French and German.",
+            "copyright":"Public Domain"
+        },
+
+        "en-kj2000": {
+            "type":"openbibles",
+            "language":"en",
+            "names": {
+                "fullName":"King James 2000",
+                "codename":"kj2000"
+            },
+            "description":"The King James 2000 translation is \"a King James Version brought forward 400 years.\" It subsitutes old English words for modern English."
+        },
+
+        "en-kjv": {
+            "type":"openbibles",
+            "language":"en",
+            "names": {
+                "fullName":"King James Version",
+                "codename":"kjv"
+            },
+            "description":"In 1604, King James I of England authorized that a new translation of the Bible into English be started. It was finished in 1611, just 85 years after the first translation of the New Testament into English appeared (Tyndale, 1526). The Authorized Version, or King James Version, quickly became the standard for English-speaking Protestants. Its flowing language and prose rhythm has had a profound influence on the literature of the past 300 years.",
+            "copyright":"Public Domain"
+        },
+
+        "en-nheb": {
+            "type":"openbibles",
+            "language":"en",
+            "names": {
+                "fullName":"New Heart English Bible",
+                "codename":"nheb"
+            },
+            "description":"\"The goal of this work is to provide a modern and accurate English translation Bible based on the latest standard texts for the public domain.\"",
+            "copyright":"Public Domain"
+        },
+
+        "en-net": {
+            "type":"online",
+            "language":"en",
+            "api":"https://labs.bible.org/api/?formatting=full&passage='",
+            "names": {
+                "fullName":"New English Translation",
+                "codename":"net"
+            },
+            "description":"The New English Translation is a free, \"completely new\" online English translation of the Bible, \"with 60,932 translators' notes\" sponsored by the Biblical Studies Foundation and published by Biblical Studies Press. Source: Wikipedia",
+            "copyright":"Non-commercial"
+        },
+
+        "en-wbt": {
+            "type":"openbibles",
+            "language":"en",
+            "names": {
+                "fullName":"Webster Bible",
+                "codename":"wbt"
+            },
+            "description":"The Webster Bible was translated by Noah Webster in 1833."
+        },
+        
+        "en-web": {
+            "type":"openbibles",
+            "language":"en",
+            "names": {
+                "fullName":"World English Bible",
+                "codename":"web"
+            },
+            "description":"The World English Bible is a revision of the American Standard Version in the Public Domain. Completed in 2000.",
+            "copyright":"Public Domain"
+        },
+        
+        "en-ylt": {
+            "type":"openbibles",
+            "language":"en",
+            "names": {
+                "fullName":"Young's Literal Translation",
+                "codename":"ylt"
+            },
+            "description":"The Young's Literal Translation is a translation of the Bible by Robert Young in 1862. It is a very literal translation of the text.",
+            "copyright":"Public Domain"
+        },
+
+        "fr-bdc": {
+            "type":"openbibles",
+            "language":"fr",
+            "names": {
+                "fullName":"Bible Pirot-Clamer",
+                "codename":"bdc"
+            },
+            "description":"La Sainte Bible commencée sous la direction de Louis Pirot ; continuée sous la direction de Albert Clamer, avec le concours de professeurs d'universités et de grands séminaires.",
+            "copyright":"Unknown"
+        }
+    }
+}

@@ -1,0 +1,68 @@
+{
+    "error-no-internet-bold": "No Internet! ",
+    "error-no-internet-text": "Internet connection is required for some features, including the NET translation.",
+
+    "info-header": "About this Program",
+    "info-update-button": "Check for Updates",
+    "info-version": "Version",
+    "info-website": "Website",
+    "info-basic-description": "This program was built by MasterOfTheTiger (https://mtiger.xyz) as a simple Bible program for desktop systems.",
+    "info-copyright": "Heb12 Desktop Copyright © 2018, 2019 The Heb12 Developers",
+    "info-license": "This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.",
+    "info-license-link": "Read the license",
+    "info-verse": "For the word of God is living and active and sharper than any double-edged sword, piercing even to the point of dividing soul from spirit, and joints from marrow; it is able to judge the desires and thoughts of the heart.",
+
+    "bookmarks-header": "Bookmarks",
+    "history-header": "History",
+    "clearHistoryButton": "Clear",
+    "no-bookmarks": "You currently have no bookmarks.",
+    "no-history": "You currently have no history.",
+
+    "settings-header": "Settings",
+    "settings-text-header": "Text",
+    "settings-text-font-size": "Font size",
+    "settings-text-font": "Font family",
+    "settings-text-font-select": [
+        "Arial",
+        "Times New Roman",
+        "Open Sans",
+        "Roboto",
+        "Roboto Mono",
+        "Montserrat"
+    ],
+    "settings-text-align": "Text align",
+    "settings-text-align-select": [
+        "Left",
+        "Center",
+        "Justify"
+    ],
+    "settings-color-theme-header": "Color Theme",
+    "settings-color-theme-select": [
+        "Default",
+        "Amethyst",
+        "Dark",
+        "Light Blue",
+        "Orange",
+        "Red"
+    ],
+
+    "settings-language-header": "Language",
+    "settings-language-select": [
+        "Default"
+    ],
+
+    "settings-reset-header": "Reset",
+    "settings-reset-text": "This will reset all of your settings and other information stored and restore the program to the state it was in when you installed it.",
+    "settings-reset-button": "Prepare Reset",
+    "settings-reset-undo": "Undo",
+    "settings-reset-undo-text": "Reset will occur next time you open the program.",
+
+    "books-header": "Books",
+    "books-ot": "Old Testament",
+    "books-nt": "New Testament",
+
+    "translations-header": "Translations",
+
+    "license-header": "License",
+    "license-info": "This is the license for Heb12 Bible Desktop (this program). You may modify and redistribute this program under the terms of this license."
+}
