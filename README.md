@@ -1,5 +1,6 @@
 # Heb12 Bible Desktop
 [![Snap Status](https://build.snapcraft.io/badge/heb12/heb12-desktop.svg)](https://build.snapcraft.io/user/heb12/heb12-desktop)
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/heb12-desktop)
 
 A desktop program for reading the Bible.
 
