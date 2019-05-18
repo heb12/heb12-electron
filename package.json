@@ -33,7 +33,7 @@
     "request": "^2.88.0"
   },
   "build": {
-    "appId": "tk.mtiger.heb12",
+    "appId": "io.github.heb12",
     "dmg": {
       "contents": [
         {
