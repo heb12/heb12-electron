@@ -11,3 +11,7 @@ parts:
   my-part:
     # See 'snapcraft plugins'
     plugin: nil
+
+apps:
+  heb12:
+    command: heb12-desktop
