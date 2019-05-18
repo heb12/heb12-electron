@@ -13,5 +13,5 @@ parts:
     plugin: nil
 
 apps:
-  heb12:
+  heb12-desktop:
     command: heb12-desktop
