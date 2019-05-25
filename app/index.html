@@ -29,7 +29,7 @@ Heb12 Desktop is a simple Electron app for reading the Bible.
     <body>
         <div id="head">
             <div id="headItems">
-                <span id="translation" class="button" onclick="openPopup('translations')">KJV</span>
+                <span id="translation" class="button" onclick="openPopup('translations');loadTranslations()">KJV</span>
                 <span onclick="openPopup('books')" id="book" class="button">Genesis</span>
                 <select id="chapter" onchange="updateText()" class="button">
                     <option value="1">1</option>
