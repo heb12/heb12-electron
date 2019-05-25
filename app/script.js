@@ -343,6 +343,10 @@ function loadChapters() {
     }
 }
 function updateTranslation(theTranslation) {
+    // If for some reason there's no complete name, default to English
+    if (theTranslation.split('-')[0].length == 1) {
+        theTranslation = 'en-' + theTranslation;
+    }
     currentTranslation = theTranslation;
     
     document.getElementById('translation').innerText = supportedTranslations.translations[currentTranslation].names.codename;
@@ -362,7 +366,6 @@ function setChapter(reference) {
 }
 
 // Increase and decrease text size
-var script;
 function fontSizePlus() {
     var fontSize = store.get('fontSize');
     let x = document.getElementsByClassName('text');
@@ -403,10 +406,10 @@ function changeFont() {
 }
 function changeTheme() {
     store.set('theme', document.getElementById('settings-color-theme-select').value);
-    themeChoice = document.getElementById('settings-color-theme-select').value;
+    let themeChoice = document.getElementById('settings-color-theme-select').value;
     document.getElementById('themeStyle').href = './themes/' + themeChoice +'.css';
 }
-function changetextAlign() {
+function changeTextAlign() {
     store.set('textAlign', document.getElementById('settings-text-align-select').value);
     document.getElementById('scripture').style.textAlign = document.getElementById('settings-text-align-select').value;
 }
@@ -620,97 +623,111 @@ function reset() {
 // Retrieves items from storage and sets up program
 // -------
 
-// Checks if this is the first time you opened the program
-var firstTime = store.get('firstTime');
-console.log(firstTime + ' is the value of firstTime in storage.');
-
-// If this is the first time you opened the program, run the setup function
-if (firstTime != 'no') {
-    setup();
-}
-
-script = document.getElementById('scripture');
-
-// Load storage into dropdowns
-let val, sel, opts;
-
-// Retrieve last font size
-let fontSize = store.get('fontSize');
-sel = document.getElementById('fontSize');
-opts = sel.options;
-for (var opt, j = 0; opt = opts[j]; j++) {
-    if (opt.innerText == fontSize) {
-        sel.selectedIndex = j;
-        break;
+(function loadStorage() {
+    // Declare default values for different variables
+    const variables = [
+        "fontSize",
+        "lineSpacing",
+        "firstTime",
+        "lastRef",
+        "font",
+        "theme",
+        "textAlign",
+        "translation",
+        "history",
+        "bookmarks"
+    ]
+    let variableData = {
+        fontSize: { 
+            defaultValue: "18px",
+            element: "fontSize"
+        },
+        lineSpacing: {
+            defaultValue: "25px",
+            element: ""
+        },
+        firstTime: {
+            defaultValue: false,
+            element: ""
+        },
+        lastRef: {
+            defaultValue: "Hebrews 4",
+            element: ""
+        },
+        font: {
+            defaultValue: "default",
+            element: "settings-text-font-select"
+        },
+        theme: {
+            defaultValue: "theme1",
+            element: "settings-color-theme-select"
+        },
+        textAlign: {
+            defaultValue: "left",
+            element: "settings-text-align-select"
+        },
+        translation: {
+            defaultValue: "en-net",
+            element: ""
+        },
+        history: {
+            defaultValue: ['Hebrews 4'],
+            element: ""
+        },
+        bookmarks: {
+            defaultValue: ['Hebrews 4'],
+            element: ""
+        }
     }
-    // Maintain backwards compatability with versions 0.3.0 and earlier
-    else {
-        sel.selectedIndex = 3;
+
+    // This looks through all of the elements and and applies the results ot the HTML or whatever else it does
+    for (let i = 0; i < variables.length; i++) {
+        const data = variableData[variables[i]];
+
+        data.value = store.get(variables[i]);
+
+        if (typeof(data.value) == 'undefined') {
+            data.value = data.defaultValue
+        }
+        
+        // Update select elements with the data required
+        if (data.element != "") {
+            const value = data.value;
+            const element = document.getElementById(data.element);
+            const options = element.options;
+            
+            for (let option, j = 0; option = options[j]; j++) {
+                if (option.value == value) {
+                    element.selectedIndex = j;
+                    break;
+                }
+            }
+        }
     }
-}
 
-// Load font size
-changeFontSize(fontSize);
-
-val = store.get('textAlign');
-sel = document.getElementById('settings-text-align-select');
-opts = sel.options;
-for (var opt, j = 0; opt = opts[j]; j++) {
-    if (opt.value == val) {
-        sel.selectedIndex = j;
-        break;
+    // Some extra circumstances to deal with now that all the storage variables are assigned
+    
+    // Apply font family
+    if (document.getElementById('settings-text-font-select').value == 'default') {
+        document.getElementById('scripture').style.fontFamily = 'Arial, Helvetica, sans-serif';
+    } else {
+        document.getElementById('scripture').style.fontFamily = document.getElementById('settings-text-font-select').value;
     }
-}
 
-// Retrieve last font style
-val = store.get('font');
-sel = document.getElementById('settings-text-font-select');
-opts = sel.options;
-for (var opt, j = 0; opt = opts[j]; j++) {
-    if (opt.value == val) {
-        sel.selectedIndex = j;
-        break;
-    }
-}
-if (document.getElementById('settings-text-font-select').value == 'default') {
-    document.getElementById('scripture').style.fontFamily = 'Arial, Helvetica, sans-serif';
-} else {
-    document.getElementById('scripture').style.fontFamily = document.getElementById('settings-text-font-select').value;
-}
-// Retrieve last textAlign
-val = store.get('textAlign');
-sel = document.getElementById('settings-text-align-select');
-opts = sel.options;
-for (var opt, j = 0; opt = opts[j]; j++) {
-    if (opt.value == val) {
-        sel.selectedIndex = j;
-        break;
-    }
-}
-document.getElementById('scripture').style.textAlign = document.getElementById('settings-text-align-select').value;
+    // Apply text align
+    document.getElementById('scripture').style.textAlign = document.getElementById('settings-text-align-select').value;
 
-// Retrieve last theme
-val = store.get('theme');
+    // Apply theme
+    changeTheme(variableData['theme'].value);
+    //let themeChoice = document.getElementById('settings-color-theme-select').value;
+    //document.getElementById('themeStyle').href = './themes/' + themeChoice + '.css';
 
-sel = document.getElementById('settings-color-theme-select');
-opts = sel.options;
-for (var opt, j = 0; opt = opts[j]; j++) {
-    if (opt.value == val) {
-        sel.selectedIndex = j;
-        break;
-    }
-}
-// Set the theme
-var themeChoice = document.getElementById('settings-color-theme-select').value;
-document.getElementById('themeStyle').href = './themes/' + themeChoice + '.css';
+    // Apply translation
+    console.log(variableData['translation'].value);
+    updateTranslation(variableData['translation'].value);
 
-console.log(themeChoice + ' is the theme loaded from storage.');
 
-// Retrieve last translation
-let storedTranslations = store.get('translation');
-console.log(storedTranslations + ' is the translation loaded from storage.');
-
-updateTranslation(storedTranslations);
+})();
 
 window.onload = function() {
     // Retrieve last chapter
