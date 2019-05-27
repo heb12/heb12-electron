@@ -556,7 +556,7 @@ function loadVerse(ref) {
             const strong = p.getElementsByTagName('strong')[0];
             let translation = strong.innerText.toLowerCase();
             let language = document.getElementById('verse-popup-languages').value;
-            let reference = document.getElementById('vs').innerText;
+            let reference = document.getElementById('searchBox').placeholder;
             console.log(reference);
             
             updateTranslation(language + '-' + translation);
