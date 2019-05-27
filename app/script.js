@@ -74,12 +74,12 @@ function getNETVerse(ref) {
     if (!navigator.onLine) {
         document.getElementById('en-nettext').innerHTML = '<em>' + ui['error-no-internet-bold'] + '</em>';
         console.log('Offline ERROR. Cannot load NET verse');
-    } else {
-        document.getElementById('nettext').innerHTML = "<i class=\"fa fa-spinner fa-spin\"></i>";
+    } else if (document.getElementById('verse-popup-languages').value == "en") {
+        document.getElementById('en-nettext').innerHTML = "<i class=\"fa fa-spinner fa-spin\"></i>";
         let url = 'https://labs.bible.org/api/?passage= ' + ref + '&formatting=plain';
         request(url, function (error, response, body) {
             if (result != '') {
-                document.getElementById('nettext').innerHTML = body;
+                document.getElementById('en-nettext').innerHTML = body;
                 document.getElementById('error').style.display = 'none';
             }
             console.log('error:', error);
@@ -151,6 +151,13 @@ async function getVerses(reference, version) {
 
         document.getElementById('scripture').innerHTML = bibles(reference, version, true);
         document.getElementById('error').style.display = 'none';
+    }
+
+    // Gives each verse a unique element ID
+    for (let i = 0; i < document.getElementsByClassName('verse').length; i++) {
+        const element = document.getElementsByClassName('verse')[i];
+        
+        element.id = i + 1;
     }
 
     // Scrolls to the top of the page when the scripture loads
@@ -497,7 +504,10 @@ function loadTranslations() {
 // This is a function which builds the HTML for supported translations in verse popup
 function buildVersesHTML(lang = 'en') {
     let toAdd = '';
-    toAdd = toAdd + '<div class="verseBox text"><p><strong>NET</strong></p><p id="en-nettext" class="text verseText"></p></div>'
+    if (lang == 'en') {
+        toAdd = toAdd + '<div class="verseBox text"><p><strong>NET</strong></p><p id="en-nettext" class="text verseText"></p></div>';
+    }
+
     let translations = getTranslations(['type', 'language'], ['openbibles', lang]);
     for (let i = 0; i < translations.length; i++) {
         const translation = translations[i];
@@ -537,6 +547,27 @@ function loadVerse(ref) {
         
     }
     getNETVerse(ref);
+
+    // Makes verse boxes clickable
+    for (let i = 0; i < document.getElementsByClassName('verseBox').length; i++) {
+        const element = document.getElementsByClassName('verseBox')[i];
+        element.addEventListener('click', function () {
+            const p = this.getElementsByTagName('p')[0];
+            const strong = p.getElementsByTagName('strong')[0];
+            let translation = strong.innerText.toLowerCase();
+            let language = document.getElementById('verse-popup-languages').value;
+            let reference = document.getElementById('vs').innerText;
+            console.log(reference);
+            
+            updateTranslation(language + '-' + translation);
+            setChapter(reference);
+
+            document.getElementById(reference.split(':')[reference.split(':').length - 1]).scrollIntoView(true);
+            window.scrollBy(0,-document.getElementById('head').scrollHeight);
+            
+            closePopup('versePopup');
+        });
+    }
 }
 
 // This opens a verse popup for a specific verse

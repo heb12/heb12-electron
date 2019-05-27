@@ -122,13 +122,13 @@ a {
     display: none;
 }
 
-.verseBox {
+/* .verseBox {
     border-top: solid gray 1px;
     border-bottom: solid gray 1px;
 }
 .verseBox p {
     margin: 5px;
-}
+} */
 
 #searchBox {
     padding: 5px;
