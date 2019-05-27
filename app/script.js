@@ -757,12 +757,11 @@ function reset() {
     console.log(variableData['translation'].value);
     updateTranslation(variableData['translation'].value);
 
-
+    // Apply last reference
+    setChapter(variableData['lastRef'].value);
 })();
 
 window.onload = function() {
-    // Retrieve last chapter
-    setChapter(store.get('lastRef'));
     let booksEl = document.getElementsByClassName('book');
     
     for (var i = 0; i < booksEl.length; i++) {
