@@ -1,5 +1,5 @@
 /*
-Heb12 Desktop is a simple Electron app for reading the Bible.
+Heb12 Electron is a simple Electron app for reading the Bible.
     Copyright (C) 2018, 2019 The Heb12 Developers <https://heb12.github.io/developers>
 
     This program is free software: you can redistribute it and/or modify
@@ -33,7 +33,9 @@ const supportedTranslations = require('./translations.json');
 
 // *The* variable for holding the current book and translation being used
 let currentBook = 'Genesis';
-let currentTranslation = 'en-web'
+let currentTranslation = 'en-web';
+// *The* variable for holding the current reference in the verse popup
+let currentVerse = 'Hebrews 4:12';
 
 // Require for locales
 let language = document.getElementById('settings-language').value;
@@ -49,6 +51,22 @@ document.getElementById('settings-language').addEventListener('change', function
 
     document.getElementById('book').innerHTML = bibleBooks[getBook(chapterAndVerse(currentBook).book.id)];
 });
+
+// Easily find the English name for a provided book
+function englishBook(book) {
+    const englishBooks = require('./locales/en-US/books.json').books;
+    const foreignBooks = bibleBooks;
+    let i = 0;
+    for (i = 0; i < foreignBooks.length; i++) {
+        const element = foreignBooks[i];
+        if (element != book) {
+            i++
+        } else {
+            return;
+        }
+    }
+    return englishBooks[i];
+}
 
 
 // List supported translations from OpenBibles
@@ -534,19 +552,29 @@ function buildVersesHTML(lang = 'en') {
 }
 
 // This loads the actual verses into the verse popup
-function loadVerse(ref) {    
-    document.getElementById('vs').innerText = bibleBooks[getBook(chapterAndVerse(ref).book.id)] + ' ' + ref.split(' ')[ref.split(' ').length-1];
+function loadVerse(ref) {
+    let book = englishBook(ref.split(' ')[0])
+    let a = chapterAndVerse(englishBook(ref.split(' ')[0]) + ref.split(' ')[ref.split(' ').length-1]);
+    console.log(a);
+    
+    let localeRef = bibleBooks[getBook(englishBook((ref.split(' ')[0])))] + ' ' + ref.split(' ')[ref.split(' ').length-1];
+    let englishRef = a.book.id + a.chapter + a.verse;
+    // if (typeof(getBook(englishBook(chapterAndVerse(ref).chapter))) == 'undefined') {
+        //     loadVerse("John 3:16")
+        // }
+    currentVerse = getBook(a.book.id);
+    document.getElementById('vs').innerText = currentVerse;
 
     let lang = document.getElementById('verse-popup-languages').value;
     buildVersesHTML(lang);
     let translations = getTranslations(['language', 'type'], [lang, 'openbibles']);
     for (let i = 0; i < translations.length; i++) {
         let element = translations[i];
-        document.getElementById(element + 'text').innerText = bibles(ref, element);
+        document.getElementById(element + 'text').innerText = bibles(englishRef, element);
         console.log('Loading translation ' + element + ' into verse lookup popup.');
         
     }
-    getNETVerse(ref);
+    getNETVerse(currentVerse);
 
     // Makes verse boxes clickable
     for (let i = 0; i < document.getElementsByClassName('verseBox').length; i++) {

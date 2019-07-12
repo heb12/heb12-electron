@@ -7,7 +7,7 @@
     "info-version": "Version",
     "info-website": "Website",
     "info-basic-description": "This program was built by MasterOfTheTiger (https://mtiger.xyz) as a simple Bible program for desktop systems.",
-    "info-copyright": "Heb12 Desktop Copyright © 2018, 2019 The Heb12 Developers",
+    "info-copyright": "Heb12 Electron Copyright © 2018, 2019 The Heb12 Developers",
     "info-license": "This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.",
     "info-license-link": "Read the license",
     "info-verse": "For the word of God is living and active and sharper than any double-edged sword, piercing even to the point of dividing soul from spirit, and joints from marrow; it is able to judge the desires and thoughts of the heart.",
@@ -64,5 +64,5 @@
     "translations-header": "Translations",
 
     "license-header": "License",
-    "license-info": "This is the license for Heb12 Bible Desktop (this program). You may modify and redistribute this program under the terms of this license."
+    "license-info": "This is the license for Heb12 Electron (this program). You may modify and redistribute this program under the terms of this license."
 }
